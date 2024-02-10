@@ -87,6 +87,7 @@ a:hover {
 .selected {
     border: 1px solid var(--dark-red);
     border-radius: 5px;
+    padding: 0 0.1em;
     background-color: var(--red);
 }
 
