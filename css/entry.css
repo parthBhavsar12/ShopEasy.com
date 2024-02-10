@@ -83,3 +83,14 @@ a {
 a:hover {
     background-color: var(--dark-green);
 }
+
+.selected {
+    border: 1px solid var(--dark-red);
+    border-radius: 5px;
+    padding: 0 0.1em;
+    background-color: var(--red);
+}
+
+input[type="radio"]{
+    accent-color: var(--dark-green);
+}
