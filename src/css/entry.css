@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+.upside {
+    background-color: var(--dark-green);
+    color: white;
+    padding: 1em;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.upside>strong {
+    font-size: 7vh;
+}
+
+.main {
+    background-color: white;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    border: 5px solid var(--dark-green);
+}
+
+.logo {
+    margin: auto;
+    width: 50vh;
+}
+
+.container {
+    display: block;
+    width: 50vh;
+    margin: auto;
+    color: var(--dark-red);
+}
+
+.container div {
+    margin: 10px 0;
+}
+
+.go_to_login {
+    text-align: center;
+}
+
+.title {
+    text-align: center;
+    font-size: 5vh;
+    color: var(--dark-green);
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    border: 1px solid var(--dark-green);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--dark-green);
+}
+
+button {
+    width: 100%;
+    background-color: var(--dark-green);
+    border: none;
+    border-radius: 5px;
+    font-size: 3.5vh;
+    padding: 5px;
+    color: white;
+}
+
+.btn {
+    text-align: center;
+    margin: 3vh 0 !important;
+}
+
+a {
+    background-color: var(--dark-red);
+    color: white;
+    text-decoration: none;
+    font-size: 0.8em;
+    padding: 0 1.5em;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: var(--dark-green);
+}
+
+.selected {
+    border: 1px solid var(--dark-red);
+    border-radius: 5px;
+    padding: 0 0.1em;
+    background-color: var(--red);
+    margin: 1vw;
+}
+
+input[type="radio"]{
+    accent-color: var(--dark-green);
+}

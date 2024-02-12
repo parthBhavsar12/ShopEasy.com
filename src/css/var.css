@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass&display=swap');
+
+:root {
+  --dark-green: #023736;
+  --dark-red: #a21d1d;
+  --green: #cdf3d8;
+  --red: #f0bcbc;
+  --logo-green: #0C807D;
+  --logo-red: #F84343;
+  --logo-black: #594E4E;
+}
+
+* {
+  font-family: 'Overpass', sans-serif;
+}
+
+i {
+  margin-right: 1vw;
+}
