@@ -23,9 +23,6 @@ a.navLogo:hover{
     background-color: white;
 }
 
-/* span{
-    font-weight: bold;
-} */
 span#one{
     color: var(--logo-green);
 }

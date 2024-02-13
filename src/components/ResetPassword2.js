@@ -1,8 +1,5 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
-import '../css/var.css';
-import '../css/entry.css';
-import '../css/reset_password.css';
 
 export default function ResetPassword2() {
   return (

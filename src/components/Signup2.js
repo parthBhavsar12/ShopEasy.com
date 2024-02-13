@@ -1,7 +1,5 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
-import '../css/var.css';
-import '../css/entry.css';
 
 export default function Signup2() {
   return (

@@ -1,8 +1,5 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
-import '../css/var.css';
-import '../css/entry.css';
-import '../css/reset_password.css';
 
 export default function ResetPassword1() {
   return (
@@ -32,7 +29,6 @@ export default function ResetPassword1() {
                     <div><label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label></div>
                     <div>
                       <input type="email" name="email" id="email" placeholder="abc@xyz.pqr" />
-                      {/* <button className="sendOtp">Send OTP</button> */}
                     </div>
 
                     <div className="btn"><button type="submit">Send OTP</button></div>
