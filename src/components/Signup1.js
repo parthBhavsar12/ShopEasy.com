@@ -2,6 +2,7 @@ import React from 'react';
 import LeftLogo from './LeftLogo';
 import '../css/var.css';
 import '../css/entry.css';
+import Password from './Password';
 
 export default function Signup1() {
   return (
@@ -31,17 +32,12 @@ export default function Signup1() {
                     <div><label for="email"><i class="zmdi zmdi-email"></i>Email</label></div>
                     <div><input type="email" name="email" id="email" placeholder="abc@xyz.pqr" /></div>
 
-                    <div><label for="password"><i class="zmdi zmdi-lock-outline"></i>Password</label></div>
-                    <div><input type="password" name="password" id="password" placeholder="Minimum 8 characters" /></div>
-
-                    <div><label for="password"><i class="zmdi zmdi-lock"></i>Confirm Password</label></div>
-                    <div><input type="password" name="con_password" id="con_password" placeholder="Minimum 8 characters" />
-                    </div>
+                    <Password/>
 
                     <div class="btn"><button type="submit">Next</button></div>
 
                 </form>
-                <div class="go_to_login"><span>Have an account? <a href="/">Log in</a></span></div>
+                <div class="go_to_login"><span>Have an account? <a href="/">Sign in</a></span></div>
             </div>
 
         </div>

@@ -2,8 +2,9 @@ import React from 'react';
 import LeftLogo from './LeftLogo';
 import '../css/var.css';
 import '../css/entry.css';
+import '../css/reset_password.css';
 
-export default function Signin() {
+export default function ResetPassword1() {
   return (
     <>
         <div className="main">
@@ -12,7 +13,7 @@ export default function Signin() {
             
             <div className="container">
 
-                <div className="title"><strong>Sign in</strong></div>
+                <div className="title"><strong>Reset Password</strong></div>
 
                 <form action="/">
                     <div>
@@ -29,17 +30,15 @@ export default function Signin() {
                     </div>
 
                     <div><label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label></div>
-                    <div><input type="email" name="email" id="email" placeholder="abc@xyz.pqr" /></div>
+                    <div>
+                      <input type="email" name="email" id="email" placeholder="abc@xyz.pqr" />
+                      {/* <button className="sendOtp">Send OTP</button> */}
+                    </div>
 
-                    <div><label htmlFor="password"><i className="zmdi zmdi-lock"></i>Password</label></div>
-                    <div><input type="password" name="password" id="password" placeholder="Minimum 8 characters" /></div>
-
-                    <div className="btn"><button type="submit">Sign in</button></div>
+                    <div className="btn"><button type="submit">Send OTP</button></div>
 
                 </form>
                 <div className="go_to_login"><span>New to ShopEasy.com? <a href="/">Sign up</a></span></div>
-
-                <div className="go_to_login"><span><a href="/">Forgot Password?</a></span></div>
             </div>
 
         </div>
