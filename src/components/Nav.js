@@ -13,25 +13,25 @@ export default function Nav() {
             </a>
         
         
-            <a href="/">
+            <a href="/" className="navMenu">
                 <i class="zmdi zmdi-edit"></i>
                 Make Order
             </a>
         
         
-            <a href="/">
+            <a href="/" className="navMenu">
                 <i class="zmdi zmdi-balance"></i>
                 Make Payment
             </a>
         
         
-            <a href="/">
+            <a href="/" className="navMenu">
                 <i class="zmdi zmdi-store"></i>
                 Find Shops
             </a>
         
         
-            <label htmlFor="search">
+            <label htmlFor="search" className='navMenu'>
                 <i className="zmdi zmdi-search"></i>
                 <input type="search" id="search" placeholder="Search"/>
             </label>
@@ -42,7 +42,7 @@ export default function Nav() {
             </span>
         
         
-            <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu"/>
+            <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu'/>
             
         </nav>
     </>

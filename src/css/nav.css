@@ -7,7 +7,7 @@ body{
     padding: 0;
 }
 
-a{
+a.navMenu{
     text-decoration: none;
     background-color: var(--dark-green);
 }
@@ -54,7 +54,7 @@ nav > a{
     color: white;
 }
 
-nav > a:hover{
+nav > a.navMenu:hover{
     color: var(--dark-red);
     font-weight: bold;
     background-color: var(--red);
@@ -93,17 +93,17 @@ span#hello{
     color: var(--dark-green);
 }
 
-label{
+label.navMenu{
     color: white;
 }
 
-img{
+img.navMenu{
     background-color: var(--green);
     padding: 0.3em 1em;
     border-radius: 5px;
     cursor: pointer;
 }
 
-img:hover{
+img.navMenu:hover{
     background-color: var(--red);
 }

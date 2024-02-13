@@ -8,19 +8,19 @@ import Nav from '../components/Nav.js';
 
 import '../css/var.css';
 import '../css/entry.css';
-// import '../css/nav.css';
+import '../css/nav.css';
 import '../css/reset_password.css';
 
 function App() {
   return (
     <>
+      {/* <Nav/> */}
       <Upside/>
       <Signup/>
       <Signin/>
       <ResetPassword1/>
       <ResetPassword2/>
       <ResetPassword3/>
-      <Nav/>
     </>
   );
 }
