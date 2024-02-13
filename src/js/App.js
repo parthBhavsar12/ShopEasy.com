@@ -10,11 +10,12 @@ import '../css/var.css';
 import '../css/entry.css';
 import '../css/nav.css';
 import '../css/reset_password.css';
+import '../css/show_password.css';
 
 function App() {
   return (
     <>
-      {/* <Nav/> */}
+      <Nav/>
       <Upside/>
       <Signup/>
       <Signin/>

@@ -90,7 +90,8 @@ i.zmdi-home{
 }
 
 span#hello{
-    color: var(--dark-green);
+    color: white;
+    font-size: 0.8em;
 }
 
 label.navMenu{

@@ -7,7 +7,7 @@
     background-color: var(--dark-green);
     color: white;
     padding: 1em;
-    border-radius: 10px 10px 0 0;
+    /* border-radius: 10px 10px 0 0; */
     text-align: center;
 }
 
@@ -17,9 +17,9 @@
 
 .main {
     background-color: white;
-    border-radius: 0 0 10px 10px;
+    /* border-radius: 0 0 10px 10px; */
     display: flex;
-    border: 5px solid var(--dark-green);
+    border: 14px solid var(--dark-green);
 }
 
 .logo {
