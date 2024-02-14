@@ -98,13 +98,13 @@ label.navMenu{
     color: white;
 }
 
-img.navMenu{
+img.nav_menu{
     background-color: var(--green);
     padding: 0.3em 1em;
     border-radius: 5px;
     cursor: pointer;
 }
 
-img.navMenu:hover{
+img.nav_menu:hover{
     background-color: var(--red);
 }
