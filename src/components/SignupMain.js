@@ -2,7 +2,7 @@ import React from 'react';
 import LeftLogo from './LeftLogo';
 import Password from './Password';
 import UserType from './UserType';
-import MoveAway from './MoveAway';
+import GoTo from './GoTo';
 
 export default function Signup1() {
   return (
@@ -28,7 +28,7 @@ export default function Signup1() {
 
                 </form>
                 
-                <MoveAway title="Have an account? " goto="Sign in" />
+                <GoTo title="Have an account? " goto="Sign in" />
             </div>
 
         </div>

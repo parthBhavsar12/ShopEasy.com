@@ -1,7 +1,7 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
 import UserType from './UserType';
-import MoveAway from './MoveAway';
+import GoTo from './GoTo';
 
 export default function ResetPassword1() {
   return (
@@ -25,7 +25,7 @@ export default function ResetPassword1() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-mail-send"></i>Send OTP</button></div>
 
                 </form>
-                <MoveAway title="New to ShopEasy.com? " goto="Sign up" />
+                <GoTo title="New to ShopEasy.com? " goto="Sign up" />
             </div>
 
         </div>

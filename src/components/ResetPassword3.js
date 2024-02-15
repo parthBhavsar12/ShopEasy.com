@@ -1,7 +1,7 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
 import Password from './Password';
-import MoveAway from './MoveAway';
+import GoTo from './GoTo';
 
 export default function ResetPassword3() {
   return (
@@ -24,7 +24,7 @@ export default function ResetPassword3() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-redo"></i>Reset Password</button></div>
 
                 </form>
-                <MoveAway title="Go to " goto="Sign in" />
+                <GoTo title="Go to " goto="Sign in" />
             </div>
 
         </div>

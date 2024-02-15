@@ -1,6 +1,6 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
-import MoveAway from './MoveAway';
+import GoTo from './GoTo';
 
 export default function Signup2() {
   return (
@@ -40,7 +40,7 @@ export default function Signup2() {
                   <div class="btn"><button type="submit"><i class="zmdi zmdi-account-add"></i>Register</button></div>
 
               </form>
-              <MoveAway title="Have an account? " goto="Sign in" />
+              <GoTo title="Have an account? " goto="Sign in" />
           </div>
 
       </div>

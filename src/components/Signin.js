@@ -1,7 +1,7 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
 import UserType from './UserType';
-import MoveAway from './MoveAway';
+import GoTo from './GoTo';
 
 export default function Signin() {
   return (
@@ -28,9 +28,9 @@ export default function Signin() {
                 </form>
 
                 
-                <MoveAway title="New to ShopEasy.com? " goto="Sign up" />
+                <GoTo title="New to ShopEasy.com? " goto="Sign up" />
 
-                <MoveAway title="" goto="Forgot Password?" />
+                <GoTo title="" goto="Forgot Password?" />
             </div>
 
         </div>
