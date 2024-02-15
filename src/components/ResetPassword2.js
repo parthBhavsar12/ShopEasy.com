@@ -27,7 +27,7 @@ export default function ResetPassword2() {
                       <input type="text" name="otp6" id="otp6" placeholder="0" />
                     </div>
 
-                    <div className="btn"><button type="submit">Proceed</button></div>
+                    <div className="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Proceed</button></div>
 
                 </form>
                 <div className="go_to_login"><span><a href="/">Go to Sign in</a></span></div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
 import Password from './Password';
+import UserType from './UserType';
 
 export default function Signup1() {
   return (
@@ -14,25 +15,15 @@ export default function Signup1() {
                 <div class="title"><strong>Sign up</strong></div>
 
                 <form action="/">
-                    <div>
-                        <label>You are a</label>
-                        <span class="rdo">
-                            <input type="radio" name="user_type" id="shopkeeper" value="shopkeeper" />
-                            <label for="shopkeeper">Shopkeeper</label>
-                        </span>
-
-                        <span class="rdo">
-                            <input type="radio" name="user_type" id="customer" value="customer" />
-                            <label for="customer">Customer</label>
-                        </span>
-                    </div>
+                    
+                    <UserType/>
 
                     <div><label for="email"><i class="zmdi zmdi-email"></i>Email</label></div>
                     <div><input type="email" name="email" id="email" placeholder="abc@xyz.pqr" /></div>
 
                     <Password/>
 
-                    <div class="btn"><button type="submit">Next</button></div>
+                    <div class="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Next</button></div>
 
                 </form>
                 <div class="go_to_login"><span>Have an account? <a href="/">Sign in</a></span></div>

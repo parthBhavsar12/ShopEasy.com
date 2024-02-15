@@ -1,5 +1,7 @@
 import Upside from '../components/Upside.js';
-import Signup from '../components/Signup1.js';
+import Signup from '../components/SignupMain.js';
+import SignupShopKeeper from '../components/SignupShopKeeper.js';
+import SignupCustomer from '../components/SignupCustomer.js';
 import Signin from '../components/Signin.js';
 import ResetPassword1 from '../components/ResetPassword1.js';
 import ResetPassword2 from '../components/ResetPassword2.js';
@@ -18,6 +20,8 @@ function App() {
       <Nav/>
       <Upside/>
       <Signup/>
+      <SignupShopKeeper/>
+      <SignupCustomer/>
       <Signin/>
       <ResetPassword1/>
       <ResetPassword2/>
