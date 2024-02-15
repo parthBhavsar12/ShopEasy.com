@@ -1,6 +1,7 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
 import UserType from './UserType';
+import MoveAway from './MoveAway';
 
 export default function Signin() {
   return (
@@ -25,9 +26,11 @@ export default function Signin() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-sign-in"></i>Sign in</button></div>
 
                 </form>
-                <div className="go_to_login"><span>New to ShopEasy.com? <a href="/">Sign up</a></span></div>
 
-                <div className="go_to_login"><span><a href="/">Forgot Password?</a></span></div>
+                
+                <MoveAway title="New to ShopEasy.com? " goto="Sign up" />
+
+                <MoveAway title="" goto="Forgot Password?" />
             </div>
 
         </div>

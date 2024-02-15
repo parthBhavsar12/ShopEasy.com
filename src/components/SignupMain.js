@@ -2,6 +2,7 @@ import React from 'react';
 import LeftLogo from './LeftLogo';
 import Password from './Password';
 import UserType from './UserType';
+import MoveAway from './MoveAway';
 
 export default function Signup1() {
   return (
@@ -26,7 +27,8 @@ export default function Signup1() {
                     <div class="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Next</button></div>
 
                 </form>
-                <div class="go_to_login"><span>Have an account? <a href="/">Sign in</a></span></div>
+                
+                <MoveAway title="Have an account? " goto="Sign in" />
             </div>
 
         </div>

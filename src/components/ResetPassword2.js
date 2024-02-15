@@ -1,5 +1,6 @@
 import React from 'react';
 import LeftLogo from './LeftLogo';
+import MoveAway from './MoveAway';
 
 export default function ResetPassword2() {
   return (
@@ -30,7 +31,7 @@ export default function ResetPassword2() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Proceed</button></div>
 
                 </form>
-                <div className="go_to_login"><span><a href="/">Go to Sign in</a></span></div>
+                <MoveAway title="Go to " goto="Sign in" />
             </div>
 
         </div>
