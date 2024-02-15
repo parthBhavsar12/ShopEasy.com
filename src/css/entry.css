@@ -99,3 +99,7 @@ a:hover {
 input[type="radio"]{
     accent-color: var(--dark-red);
 }
+
+.rdo > label{
+    cursor: pointer;
+}
