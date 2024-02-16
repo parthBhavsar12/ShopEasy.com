@@ -1,0 +1,9 @@
+textarea#msg{
+    height: 14em !important;
+    width: 100% !important;
+}
+
+.mainContactUs{
+    margin: 0.3em;
+    border-radius: 10px;
+}

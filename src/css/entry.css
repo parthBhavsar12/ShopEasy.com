@@ -52,7 +52,8 @@
 
 input[type="email"],
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+textarea {
     width: 100%;
     border: 1px solid var(--dark-green);
     padding: 5px;

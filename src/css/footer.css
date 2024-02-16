@@ -1,0 +1,21 @@
+#footer{
+    background-color: var(--footer-bg);
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    text-align: center;
+    color: white;
+    padding: 1em;
+    font-size: 1em;
+}
+
+a#footerContactUs{
+    margin: 1em;
+    background-color: unset;
+    text-decoration: underline;
+    font-size: 1em;
+}
+
+a#footerContactUs:hover{
+    color: yellow;
+}

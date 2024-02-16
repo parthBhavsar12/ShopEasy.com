@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Nav() {
+export default function Nav(props) {
   return (
     <>
         <nav>
@@ -14,20 +14,20 @@ export default function Nav() {
         
         
             <a href="/" className="navMenu">
-                <i class="zmdi zmdi-edit"></i>
-                Make Order
+                <i class={`zmdi zmdi-${props.iName1}`}></i>
+                {props.menuTitle1}
             </a>
         
         
             <a href="/" className="navMenu">
-                <i class="zmdi zmdi-balance"></i>
-                Make Payment
+                <i class={`zmdi zmdi-${props.iName2}`}></i>
+                {props.menuTitle2}
             </a>
         
         
             <a href="/" className="navMenu">
-                <i class="zmdi zmdi-store"></i>
-                Find Shops
+                <i class={`zmdi zmdi-${props.iName3}`}></i>
+                {props.menuTitle3}    
             </a>
         
         
