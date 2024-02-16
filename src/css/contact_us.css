@@ -1,6 +1,7 @@
 textarea#msg{
     height: 14em !important;
     width: 100% !important;
+    resize: none;
 }
 
 .mainContactUs{

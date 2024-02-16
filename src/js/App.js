@@ -10,6 +10,7 @@ import Nav from '../components/Nav.js';
 import VerticalNav from '../components/VerticalNav.js';
 import Footer from '../components/Footer.js';
 import ContactUs from '../components/ContactUs.js';
+import AddItems from '../components/AddItems.js';
 
 import '../css/var.css';
 import '../css/entry.css';
@@ -41,7 +42,9 @@ function App() {
       <ResetPassword2/>
       <ResetPassword3/> */}
       {/* <Footer/> */}
-      <ContactUs/>
+      {/* <ContactUs/> */}
+
+      <AddItems/>
     </>
   );
 }
