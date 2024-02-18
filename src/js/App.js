@@ -17,6 +17,8 @@ import MakePayment from '../components/MakePayment.js';
 import FindShops from '../components/FindShops.js';
 import UpdateItems from '../components/UpdateItems.js';
 import Coupons from '../components/Coupons.js';
+import Account from '../components/Account.js';
+import Settings from '../components/Settings.js';
 
 import '../css/var.css';
 import '../css/entry.css';
@@ -82,6 +84,22 @@ function App() {
     {
       path: "/coupons",
       element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Coupons/></>
+    },
+    {
+      path: "/menu",
+      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><VerticalNav/></>
+    },
+    {
+      path: "/account",
+      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Account/></>
+    },
+    {
+      path: "/settings",
+      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Settings/></>
+    },
+    {
+      path: "/logout",
+      element: <><Upside/><Signin/></>
     },
   ])
   return (

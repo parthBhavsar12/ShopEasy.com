@@ -1,7 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+// import VerticalNav from './VerticalNav';
 
 export default function Nav(props) {
+    // toggleVerticalMenu = () => {
+        
+    // }
   return (
     <>
         <nav>
@@ -37,7 +41,7 @@ export default function Nav(props) {
             </span>
         
         
-            <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu'/>
+            <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu' />
             
         </nav>
     </>

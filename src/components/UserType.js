@@ -5,7 +5,7 @@ export default function UserType() {
     <div>
         <label><i class="zmdi zmdi-account"></i>You are a</label>
         <span class="rdo">
-            <input type="radio" name="user_type" id="shopkeeper" value="shopkeeper" />
+            <input type="radio" name="user_type" id="shopkeeper" value="shopkeeper"/>
             <label for="shopkeeper">Shopkeeper</label>
         </span>
 
