@@ -108,3 +108,10 @@ img.nav_menu{
 img.nav_menu:hover{
     background-color: var(--red);
 }
+
+.activeNavItem{
+    color: var(--red);
+    font-weight: bold;
+    background-color: white;
+    border-radius: 5px;
+}

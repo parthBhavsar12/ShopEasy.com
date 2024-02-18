@@ -31,7 +31,7 @@ export default function ResetPassword2() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Proceed</button></div>
 
                 </form>
-                <GoTo title="Go to " goto="Sign in" />
+                <GoTo title="Go to " goto="Sign in" slug="../signin"/>
             </div>
 
         </div>

@@ -25,7 +25,7 @@ export default function ResetPassword1() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-mail-send"></i>Send OTP</button></div>
 
                 </form>
-                <GoTo title="New to ShopEasy.com? " goto="Sign up" />
+                <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup"/>
             </div>
 
         </div>

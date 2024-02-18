@@ -1,41 +1,36 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function Nav(props) {
   return (
     <>
         <nav>
-            
-            <a href="/" className="navLogo">
+            <NavLink to="/" className={(e)=>{return e.isActive?"navLogo activeNavItem": "navLogo" }}>
                 <i class="zmdi zmdi-home"></i>
                 <span id="one">Shop</span>
                 <span id="two">Easy</span>
                 <span id="three">.com</span>
-            </a>
+            </NavLink>
         
-        
-            <a href="/" className="navMenu">
+            <NavLink to={props.slug1} className={(e)=>{return e.isActive?"navMenu activeNavItem": "navMenu" }}>
                 <i class={`zmdi zmdi-${props.iName1}`}></i>
                 {props.menuTitle1}
-            </a>
+            </NavLink>
         
-        
-            <a href="/" className="navMenu">
+            <NavLink to={props.slug2} className={(e)=>{return e.isActive?"navMenu activeNavItem": "navMenu" }}>
                 <i class={`zmdi zmdi-${props.iName2}`}></i>
                 {props.menuTitle2}
-            </a>
+            </NavLink>
         
-        
-            <a href="/" className="navMenu">
+            <NavLink to={props.slug3} className={(e)=>{return e.isActive?"navMenu activeNavItem": "navMenu" }}>
                 <i class={`zmdi zmdi-${props.iName3}`}></i>
                 {props.menuTitle3}    
-            </a>
-        
+            </NavLink>
         
             <label htmlFor="search" className='navMenu'>
                 <i className="zmdi zmdi-search"></i>
                 <input type="search" id="search" placeholder="Search"/>
             </label>
-        
         
             <span id="hello">
                 <i className="zmdi zmdi-account"></i>Hello, user

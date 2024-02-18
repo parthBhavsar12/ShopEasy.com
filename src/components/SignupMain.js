@@ -28,7 +28,7 @@ export default function Signup1() {
 
                 </form>
                 
-                <GoTo title="Have an account? " goto="Sign in" />
+                <GoTo title="Have an account? " goto="Sign in" slug="../signin"/>
             </div>
 
         </div>

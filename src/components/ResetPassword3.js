@@ -24,7 +24,7 @@ export default function ResetPassword3() {
                     <div className="btn"><button type="submit"><i class="zmdi zmdi-redo"></i>Reset Password</button></div>
 
                 </form>
-                <GoTo title="Go to " goto="Sign in" />
+                <GoTo title="Go to " goto="Sign in" slug="../signin"/>
             </div>
 
         </div>

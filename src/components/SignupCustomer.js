@@ -40,7 +40,7 @@ export default function Signup2() {
                   <div class="btn"><button type="submit"><i class="zmdi zmdi-account-add"></i>Register</button></div>
 
               </form>
-              <GoTo title="Have an account? " goto="Sign in" />
+              <GoTo title="Have an account? " goto="Sign in" slug="../signin"/>
           </div>
 
       </div>

@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div id='footer'>
         <span>
-            [ &copy; Copyrights reserved by ShopEasy.com - {year} ]
+            [ &copy; All copyrights reserved by ShopEasy.com - {year} ]
         </span>
         <a href='/' id='footerContactUs'>Contact Us</a>
     </div>

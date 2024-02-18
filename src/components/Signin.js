@@ -28,9 +28,9 @@ export default function Signin() {
                 </form>
 
                 
-                <GoTo title="New to ShopEasy.com? " goto="Sign up" />
+                <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup"/>
 
-                <GoTo title="" goto="Forgot Password?" />
+                <GoTo title="" goto="Forgot Password?" slug="../resetpassword"/>
             </div>
 
         </div>
