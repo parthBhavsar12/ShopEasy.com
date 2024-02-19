@@ -101,6 +101,10 @@ function App() {
       path: "/logout",
       element: <><Upside/><Signin/></>
     },
+    {
+      path: "/contact",
+      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><ContactUs/></>
+    },
   ])
   return (
     <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
     var year = new Date().getFullYear();
@@ -7,7 +8,7 @@ export default function Footer() {
         <span>
             [ &copy; All copyrights reserved by ShopEasy.com - {year} ]
         </span>
-        <a href='/' id='footerContactUs'>Contact Us</a>
+        <Link to='/contact' id='footerContactUs'>Contact Us</Link>
     </div>
   )
 }
