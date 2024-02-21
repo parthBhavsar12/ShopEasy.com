@@ -1,5 +1,5 @@
 import React from 'react';
-import LeftLogo from './LeftLogo.js';
+import LeftLogo from './LeftLogo';
 
 export default function ContactUs() {
   return (
