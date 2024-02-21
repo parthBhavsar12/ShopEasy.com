@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
-function MessageBox() { //props
+function MessageBox(props) { 
+
+    const msgBox = useRef();
+
+    const closeMsgBox = ()=>{
+        msgBox.current.style.display = 'none';
+    }
+
     return (
-        <div class="msgBox" id="msgBox">
-            {/* <div class="msgHeading"><span class="msgTitle">{props.msgTitle}</span></div> */}
-            <span class="msgTitle">Warning</span>
-            {/* <div class="msgContent"><span class="msgText">{props.msgText}</span></div> */}
-            <span class="msgText">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore quasi totam aperiam.</span>
-            <button id="ok-btn">Ok</button>
+        <div class="msgBox" id="msgBox" ref={msgBox} >
+            <span class="msgTitle">{props.msgTitle}</span>
+            <span class="msgText">{props.msgText}</span>
+            <button id="closeMsgBox" onClick={closeMsgBox}>Ok</button>
         </div>
     )
 }
 
-export default MessageBox
+export default MessageBox;

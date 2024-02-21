@@ -37,7 +37,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Upside/><Signup/><MessageBox/></>
+      element: <><Upside/><Signup/></>
       // element: <><MessageBox/></>
     },
     {
