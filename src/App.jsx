@@ -19,6 +19,7 @@ import UpdateItems from './components/UpdateItems.jsx';
 import Coupons from './components/Coupons.jsx';
 import Account from './components/Account.jsx';
 import Settings from './components/Settings.jsx';
+import MessageBox from './components/MessageBox.jsx';
 
 import './css/var.css';
 import './css/entry.css';
@@ -28,6 +29,7 @@ import './css/show_password.css';
 import './css/vertical_nav.css';
 import './css/footer.css';
 import './css/contact_us.css';
+import './css/message_box.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -35,7 +37,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <><Upside/><Signup/></>
+      element: <><Upside/><Signup/><MessageBox/></>
+      // element: <><MessageBox/></>
     },
     {
       path: "/signup",
