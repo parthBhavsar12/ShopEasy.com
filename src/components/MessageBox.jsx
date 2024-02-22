@@ -9,9 +9,9 @@ function MessageBox(props) {
     }
 
     return (
-        <div class="msgBox" id="msgBox" ref={msgBox} >
-            <span class="msgTitle">{props.msgTitle}</span>
-            <span class="msgText">{props.msgText}</span>
+        <div className="msgBox" id="msgBox" ref={msgBox} >
+            <span className="msgTitle">{props.msgTitle}</span>
+            <span className="msgText">{props.msgText}</span>
             <button id="closeMsgBox" onClick={closeMsgBox}>Ok</button>
         </div>
     )

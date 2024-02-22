@@ -6,10 +6,10 @@ export default function AddItems() {
         <div className="addItems">
             <span id="addItemsTitle">Add Items</span>
 
-            <label for="itemName">Item Name</label>
+            <label htmlFor="itemName">Item Name</label>
             <input type="text" name="itemName" id="itemName" />
 
-            <label for="itemCat">Item Category</label>
+            <label htmlFor="itemCat">Item Category</label>
             <input list="itemCats" name="itemCat" id="itemCat" />
             <datalist id="itemCats">
               <option value="NA">NA</option>

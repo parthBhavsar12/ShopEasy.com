@@ -18,8 +18,8 @@ export default function ResetPassword2() {
                         <label className='userResetPassword'>User: abc@xyz.pqr</label>
                     </div>
 
-                    <div className='divUser'><label htmlFor="otp"><i class="zmdi zmdi-key"></i>OTP</label></div>
-                    <div class="otp">
+                    <div className='divUser'><label htmlFor="otp"><i className="zmdi zmdi-key"></i>OTP</label></div>
+                    <div className="otp">
                       <input type="text" name="otp1" id="otp1" placeholder="0" />
                       <input type="text" name="otp2" id="otp2" placeholder="0" />
                       <input type="text" name="otp3" id="otp3" placeholder="0" />
@@ -28,7 +28,7 @@ export default function ResetPassword2() {
                       <input type="text" name="otp6" id="otp6" placeholder="0" />
                     </div>
 
-                    <div className="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Proceed</button></div>
+                    <div className="btn"><button type="submit"><i className="zmdi zmdi-fast-forward"></i>Proceed</button></div>
 
                 </form>
                 <GoTo title="Go to " goto="Sign in" slug="../signin"/>

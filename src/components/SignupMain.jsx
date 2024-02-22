@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import LeftLogo from './LeftLogo';
 import Password from './Password';
 import UserType from './UserType';
@@ -14,17 +14,31 @@ export default function Signup1() {
     formState: { errors },
     handleSubmit,
   } = useForm()
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = (data) => console.log(data);
+
+  // const main = useRef();
+  // const msgBox = useRef();
+
+  // const showMessageBox = ()=>{
+  //     main.current.style.opacity = '0.6';
+  //     main.current.style.filter = 'blur(1px)';
+  //     main.current.style.pointerEvents = 'none';
+
+  //     msgBox.current.style.opacity = 'unset';
+  //     msgBox.current.style.filter = 'unset';
+  //     msgBox.current.style.pointerEvents = 'unset';
+  // }
 
   return (
     <>
-        <div class="main">
+        <div className="main">
+        {/* ref={main} */}
 
             <LeftLogo/>
 
-            <div class="container">
+            <div className="container">
 
-                <div class="title"><strong>Sign up</strong></div>
+                <div className="title"><strong>Sign up</strong></div>
 
                 <form onSubmit={handleSubmit(onSubmit)}>
                   {/* <input
@@ -46,7 +60,7 @@ export default function Signup1() {
                     
                     <UserType/>
                     {/* {...register("firstName", { required: true, maxLength: 20 })}  */}
-                    <div><label for="email"><i class="zmdi zmdi-email"></i>Email</label></div>
+                    <div><label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label></div>
                     {/* <div><input type="email" placeholder="abc@xyz.pqr" {...register("email", { required: true, message: 'Email id is required for registration'})}/></div> */}
                     <div><input placeholder="abc@xyz.pqr" type='email'
                     {...register("mail", { required: "Email Address is required" })}
@@ -54,9 +68,12 @@ export default function Signup1() {
                   /></div>
                   {errors.mail && <MessageBox msgTitle="Error" msgText={errors.mail.message}/>}
 
+                  {/* ref={msgBox} */}
+                  {/* {errors.mail && showMessageBox()} */}
+
                     <Password/>
 
-                    <div class="btn"><button type="submit"><i class="zmdi zmdi-fast-forward"></i>Next</button></div>
+                    <div className="btn"><button type="submit"><i className="zmdi zmdi-fast-forward"></i>Next</button></div>
 
                 </form>
                 

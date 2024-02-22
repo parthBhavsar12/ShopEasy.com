@@ -1,5 +1,5 @@
 .verticalNav{
-    display: flex;
+    display: none;
     flex-direction: column;
     background-color: var(--dark-green);
     position: absolute;

@@ -23,7 +23,7 @@ export default function ContactUs() {
                     <div><textarea name="msg" id="msg" placeholder="Type your message here" /></div>
 
 
-                    <div className="btn"><button type="submit"><i class="zmdi zmdi-mail-send"></i>Send</button></div>
+                    <div className="btn"><button type="submit"><i className="zmdi zmdi-mail-send"></i>Send</button></div>
 
                 </form>
             </div>

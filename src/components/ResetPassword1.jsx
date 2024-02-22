@@ -22,7 +22,7 @@ export default function ResetPassword1() {
                       <input type="email" name="email" id="email" placeholder="abc@xyz.pqr" />
                     </div>
 
-                    <div className="btn"><button type="submit"><i class="zmdi zmdi-mail-send"></i>Send OTP</button></div>
+                    <div className="btn"><button type="submit"><i className="zmdi zmdi-mail-send"></i>Send OTP</button></div>
 
                 </form>
                 <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup"/>

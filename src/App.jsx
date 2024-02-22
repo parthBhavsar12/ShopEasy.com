@@ -7,7 +7,6 @@ import ResetPassword1 from './components/ResetPassword1.jsx';
 import ResetPassword2 from './components/ResetPassword2.jsx';
 import ResetPassword3 from './components/ResetPassword3.jsx';
 import Nav from './components/Nav.jsx';
-import VerticalNav from './components/VerticalNav.jsx';
 import Footer from './components/Footer.jsx';
 import ContactUs from './components/ContactUs.jsx';
 import AddItems from './components/AddItems.jsx';
@@ -90,7 +89,7 @@ function App() {
     },
     {
       path: "/menu",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><VerticalNav/></>
+      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
     },
     {
       path: "/account",
