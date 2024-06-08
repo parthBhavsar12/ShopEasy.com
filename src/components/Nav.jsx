@@ -3,16 +3,16 @@ import { NavLink } from 'react-router-dom';
 
 export default function Nav(props) {
 
-    const verNav = useRef();
+    // const verNav = useRef();
 
-    const showVerticalNav = () => {
-        verNav.current.style.display = 'flex';
-    }
+    // const showVerticalNav = () => {
+    //     verNav.current.style.display = 'flex';
+    // }
 
-    const closeVerticalNav = () => {
-        verNav.current.style.display = 'none';
-        // verNav.current.children.style.display = 'none';
-    }
+    // const closeVerticalNav = () => {
+    //     verNav.current.style.display = 'none';
+    //     // verNav.current.children.style.display = 'none';
+    // }
   return (
     <>
         <nav>
@@ -46,19 +46,23 @@ export default function Nav(props) {
             <span id="hello">
                 <i className="zmdi zmdi-account"></i>Hello, user
             </span>
+
+            <span id="logOut">
+                <i className="zmdi zmdi-power"></i>Log Out
+            </span>
         
         
-            <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu' onClick={showVerticalNav}/>
+            {/* <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu' onClick={showVerticalNav}/> */}
             
         </nav>
-        <div className="verticalNav" ref={verNav}>
-            {/* <nav> */}
+        {/* <div className="verticalNav" ref={verNav}>
+            <nav>
                 <NavLink className='closeVerticalNav'><i className="zmdi zmdi-close" onClick={closeVerticalNav}></i>Close</NavLink>
                 <NavLink to="/account"><i className="zmdi zmdi-account"></i>Account</NavLink>
                 <NavLink to="/settings"><i className="zmdi zmdi-settings"></i>Settings</NavLink>
                 <NavLink to="/logout"><i className="zmdi zmdi-power"></i>Log Out</NavLink>
-            {/* </nav> */}
-        </div>
+            </nav>
+        </div> */}
     </>
   )
 }

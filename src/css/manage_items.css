@@ -1,0 +1,122 @@
+body > .items{
+    background-color: var(--green);
+}
+
+.items{
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    background-color: white;
+    /* flex-direction: column; */
+    height: 80vh;
+    box-sizing: border-box;
+    margin: 25px;
+    padding: 25px;
+    border: 3px solid var(--dark-green);
+    border-radius: 5px;
+}
+
+.items form{   
+    margin: 15px;
+}
+
+.items form input{
+    width: 100%;
+    border: 1px solid var(--dark-green);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--dark-green);
+}
+
+#itemsTitle{
+    text-align: center;
+    font-weight: bold;
+    font-size: 35px;
+    color: var(--dark-red);
+    grid-column: span 2;
+}
+
+.form{
+    display: grid;
+    grid-template-columns: 200px 400px;
+    row-gap: 40px;
+}
+
+select{
+    width: 100%;    
+    border: 1px solid var(--dark-green);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--dark-green);
+}
+
+.btnItem{
+    grid-column: span 2;
+}
+
+.tableContainer{
+    max-height: 70vh;
+    overflow-y: auto;
+    width: 60%;
+    text-align: center;
+    margin-left: 25px;
+}
+
+.itemsTable{
+    border: 1px solid var(--dark-green);
+    text-align: center;
+    width: 100%;
+}
+
+.itemsTable tr:nth-child(even){
+    background-color: var(--green);
+}
+
+.itemsTable tr:nth-child(odd){
+    background-color: var(--red);
+}
+
+.buttonMerger{
+    grid-column: span 2;
+}
+
+.buttonMerger input, .buttonMerger button{
+    width: 50% !important;
+    color: white !important;
+    font-size: 1.2em;
+    border: 1px solid white !important;
+    cursor: pointer;
+}
+
+.buttonMerger input#actionItemsLeft{
+    border-radius: 10px 0 0 10px;
+    background-color: var(--dark-red);
+}
+
+.buttonMerger input#actionItemsRight{
+    border-radius: 0 10px 10px 0;
+    background-color: var(--dark-red);
+}
+
+.resetBtnItem{
+    /* grid-column: span 2; */
+    background-color: var(--dark-red);
+}
+
+.red{
+    background-color: var(--dark-red) !important;
+}
+
+.red:hover{
+    background-color: var(--red) !important;
+    color: var(--dark-red) !important;
+    font-weight: bold;
+}
+
+.green{
+    background-color: var(--dark-green) !important;
+}
+
+.underline{
+    text-decoration: underline;
+}

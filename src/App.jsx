@@ -9,12 +9,12 @@ import ResetPassword3 from './components/ResetPassword3.jsx';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ContactUs from './components/ContactUs.jsx';
-import AddItems from './components/AddItems.jsx';
+import AddItems from './components/ManageItems.jsx';
 import About from './components/About.jsx';
 import MakeOrder from './components/MakeOrder.jsx';
 import MakePayment from './components/MakePayment.jsx';
 import FindShops from './components/FindShops.jsx';
-import UpdateItems from './components/UpdateItems.jsx';
+import UpdateItems from './components/Bill.jsx';
 import Coupons from './components/Coupons.jsx';
 import Account from './components/Account.jsx';
 import Settings from './components/Settings.jsx';
@@ -29,6 +29,7 @@ import './css/vertical_nav.css';
 import './css/footer.css';
 import './css/contact_us.css';
 import './css/message_box.css';
+import './css/manage_items.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -61,7 +62,7 @@ function App() {
     },
     {
       path: "/shopkeeperhome",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
     },
     {
       path: "/makeorder",
@@ -76,16 +77,16 @@ function App() {
       element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><FindShops/></>
     },
     {
-      path: "/additems",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><AddItems/></>
+      path: "/items",
+      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><AddItems/></>
     },
     {
-      path: "/updateitems",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><UpdateItems/></>
+      path: "/bill",
+      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><UpdateItems/></>
     },
     {
       path: "/coupons",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Coupons/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Coupons/></>
     },
     {
       path: "/menu",
