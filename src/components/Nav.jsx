@@ -16,7 +16,7 @@ export default function Nav(props) {
   return (
     <>
         <nav>
-            <NavLink to="/" className={(e)=>{return e.isActive?"navLogo activeNavItem": "navLogo" }}>
+            <NavLink to="/shopkeeperhome" className={(e)=>{return e.isActive?"navLogo activeNavItem": "navLogo" }}>
                 <i className="zmdi zmdi-home"></i>
                 <span id="one">Shop</span>
                 <span id="two">Easy</span>

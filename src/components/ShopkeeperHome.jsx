@@ -1,43 +1,13 @@
-import React from 'react'
+import React from 'react';
 
-export default function MakeOrder() {
+export default function ShopkeeperHome() {
   return (
     <>
-      <div className="items">
-
-        <form className="form">
-
-            <span id="itemsTitle">Make Order</span>
-          
-            <label htmlFor="shopName">Shop Name:</label>
-            <select name="shopName" id="shopName">
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
-            </select>
-          
-            <label htmlFor="itemName">Item Name:</label>
-            <select name="itemName" id="itemName">
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
-            </select>
-          
-            <label htmlFor="itemQuant">Item Quantity:</label>
-            <input type="number" name="itemQuant" id="itemQuant" min="0"/>
-
-            <label htmlFor="applyCoupon">Apply Coupon:</label>
-            <input type="text" name="applyCoupon" id="applyCoupon"/>
-
-            <button type="submit" class="btnItem">Add to order</button>
-
-        </form>
-
-
-        <div className="tableContainer">
-          <span id="itemsTitle">Ordered Items</span>
+        <div className="shop-keeper-home">
+          <span id="itemsTitle" className="order-title">Your Orders</span>
           <table class="itemsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: ABC store</caption>
+            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="complete-order">Complete Order</button></caption>
+            
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -93,7 +63,8 @@ export default function MakeOrder() {
             </tr>
           </table>
           <table class="itemsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: PQR store</caption>
+            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="complete-order">Complete Order</button></caption>
+            
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -149,7 +120,8 @@ export default function MakeOrder() {
             </tr>
           </table>
           <table class="itemsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: XYZ store</caption>
+            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="complete-order">Complete Order</button></caption>
+            
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -205,8 +177,6 @@ export default function MakeOrder() {
             </tr>
           </table>
         </div>
-
-      </div>
     </>
   )
 }

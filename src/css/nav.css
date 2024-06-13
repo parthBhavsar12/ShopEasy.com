@@ -24,7 +24,8 @@ a.navLogo:hover{
 }
 
 span#one{
-    color: var(--logo-green);
+    /* color: var(--logo-green); */
+    color: var(--dark-green);
 }
 
 span#two{

@@ -13,12 +13,12 @@ import AddItems from './components/ManageItems.jsx';
 import About from './components/About.jsx';
 import MakeOrder from './components/MakeOrder.jsx';
 import MakePayment from './components/MakePayment.jsx';
-import FindShops from './components/FindShops.jsx';
+import FindShops from './components/Shops.jsx';
 import UpdateItems from './components/Bill.jsx';
 import Coupons from './components/Coupons.jsx';
 import Account from './components/Account.jsx';
-import Settings from './components/Settings.jsx';
 import MessageBox from './components/MessageBox.jsx';
+import ShopkeeperHome from './components/ShopkeeperHome.jsx';
 
 import './css/var.css';
 import './css/entry.css';
@@ -30,6 +30,9 @@ import './css/footer.css';
 import './css/contact_us.css';
 import './css/message_box.css';
 import './css/manage_items.css';
+import './css/shops.css';
+import './css/make_order.css';
+import './css/shop_keeper_home.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
@@ -58,23 +61,23 @@ function App() {
     },
     {
       path: "/customerhome",
-      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/></>
     },
     {
       path: "/shopkeeperhome",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><ShopkeeperHome/></>
     },
     {
       path: "/makeorder",
-      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><MakeOrder/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><MakeOrder/></>
     },
     {
       path: "/makepayment",
-      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><MakePayment/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><MakePayment/></>
     },
     {
       path: "/findshops",
-      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><FindShops/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><FindShops/></>
     },
     {
       path: "/items",
@@ -97,16 +100,12 @@ function App() {
       element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Account/></>
     },
     {
-      path: "/settings",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Settings/></>
-    },
-    {
       path: "/logout",
       element: <><Upside/><Signin/></>
     },
     {
       path: "/contact",
-      element: <><Nav iName1="edit" menuTitle1="Make Order" slug1="../makeorder" iName2="balance" menuTitle2="Make Payment" slug2="../makepayment" iName3="store" menuTitle3="Find Shops" slug3="../findshops"/><ContactUs/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><ContactUs/></>
     },
   ])
   return (

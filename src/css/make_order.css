@@ -1,0 +1,6 @@
+.shopNameOnOrder{
+    color: var(--dark-green);
+    margin: 15px 0;
+    text-align: left;
+    font-weight: bold;
+}

@@ -119,4 +119,9 @@ select{
 
 .underline{
     text-decoration: underline;
+    cursor: default !important;
+}
+
+#updateItemsForm{
+    display: none;
 }
