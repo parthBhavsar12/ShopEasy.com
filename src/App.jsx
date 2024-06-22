@@ -35,6 +35,7 @@ import './css/make_order.css';
 import './css/shop_keeper_home.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import CustomerHome from './components/CustomerHome.jsx';
 
 function App() {
   const router = createBrowserRouter([
@@ -61,7 +62,7 @@ function App() {
     },
     {
       path: "/customerhome",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><CustomerHome/></>
     },
     {
       path: "/shopkeeperhome",
