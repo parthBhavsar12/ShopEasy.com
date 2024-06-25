@@ -1,8 +1,8 @@
-.shop-keeper-home{
+.shop-keeper-home {
     /* width: 80vw;
     height: 100%; */
     /* margin: 25px auto; */
-    
+
     text-align: center;
     height: 80vh;
     box-sizing: border-box;
@@ -13,11 +13,62 @@
     overflow-y: auto;
 }
 
-.order-action{
+.order-action {
     display: inline-block;
     width: auto;
     font-size: 0.8em;
     padding: 2px;
     margin-left: 25px;
     background-color: var(--dark-red);
+}
+
+.shopKeeperHomeBtns {
+    text-align: center;
+    position: sticky;
+    top: 0;
+}
+
+input#btnYourOrders,
+input#btnCheckStocks,
+input#btnYourProducts {
+    width: 20% !important;
+    color: white;
+    font-size: 1.2em;
+    border: 1px solid white !important;
+    cursor: pointer;
+    padding: 5px;
+}
+
+input#btnYourOrders {
+    border-radius: 10px 0 0 10px;
+}
+
+input#btnCheckStocks {
+    border-radius: 0 10px 10px 0;
+}
+
+.no-underline:hover {
+    background-color: var(--red) !important;
+    color: var(--dark-red) !important;
+    font-weight: bold;
+}
+
+.stocksTable {
+    display: none;
+    margin-top: 25px;
+}
+
+.underlined {
+    text-decoration: underline;
+    cursor: default !important;
+    background-color: var(--dark-green) !important;
+}
+
+.no-underline {
+    text-decoration: none;
+    background-color: var(--dark-red) !important;
+}
+
+.productsDiv {
+    display: none;
 }

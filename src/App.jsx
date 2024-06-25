@@ -33,6 +33,7 @@ import './css/manage_items.css';
 import './css/shops.css';
 import './css/make_order.css';
 import './css/shop_keeper_home.css';
+import './css/scrollbar.css';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import CustomerHome from './components/CustomerHome.jsx';
