@@ -4,10 +4,10 @@ export default function Coupons() {
   return (
     <>
     
-    <div className="items" id="updateItems">
+    <div className="products" id="updateProducts">
 
       <form className="form">
-        <span id="itemsTitle">Add Coupon</span>
+        <span id="productsTitle">Add Coupon</span>
 
         <label htmlFor="cpnCode">Coupon code:</label>
         <input type="text" name="cpnCode" id="cpnCode"/>
@@ -15,188 +15,186 @@ export default function Coupons() {
         <label htmlFor="cpnQuant">Coupon Quantity:</label>
         <input type="number" name="cpnQuant" id="cpnQuant" min="0"/>
 
-        <label htmlFor="cpnStartDate">Start Date:</label>
-        <input type="date" name="cpnStartDate" id="cpnStartDate"/>
+        <label htmlFor="cpnStartDate">Start Date-Time:</label>
+        <input type="datetime-local" name="cpnStartDate" id="cpnStartDate"/>
 
-        <label htmlFor="cpnEndDate">End Date:</label>
-        <input type="date" name="cpnEndDate" id="cpnEndDate"/>
+        <label htmlFor="cpnEndDate">End Date-Time:</label>
+        <input type="datetime-local" name="cpnEndDate" id="cpnEndDate"/>
 
-        
-
-        <button type="submit" class="btnItem">Add Coupon</button>
+        <button type="submit" class="btnProduct">Add Coupon</button>
 
       </form>
 
       <div className="tableContainer">
-        <span id="itemsTitle">Coupons</span>
-        <table class="itemsTable">
+        <span id="productsTitle">Coupons</span>
+        <table class="productsTable">
           <tr>
             <th>#</th>
             <th>Coupon Code</th>
             <th>Quantity</th>
-            <th>Start Date</th>
-            <th>End Date</th>
+            <th>Start Date-Time</th>
+            <th>End Date-Time</th>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
           <tr>
             <td>#</td>
             <td>Coupon Code</td>
             <td>Quantity</td>
-            <td>Start Date</td>
-            <td>End Date</td>
+            <td>Start Date-Time</td>
+            <td>End Date-Time</td>
           </tr>
         </table>
       </div>

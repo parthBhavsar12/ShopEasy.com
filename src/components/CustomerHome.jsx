@@ -4,8 +4,8 @@ export default function CustomerHome() {
   return (
     <>
         <div className="shop-keeper-home">
-          <span id="itemsTitle" className="order-title">Your Orders</span>
-          <table class="itemsTable">
+          <span id="productsTitle" className="order-title">Your Orders</span>
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: ABC Store <button className="order-action">Complete Order</button></caption>
             
             <tr>
@@ -62,7 +62,7 @@ export default function CustomerHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable">
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: PQR Store <button className="order-action">Complete Order</button></caption>
             
             <tr>
@@ -119,7 +119,7 @@ export default function CustomerHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable">
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: XYZ Store <button className="order-action">Complete Order</button></caption>
             
             <tr>

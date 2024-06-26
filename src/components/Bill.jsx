@@ -4,37 +4,37 @@ export default function Bill() {
   return (
     <>
 
-      <div className="items" id="updateItems">
+      <div className="products" id="updateProducts">
 
         <form className="form">
-          <span id="itemsTitle">Generate Bill</span>
+          <span id="productsTitle">Generate Bill</span>
 
             <label htmlFor="custName">Customer Name:</label>
             <input type="text" name="custName" id="custName" />
 
-            <label htmlFor="itemName">Item Name:</label>
-            <select name="itemName" id="itemName">
+            <label htmlFor="productName">Product Name:</label>
+            <select name="productName" id="productName">
               <option value="NA">NA</option>
               <option value="abc">abc</option>
               <option value="xyz">xyz</option>
             </select>
 
-          <label htmlFor="itemQuant">Item Quantity:</label>
-          <input type="number" name="itemQuant" id="itemQuant" min="0"/>
+          <label htmlFor="productQuant">Product Quantity:</label>
+          <input type="number" name="productQuant" id="productQuant" min="0"/>
 
-          <label htmlFor="itemDiscount">Discount (%):</label>
-          <input type="number" name="itemDiscount" id="itemDiscount" defaultValue="0" min="0"/>
+          <label htmlFor="productDiscount">Discount (%):</label>
+          <input type="number" name="productDiscount" id="productDiscount" defaultValue="0" min="0"/>
 
           {/* <div className="buttonMerger"> */}
-            <button type="submit" class="btnItem">Add to Bill</button>
-            {/* <button type="reset" class="resetBtnItem">Reset</button> */}
+            <button type="submit" class="btnProduct">Add to Bill</button>
+            {/* <button type="reset" class="resetBtnProduct">Reset</button> */}
           {/* </div> */}
 
         </form>
 
         <div className="tableContainer">
-          <span id="itemsTitle">Items added to Bill</span>
-          <table class="itemsTable">
+          <span id="productsTitle">Products added to Bill</span>
+          <table class="productsTable">
             <tr>
               <th>#</th>
               <th>Name</th>

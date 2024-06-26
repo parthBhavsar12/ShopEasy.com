@@ -3,11 +3,11 @@ import React from 'react'
 export default function MakeOrder() {
   return (
     <>
-      <div className="items">
+      <div className="products">
 
         <form className="form">
 
-            <span id="itemsTitle">Make Order</span>
+            <span id="productsTitle">Make Order</span>
           
             <label htmlFor="shopName">Shop Name:</label>
             <select name="shopName" id="shopName">
@@ -16,27 +16,27 @@ export default function MakeOrder() {
               <option value="xyz">xyz</option>
             </select>
           
-            <label htmlFor="itemName">Item Name:</label>
-            <select name="itemName" id="itemName">
+            <label htmlFor="productName">Product Name:</label>
+            <select name="productName" id="productName">
               <option value="NA">NA</option>
               <option value="abc">abc</option>
               <option value="xyz">xyz</option>
             </select>
           
-            <label htmlFor="itemQuant">Item Quantity:</label>
-            <input type="number" name="itemQuant" id="itemQuant" min="0"/>
+            <label htmlFor="productQuant">Product Quantity:</label>
+            <input type="number" name="productQuant" id="productQuant" min="0"/>
 
             <label htmlFor="applyCoupon">Apply Coupon:</label>
             <input type="text" name="applyCoupon" id="applyCoupon"/>
 
-            <button type="submit" class="btnItem">Add to order</button>
+            <button type="submit" class="btnProduct">Add to order</button>
 
         </form>
 
 
         <div className="tableContainer">
-          <span id="itemsTitle">Ordered Items</span>
-          <table class="itemsTable">
+          <span id="productsTitle">Ordered Products</span>
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: ABC store</caption>
             <tr>
               <th>#</th>
@@ -92,7 +92,7 @@ export default function MakeOrder() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable">
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: PQR store</caption>
             <tr>
               <th>#</th>
@@ -148,7 +148,7 @@ export default function MakeOrder() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable">
+          <table class="productsTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: XYZ store</caption>
             <tr>
               <th>#</th>

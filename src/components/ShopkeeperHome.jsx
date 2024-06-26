@@ -18,7 +18,7 @@ export default function ShopkeeperHome() {
   const handleViewProducts = () => {
     stocksTable.current.style.display = 'none';
     orderTableDiv.current.style.display = 'none';
-    productsDiv.current.style.display = 'block';
+    productsDiv.current.style.display = 'flex';
     setUnderlineRight('no-underline');
     setUnderlineMid('underlined');
     setUnderlineLeft('no-underline');
@@ -34,14 +34,14 @@ export default function ShopkeeperHome() {
   return (
     <>
       <div className="shop-keeper-home">
-        {/* <span id="itemsTitle" className="order-title">Your Orders</span> */}
+        {/* <span id="productsTitle" className="order-title">Your Orders</span> */}
         <div className="shopKeeperHomeBtns">
           <input type="button" id="btnYourOrders" value="Your Orders" className={underlineLeft} onClick={handleViewOrders} />
           <input type="button" id="btnYourProducts" value="Your Products" className={underlineMid} onClick={handleViewProducts} />
           <input type="button" id="btnCheckStocks" value="Check Stocks" className={underlineRight} onClick={handleViewStocks} />
         </div>
         <div ref={orderTableDiv} className='orderTableDiv'>
-          <table class="itemsTable shopkeeperHomeOrderTable">
+          <table class="productsTable shopkeeperHomeOrderTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
 
             <tr>
@@ -98,7 +98,7 @@ export default function ShopkeeperHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable shopkeeperHomeOrderTable">
+          <table class="productsTable shopkeeperHomeOrderTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
 
             <tr>
@@ -155,7 +155,7 @@ export default function ShopkeeperHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="itemsTable shopkeeperHomeOrderTable">
+          <table class="productsTable shopkeeperHomeOrderTable">
             <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
 
             <tr>
@@ -214,288 +214,327 @@ export default function ShopkeeperHome() {
           </table>
         </div>
         <div ref={productsDiv} className='productsDiv'>
-          <div className="shop-container">
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
-            <div className="shop-item">
-              <span className="shop"><i class="zmdi zmdi-store"></i>Shop name: </span>
-              <span>ABC store</span>
-              <span className="shop"><i class="zmdi zmdi-pin"></i>Address:</span>
-              <span >A/21, hdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhjhdhdhgs dshgdsfb dshjdsh, sjhdh, dhjds, sdhjhds, sdhj</span>
-              <span className=" shop"><i class="zmdi zmdi-phone"></i>Contact:</span>
-              <span>0123456789</span>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
+            </div>
+          </div>
+          <div className="product-card">
+            <img src="../../public\logo\new_product.png" alt="Product" />
+            <div className="product-details">
+              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span>ABC XYZ</span>
+              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span>pqr</span>
+              <span className="product"><i>&#8377;</i>Price:</span>
+              <span >Rs. 000</span>
             </div>
           </div>
         </div>
         <div ref={stocksTable} className='stocksTable'>
-          <table class="itemsTable" >
-            {/* <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption> */}
+          <table class="productsTable" >
+            <caption id="stocksTableCaption">(Less to More)<i class="zmdi zmdi-long-arrow-down"></i></caption>
 
             <tr>
               <th>#</th>
-              <th>Item Name</th>
+              <th>Product Name</th>
               <th>Remaining Stock</th>
               <th>Minimum Stock</th>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>
             <tr>
               <td>#</td>
-              <td>Item Name</td>
+              <td>Product Name</td>
               <td>Remaining Stock</td>
               <td>Minimum Stock</td>
             </tr>

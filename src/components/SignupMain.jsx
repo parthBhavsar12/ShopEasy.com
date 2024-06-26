@@ -3,7 +3,7 @@ import LeftLogo from './LeftLogo';
 import Password from './Password';
 import UserType from './UserType';
 import GoTo from './GoTo';
-import MessageBox from './MessageBox';
+// import MessageBox from './MessageBox';
 
 import { useForm } from "react-hook-form";
 

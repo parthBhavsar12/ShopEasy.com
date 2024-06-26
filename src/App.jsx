@@ -9,12 +9,12 @@ import ResetPassword3 from './components/ResetPassword3.jsx';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ContactUs from './components/ContactUs.jsx';
-import AddItems from './components/ManageItems.jsx';
+import AddProducts from './components/ManageProducts.jsx';
 import About from './components/About.jsx';
 import MakeOrder from './components/MakeOrder.jsx';
 import MakePayment from './components/MakePayment.jsx';
 import FindShops from './components/Shops.jsx';
-import UpdateItems from './components/Bill.jsx';
+import UpdateProducts from './components/Bill.jsx';
 import Coupons from './components/Coupons.jsx';
 import Account from './components/Account.jsx';
 import MessageBox from './components/MessageBox.jsx';
@@ -29,7 +29,7 @@ import './css/vertical_nav.css';
 import './css/footer.css';
 import './css/contact_us.css';
 import './css/message_box.css';
-import './css/manage_items.css';
+import './css/manage_products.css';
 import './css/shops.css';
 import './css/make_order.css';
 import './css/shop_keeper_home.css';
@@ -43,11 +43,12 @@ function App() {
     {
       path: "/",
       element: <><Upside/><Signup/></>
-      // element: <><MessageBox/></>
+      // element: <><Upside/><Signup/><MessageBox/></>
     },
     {
       path: "/signup",
       element: <><Upside/><Signup/></>
+      // element: <><Upside/><Signup/><MessageBox/></>
     },
     {
       path: "/signin",
@@ -67,7 +68,7 @@ function App() {
     },
     {
       path: "/shopkeeperhome",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><ShopkeeperHome/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><ShopkeeperHome/></>
     },
     {
       path: "/makeorder",
@@ -82,24 +83,24 @@ function App() {
       element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"/><FindShops/></>
     },
     {
-      path: "/items",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><AddItems/></>
+      path: "/products",
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><AddProducts/></>
     },
     {
       path: "/bill",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><UpdateItems/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><UpdateProducts/></>
     },
     {
       path: "/coupons",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Items" slug1="../items" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Coupons/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Coupons/></>
     },
     {
       path: "/menu",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
+      element: <><Nav iName1="plus-square" menuTitle1="Add Products" slug1="../addproducts" iName2="upload" menuTitle2="Update Products" slug2="../updateproducts" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /></>
     },
     {
       path: "/account",
-      element: <><Nav iName1="plus-square" menuTitle1="Add Items" slug1="../additems" iName2="upload" menuTitle2="Update Items" slug2="../updateitems" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Account/></>
+      element: <><Nav iName1="plus-square" menuTitle1="Add Products" slug1="../addproducts" iName2="upload" menuTitle2="Update Products" slug2="../updateproducts" iName3="receipt" menuTitle3="Coupons" slug3="../coupons" /><Account/></>
     },
     {
       path: "/logout",
@@ -120,7 +121,7 @@ function App() {
 
         {/* Menu for Shopkeeper */}
 
-        {/* <Nav iName1="plus-square" menuTitle1="Add Items" iName2="upload" menuTitle2="Update Items" iName3="receipt" menuTitle3="Coupons"/> */}
+        {/* <Nav iName1="plus-square" menuTitle1="Add Products" iName2="upload" menuTitle2="Update Products" iName3="receipt" menuTitle3="Coupons"/> */}
 
         {/* <Upside/> */}
 
@@ -142,7 +143,7 @@ function App() {
 
         {/* <ContactUs/> */}
 
-        {/* <AddItems/> */}
+        {/* <AddProducts/> */}
 
         {/* <Signup/> */}
       
