@@ -1,5 +1,5 @@
 import Upside from './components/Upside.jsx';
-import Signup from './components/SignupMain.jsx';
+import Signup from './components/Signup.jsx';
 import SignupShopKeeper from './components/SignupShopKeeper.jsx';
 import SignupCustomer from './components/SignupCustomer.jsx';
 import Signin from './components/Signin.jsx';
@@ -48,6 +48,16 @@ function App() {
     {
       path: "/signup",
       element: <><Upside/><Signup/></>
+      // element: <><Upside/><Signup/><MessageBox/></>
+    },
+    {
+      path: "/signup2",
+      element: <><Upside/><SignupCustomer/></>
+      // element: <><Upside/><Signup/><MessageBox/></>
+    },
+    {
+      path: "/signup3",
+      element: <><Upside/><SignupShopKeeper/></>
       // element: <><Upside/><Signup/><MessageBox/></>
     },
     {

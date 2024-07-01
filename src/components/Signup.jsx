@@ -3,7 +3,7 @@ import LeftLogo from './LeftLogo';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
 
-export default function Signup1() {
+export default function Signup() {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -164,7 +164,7 @@ export default function Signup1() {
               />
               <label htmlFor="show_password" id="label_show_password">Show Password</label>
             </div>
-            
+
             <div className="btn">
               <button type="submit">
                 <i className="zmdi zmdi-fast-forward"></i>Next

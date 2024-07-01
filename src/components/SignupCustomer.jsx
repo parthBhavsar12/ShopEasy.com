@@ -27,10 +27,8 @@ export default function Signup2() {
                   <div><label htmlFor="area"><i className="zmdi zmdi-pin"></i>Area</label></div>
                   <div><input type="text" name="area" id="area" placeholder="Local Area" /></div>
               
-                  {/* <div><label htmlFor="dist"><i className="zmdi zmdi-email"></i>District</label></div> */}
                   <div><input type="text" name="dist" id="dist" placeholder="District" /></div>
 
-                  {/* <div><label htmlFor="pin"><i className="zmdi zmdi-email"></i>Pin Code</label></div> */}
                   <div><input type="text" name="pin" id="pin" placeholder="Pin Code" /></div>
 
                   <div><input type="text" name="state" id="state" placeholder="State" /></div>
