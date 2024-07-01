@@ -60,6 +60,11 @@ export default function Signup() {
 
     const { password, conPassword } = formData;
 
+    if (password !== conPassword && password.length < 8) {
+      setError('Passwords do not match, Password must be at least 8 characters long.');
+      return;
+    }
+
     if (password !== conPassword) {
       setError('Passwords do not match.');
       return;

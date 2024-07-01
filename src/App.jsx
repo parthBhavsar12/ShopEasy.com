@@ -4,8 +4,8 @@ import SignupShopKeeper from './components/SignupShopKeeper.jsx';
 import SignupCustomer from './components/SignupCustomer.jsx';
 import Signin from './components/Signin.jsx';
 import ResetPassword1 from './components/ResetPassword1.jsx';
-import ResetPassword2 from './components/ResetPassword2.jsx';
-import ResetPassword3 from './components/ResetPassword3.jsx';
+import Otp from './components/ResetPassword2.jsx';
+import ChangePassword from './components/ResetPassword3.jsx';
 import Nav from './components/Nav.jsx';
 import Footer from './components/Footer.jsx';
 import ContactUs from './components/ContactUs.jsx';
@@ -71,6 +71,14 @@ function App() {
     {
       path: "/resetpassword",
       element: <><Upside/><ResetPassword1/></>
+    },
+    {
+      path: "/otp",
+      element: <><Upside/><Otp/></>
+    },
+    {
+      path: "/changepassword",
+      element: <><Upside/><ChangePassword/></>
     },
     {
       path: "/customerhome",
