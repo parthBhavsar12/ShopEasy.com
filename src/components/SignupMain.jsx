@@ -1,86 +1,180 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from 'react';
 import LeftLogo from './LeftLogo';
-import Password from './Password';
-import UserType from './UserType';
 import GoTo from './GoTo';
-// import MessageBox from './MessageBox';
-
-import { useForm } from "react-hook-form";
+import MessageBox from './MessageBox';
 
 export default function Signup1() {
-  
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm()
-  const onSubmit = (data) => console.log(data);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    conPassword: '',
+    userType: ''
+  });
+  const [error, setError] = useState('');
+  const pwd = useRef();
+  const conPwd = useRef();
+  const checkBox = useRef();
+  const span1 = useRef();
+  const span2 = useRef();
+  const rdo1 = useRef();
+  const rdo2 = useRef();
 
-  // const main = useRef();
-  // const msgBox = useRef();
+  const handleOnChange = () => {
+    pwd.current.type = checkBox.current.checked ? "text" : "password";
+    conPwd.current.type = checkBox.current.checked ? "text" : "password";
+  };
 
-  // const showMessageBox = ()=>{
-  //     main.current.style.opacity = '0.6';
-  //     main.current.style.filter = 'blur(1px)';
-  //     main.current.style.pointerEvents = 'none';
+  const handleUserTypeChange = (e) => {
+    setFormData({
+      ...formData,
+      userType: e.target.value
+    });
 
-  //     msgBox.current.style.opacity = 'unset';
-  //     msgBox.current.style.filter = 'unset';
-  //     msgBox.current.style.pointerEvents = 'unset';
-  // }
+    if (e.target.value === 'shopkeeper') {
+      span1.current.style.border = '1px solid var(--dark-red)';
+      span1.current.style.borderRadius = '5px';
+      span1.current.style.backgroundColor = 'var(--red)';
+
+      span2.current.style.backgroundColor = 'unset';
+      span2.current.style.border = 'none';
+    } else {
+      span2.current.style.border = '1px solid var(--dark-red)';
+      span2.current.style.borderRadius = '5px';
+      span2.current.style.backgroundColor = 'var(--red)';
+
+      span1.current.style.backgroundColor = 'unset';
+      span1.current.style.border = 'none';
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+
+    const { password, conPassword } = formData;
+
+    if (password !== conPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    if (password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
+
+    // Proceed with form submission
+    console.log('Form submitted successfully', formData);
+  };
 
   return (
     <>
-        <div className="main">
-        {/* ref={main} */}
-
-            <LeftLogo/>
-
-            <div className="container">
-
-                <div className="title"><strong>Sign up</strong></div>
-
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  {/* <input
-                    {...register("firstName", { required: true })}
-                    aria-invalid={errors.firstName ? "true" : "false"}
-                  />
-                  {errors.firstName?.type === "required" && (
-                    <p role="alert">First name is required</p>
-                  )}
-
-                  <input
-                    {...register("mail", { required: "Email Address is required" })}
-                    aria-invalid={errors.mail ? "true" : "false"}
-                  />
-                  {errors.mail && <p role="alert">{errors.mail.message}</p>}
-
-                  <input type="submit" />
-                </form> */}
-                    
-                    <UserType/>
-                    {/* {...register("firstName", { required: true, maxLength: 20 })}  */}
-                    <div><label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label></div>
-                    {/* <div><input type="email" placeholder="abc@xyz.pqr" {...register("email", { required: true, message: 'Email id is required for registration'})}/></div> */}
-                    <div><input placeholder="abc@xyz.pqr" type='email'
-                    {...register("mail", { required: "Email Address is required" })}
-                    aria-invalid={errors.mail ? "true" : "false"}
-                  /></div>
-                  {errors.mail && <MessageBox msgTitle="Error" msgText={errors.mail.message}/>}
-
-                  {/* ref={msgBox} */}
-                  {/* {errors.mail && showMessageBox()} */}
-
-                    <Password/>
-
-                    <div className="btn"><button type="submit"><i className="zmdi zmdi-fast-forward"></i>Next</button></div>
-
-                </form>
-                
-                <GoTo title="Have an account? " goto="Sign in" slug="../signin"/>
+      <div className="main">
+        <LeftLogo />
+        <div className="container">
+          <div className="title"><strong>Sign up</strong></div>
+          <form onSubmit={handleSubmit} method='post'>
+            <div>
+              <label><i className="zmdi zmdi-account"></i>You are a</label>
+              <span className="rdo" ref={span1}>
+                <input
+                  type="radio"
+                  name="userType"
+                  id="shopkeeper"
+                  value="shopkeeper"
+                  onChange={handleUserTypeChange}
+                  ref={rdo1}
+                />
+                <label htmlFor="shopkeeper">Shopkeeper</label>
+              </span>
+              <span className="rdo" ref={span2}>
+                <input
+                  type="radio"
+                  name="userType"
+                  id="customer"
+                  value="customer"
+                  onChange={handleUserTypeChange}
+                  ref={rdo2}
+                  required
+                />
+                <label htmlFor="customer">Customer</label>
+              </span>
             </div>
 
+            <div>
+              <label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label>
+            </div>
+            <div>
+              <input
+                type="email"
+                name="email"
+                placeholder="abc@xyz.pqr"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password"><i className="zmdi zmdi-lock-outline"></i>Password</label>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Minimum 8 characters"
+                ref={pwd}
+                value={formData.password}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div>
+              <label htmlFor="conPassword"><i className="zmdi zmdi-lock"></i>Confirm Password</label>
+            </div>
+            <div>
+              <input
+                type="password"
+                name="conPassword"
+                id="conPassword"
+                placeholder="Minimum 8 characters"
+                ref={conPwd}
+                value={formData.conPassword}
+                onChange={handleInputChange}
+                required
+              />
+            </div>
+
+            <div>
+              <input
+                type="checkbox"
+                name="show_password"
+                id="show_password"
+                onChange={handleOnChange}
+                ref={checkBox}
+              />
+              <label htmlFor="show_password" id="label_show_password">Show Password</label>
+            </div>
+            
+            <div className="btn">
+              <button type="submit">
+                <i className="zmdi zmdi-fast-forward"></i>Next
+              </button>
+            </div>
+          </form>
+          <GoTo title="Have an account? " goto="Sign in" slug="../signin" />
         </div>
+      </div>
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
     </>
-  )
+  );
 }

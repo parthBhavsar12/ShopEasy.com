@@ -44,7 +44,7 @@ export default function UserType() {
         </span>
 
         <span className="rdo" ref={span2}>
-            <input type="radio" name="user_type" id="customer" value="customer" onChange={handleOnChange2} ref={rdo2}/>
+            <input type="radio" name="user_type" id="customer" value="customer" onChange={handleOnChange2} ref={rdo2} required/>
             <label htmlFor="customer">Customer</label>
         </span>
     </div>
