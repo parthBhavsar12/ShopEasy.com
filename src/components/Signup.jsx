@@ -70,7 +70,6 @@ export default function Signup() {
       return;
     }
 
-    // Proceed with form submission
     console.log('Form submitted successfully', formData);
   };
 
