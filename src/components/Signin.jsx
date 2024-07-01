@@ -1,63 +1,96 @@
-import React, {useRef} from 'react';
+import React, { useRef, useState } from 'react';
 import LeftLogo from './LeftLogo';
-import UserType from './UserType';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
-import { useForm } from "react-hook-form";
 
 export default function Signin() {
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm()
-  const onSubmit = (data) => console.log(data);
-
   const pwd = useRef();
   const checkBox = useRef();
-  const handleOnChange = ()=>{
-      pwd.current.type = checkBox.current.checked ? "text" : "password";
+  const handleOnChange = () => {
+    pwd.current.type = checkBox.current.checked ? "text" : "password";
   }
 
-  return (
-    <>
-        <div className="main">
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
 
-            <LeftLogo/>
-            
-            <div className="container">
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
 
-                <div className="title"><strong>Sign in</strong></div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
 
-                <form onSubmit={handleSubmit(onSubmit)}>
-                    <UserType/>
+    const { password } = formData;
 
-                    <div><label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label></div>
-                    <div><input placeholder="abc@xyz.pqr" type='email'
-                    {...register("mail", { required: "Email Address is required" })}
-                    aria-invalid={errors.mail ? "true" : "false"}/></div>
-                  {errors.mail && <MessageBox msgTitle="Error" msgText={errors.mail.message}/>}
-                    {/* <div><input type="email" name="email" id="email" placeholder="abc@xyz.pqr" /></div> */}
+    console.log('Form submitted successfully', formData);
+  };
 
-                    <div><label htmlFor="password"><i className="zmdi zmdi-lock"></i>Password</label></div>
-                    <div><input type="password" name="password" id="password" placeholder="Minimum 8 characters" ref={pwd}/></div>
+return (
+  <>
+    <div className="main">
 
-                    <div>
-                      <input type="checkbox" name="show_password" id="show_password" onChange={handleOnChange} ref={checkBox}/>
-                      <label htmlFor="show_password" id="label_show_password">Show Password</label>
-                    </div>
+      <LeftLogo />
 
-                    <div className="btn"><button type="submit"><i className="zmdi zmdi-sign-in"></i>Sign in</button></div>
+      <div className="container">
 
-                </form>
+        <div className="title"><strong>Sign in</strong></div>
 
-                
-                <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup"/>
+        <form onSubmit={handleSubmit} method='post'>
+          <div>
+            <label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label>
+          </div>
 
-                <GoTo title="" goto="Forgot Password?" slug="../resetpassword"/>
-            </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+              placeholder="abc@xyz.pqr" />
+          </div>
 
-        </div>
-    </>
-  )
+          <div>
+            <label htmlFor="password"><i className="zmdi zmdi-lock"></i>Password</label>
+          </div>
+
+          <div>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              placeholder="Minimum 8 characters"
+              required
+              ref={pwd} />
+          </div>
+
+          <div>
+            <input type="checkbox" name="show_password" id="show_password" onChange={handleOnChange} ref={checkBox} />
+            <label htmlFor="show_password" id="label_show_password">Show Password</label>
+          </div>
+
+          <div className="btn"><button type="submit"><i className="zmdi zmdi-sign-in"></i>Sign in</button></div>
+
+        </form>
+
+
+        <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup" />
+
+        <GoTo title="" goto="Forgot Password?" slug="../resetpassword" />
+      </div>
+
+    </div> 
+    {error && <MessageBox msgTitle="Error" msgText={error} />}
+  </>
+)
 }
