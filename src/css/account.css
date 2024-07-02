@@ -1,0 +1,12 @@
+.account-form{
+    width: 60%;
+    margin: 25px auto;
+}
+
+.label-account{
+    color: var(--dark-red);
+}
+
+.account-form div{
+    margin: 10px !important;
+}

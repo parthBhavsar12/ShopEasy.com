@@ -171,7 +171,7 @@ export default function Signup() {
 
             <div className="btn">
               <button type="submit">
-                <i className="zmdi zmdi-fast-forward"></i>Next
+                <i className="zmdi zmdi-account-add"></i>Register
               </button>
             </div>
           </form>

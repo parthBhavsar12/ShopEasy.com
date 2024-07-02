@@ -66,7 +66,7 @@ input[type="search"]{
     border: 1px solid var(--dark-green);
     padding: 10px;
     border-radius: 5px;
-    width: 25vw;
+    width: 22vw;
     color: var(--dark-green);
 }
 
@@ -90,14 +90,14 @@ i.zmdi-home{
     font-size: 1.3em;
 }
 
-span#hello{
-    color: white;
-    font-size: 0.8em;
-}
-
 label.navMenu{
     color: white;
 }
+
+/* span#hello{
+    color: white;
+    font-size: 0.8em;
+} */
 
 /* img.nav_menu{
     background-color: var(--green);
@@ -118,8 +118,8 @@ img.nav_menu:hover{
 }
 
 span#logOut{
-    background-color: var(--red);
-    color: var(--dark-red);
+    background-color: #ed4444;
+    color: white;
     font-weight: bold;
     padding: 10px;
     border-radius: 10px;
@@ -128,5 +128,4 @@ span#logOut{
 
 span#logOut:hover{
     background-color: var(--dark-red);
-    color: white;
 }

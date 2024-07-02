@@ -43,9 +43,14 @@ export default function Nav(props) {
                 <input type="search" id="search" placeholder="Search"/>
             </label>
         
-            <span id="hello">
+            {/* <span id="hello">
                 <i className="zmdi zmdi-account"></i>Hello, user
-            </span>
+            </span> */}
+
+            <NavLink to={props.slug4} className={(e)=>{return e.isActive?"navMenu activeNavItem": "navMenu" }}>
+                <i className={`zmdi zmdi-${props.iName4}`}></i>
+                {props.menuTitle4}    
+            </NavLink>
 
             <span id="logOut">
                 <i className="zmdi zmdi-power"></i>Log Out
