@@ -88,7 +88,7 @@ function Customer() {
                         type="text"
                         name="address1"
                         id="address1"
-                        placeholder="1, XYZ Complex"
+                        placeholder="1, Apar Apartments"
                         value={formData.address1}
                         onChange={handleInputChange}
                         required
