@@ -4,7 +4,7 @@
     pointer-events: none;
 } */
 
-.msgBox {
+.msgBoxRed, .msgBoxGreen {
     max-width: 40%;
     position: fixed;
     background-color: white;
@@ -20,7 +20,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     /* z-index: 1; */
-    border: 1px solid var(--red);
+    border: 1px solid var(--dark-red);
 }
 
 
@@ -61,7 +61,27 @@ button#closeMsgBox {
 }
 
 @media screen and (max-width: 1000px) {
-    .msgBox {
+    .msgBoxRed, .msgBoxGreen {
         max-width: 40%;
     }
+}
+
+.msgBoxGreen{
+    border: 1px solid var(--dark-green);
+    color: var(--dark-green);
+    box-shadow: 2px 2px 2px rgb(130, 189, 154);
+}
+
+
+.msgBoxGreen .msgText {
+    border-top: 1px solid var(--dark-green);
+    color: var(--dark-green);
+}
+
+.msgBoxGreen .msgTitle {
+    color: var(--dark-green);
+}
+
+.msgBoxGreen button#closeMsgBox {
+    background-color: var(--dark-green);
 }

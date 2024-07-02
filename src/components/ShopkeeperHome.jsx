@@ -215,7 +215,7 @@ export default function ShopkeeperHome() {
         </div>
         <div ref={productsDiv} className='productsDiv'>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -226,7 +226,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -237,7 +237,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -248,7 +248,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -259,7 +259,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -270,7 +270,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -281,7 +281,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -292,7 +292,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -303,7 +303,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -314,7 +314,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
@@ -325,7 +325,7 @@ export default function ShopkeeperHome() {
             </div>
           </div>
           <div className="product-card">
-            <img src="../../public\logo\new_product.png" alt="Product" />
+            <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
               <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>

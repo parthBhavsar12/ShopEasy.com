@@ -4,18 +4,18 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--red);
-    border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
     background: var(--dark-red);
+    border-radius: 5px;
 }
 
-/* ::-webkit-scrollbar-track {
-    background: var(--red);
-    border-radius: 5px;
+/* ::-webkit-scrollbar-thumb:hover {
+    background: var(--dark-red);
 } */
+
+::-webkit-scrollbar-track {
+    border-radius: 5px;
+    box-shadow: inset 2px 2px 5px var(--dark-green);
+}
 
 ::-webkit-scrollbar-corner {
     background: var(--dark-green);

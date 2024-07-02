@@ -1,35 +1,105 @@
-import React from 'react'
+import React, { useState } from 'react';
+import MessageBox from './MessageBox';
 
 export default function MakeOrder() {
+
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+    shopName: 'none',
+    productName: 'none',
+    productQuant: '',
+    applyCoupon: '',
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+
+    const { shopName, productName } = formData;
+
+    if ( shopName === "none" && productName === "none") {
+      setError('Please select shop and product.');
+      return;
+    }
+
+    if ( shopName === "none") {
+      setError('Please select shop.');
+      return;
+    }
+
+    if (productName === "none") {
+      setError('Please select product.');
+      return;
+    }
+
+    console.log('Form submitted successfully', formData);
+  };
+
   return (
     <>
       <div className="products">
 
-        <form className="form">
+        <form className="form" onSubmit={handleSubmit} method='post'>
 
-            <span id="productsTitle">Make Order</span>
-          
-            <label htmlFor="shopName">Shop Name:</label>
-            <select name="shopName" id="shopName">
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
-            </select>
-          
-            <label htmlFor="productName">Product Name:</label>
-            <select name="productName" id="productName">
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
-            </select>
-          
-            <label htmlFor="productQuant">Product Quantity:</label>
-            <input type="number" name="productQuant" id="productQuant" min="0"/>
+          <span id="productsTitle">Make Order</span>
 
-            <label htmlFor="applyCoupon">Apply Coupon:</label>
-            <input type="text" name="applyCoupon" id="applyCoupon"/>
+          <label htmlFor="shopName">Shop Name:</label>
+          <select
+            name="shopName"
+            id="shopName"
+            value={formData.shopName}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none" selected>--Select shop--</option>
+            <option value="NA">NA</option>
+            <option value="abc">abc</option>
+            <option value="xyz">xyz</option>
+          </select>
 
-            <button type="submit" class="btnProduct">Add to order</button>
+          <label htmlFor="productName">Product Name:</label>
+          <select
+            name="productName"
+            id="productName"
+            value={formData.productName}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none" selected>--Select product--</option>
+            <option value="NA">NA</option>
+            <option value="abc">abc</option>
+            <option value="xyz">xyz</option>
+          </select>
+
+          <label htmlFor="productQuant">Product Quantity:</label>
+          <input
+            type="number"
+            name="productQuant"
+            id="productQuant"
+            min="0"
+            value={formData.productQuant}
+            onChange={handleInputChange}
+            required
+          />
+
+          <label htmlFor="applyCoupon">Apply Coupon:</label>
+          <input
+            type="text"
+            name="applyCoupon"
+            id="applyCoupon"
+            value={formData.applyCoupon}
+            onChange={handleInputChange}
+            required
+          />
+
+          <button type="submit" class="btnProduct">Add to order</button>
 
         </form>
 
@@ -207,6 +277,8 @@ export default function MakeOrder() {
         </div>
 
       </div>
+      
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
     </>
   )
 }
