@@ -1,16 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import LeftLogo from './LeftLogo';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
+import axios from 'axios';
 
 export default function Signup() {
+  
+  const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
+
+  useEffect(() => {
+    console.log("hsjhjs");
+  }, [error, msg]);
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     conPassword: '',
     userType: ''
   });
-  const [error, setError] = useState('');
   const pwd = useRef();
   const conPwd = useRef();
   const checkBox = useRef();
@@ -54,11 +62,11 @@ export default function Signup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    const { password, conPassword } = formData;
+    const { email, password, conPassword, userType } = formData;
 
     if (password !== conPassword && password.length < 8) {
       setError('Passwords do not match, Password must be at least 8 characters long.');
@@ -76,6 +84,20 @@ export default function Signup() {
     }
 
     console.log('Form submitted successfully', formData);
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/signup",
+        { email, password, role: userType },
+        { withCredentials: true }
+      );
+      console.log('Response: ', response);
+      setMsg('Registered successfully.');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  
   };
 
   return (
@@ -179,6 +201,7 @@ export default function Signup() {
         </div>
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
     </>
   );
 }
