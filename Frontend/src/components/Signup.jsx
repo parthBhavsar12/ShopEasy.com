@@ -5,20 +5,10 @@ import MessageBox from './MessageBox';
 import axios from 'axios';
 
 export default function Signup() {
-  
+
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
 
-  useEffect(() => {
-    console.log("hsjhjs");
-  }, [error, msg]);
-
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    conPassword: '',
-    userType: ''
-  });
   const pwd = useRef();
   const conPwd = useRef();
   const checkBox = useRef();
@@ -26,6 +16,18 @@ export default function Signup() {
   const span2 = useRef();
   const rdo1 = useRef();
   const rdo2 = useRef();
+  const btnRegister = useRef();
+
+  // useEffect(() => {
+  //   // console.log("hsjhjs");
+  // }, [btnRegister]);
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    conPassword: '',
+    userType: ''
+  });
 
   const handleOnChange = () => {
     pwd.current.type = checkBox.current.checked ? "text" : "password";
@@ -83,7 +85,7 @@ export default function Signup() {
       return;
     }
 
-    console.log('Form submitted successfully', formData);
+    // console.log('Form submitted successfully', formData);
 
     try {
       const response = await axios.post(
@@ -91,13 +93,20 @@ export default function Signup() {
         { email, password, role: userType },
         { withCredentials: true }
       );
-      console.log('Response: ', response);
-      setMsg('Registered successfully.');
-      return response;
+
+      if (response.status == 200) {
+        setMsg('Registered successfully.');
+        // console.log(200);
+      }
     } catch (error) {
-      throw error;
-    }
-  
+
+      if (error.message == "Request failed with status code 401")
+        setError('Email id is already registered.');
+      else
+        setError('Some error occured, Try again.');
+
+    }
+
   };
 
   return (
@@ -192,7 +201,7 @@ export default function Signup() {
             </div>
 
             <div className="btn">
-              <button type="submit">
+              <button type="submit" ref={btnRegister}>
                 <i className="zmdi zmdi-account-add"></i>Register
               </button>
             </div>

@@ -2,8 +2,13 @@ import React, { useRef, useState } from 'react';
 import LeftLogo from './LeftLogo';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signin() {
+
+  const navigate = useNavigate();
+
   const pwd = useRef();
   const checkBox = useRef();
   const handleOnChange = () => {
@@ -24,13 +29,36 @@ export default function Signin() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    const { password } = formData;
+    const { email, password } = formData;
 
-    console.log('Form submitted successfully', formData);
+    // console.log('Form submitted successfully', formData);
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/login",
+        { email, password },
+        { withCredentials: true }
+      );
+      
+      console.log(response);
+      if (response.status == 200) {
+        // setMsg('Registered successfully.');
+        console.log(response);
+        navigate('/shopkeeperhome');
+      }
+    } catch (error) {
+      
+      console.log(error);
+      if (error.message == "Request failed with status code 401")
+        setError('Invalid credentials.');
+      else
+        setError('Some error occured, Try again.');
+
+    }
   };
 
 return (
