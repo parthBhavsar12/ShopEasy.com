@@ -1,7 +1,5 @@
 import Upside from './components/Upside.jsx';
 import Signup from './components/Signup.jsx';
-import SignupShopKeeper from './components/SignupShopKeeper.jsx';
-import SignupCustomer from './components/SignupCustomer.jsx';
 import Signin from './components/Signin.jsx';
 import ResetPassword1 from './components/ResetPassword1.jsx';
 import Otp from './components/ResetPassword2.jsx';
@@ -43,20 +41,10 @@ function App() {
     {
       path: "/",
       element: <><Upside/><Signup/></>
-      // element: <><Upside/><Signup/><MessageBox/></>
     },
     {
       path: "/signup",
       element: <><Upside/><Signup/></>
-      // element: <><Upside/><Signup/><MessageBox/></>
-    },
-    {
-      path: "/signup2",
-      element: <><Upside/><SignupCustomer/></>
-    },
-    {
-      path: "/signup3",
-      element: <><Upside/><SignupShopKeeper/></>
     },
     {
       path: "/signin",
@@ -129,44 +117,6 @@ function App() {
   ])
   return (
     <>
-        {/* <VerticalNav/> */}
-
-        {/* Menu for Customer */}
-
-        {/* <Nav iName1="edit" menuTitle1="Make Order" iName2="balance" menuTitle2="Make Payment" iName3="store" menuTitle3="Find Shops"/> */}
-
-        {/* Menu for Shopkeeper */}
-
-        {/* <Nav iName1="plus-square" menuTitle1="Add Products" iName2="upload" menuTitle2="Update Products" iName3="receipt" menuTitle3="Coupons"/> */}
-
-        {/* <Upside/> */}
-
-        {/* <Signup/> */}
-
-        {/* <SignupShopKeeper/> */}
-
-        {/* <SignupCustomer/> */}
-
-        {/* <Signin/> */}
-
-        {/* <ResetPassword1/> */}
-
-        {/* <ResetPassword2/> */}
-
-        {/* <ResetPassword3/> */}
-
-        {/* <Footer/> */}
-
-        {/* <ContactUs/> */}
-
-        {/* <AddProducts/> */}
-
-        {/* <Signup/> */}
-      
-        {/* <Signin/> */}
-
-        {/* <ResetPassword1/> */}
-        {/* <Footer/> */}
         <RouterProvider router={router} />
     </>
   );
