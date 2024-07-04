@@ -6,6 +6,7 @@ import os
 import signal
 from routes.route import router;
 from api.routes.auth_routes import auth_router
+from fastapi.middleware.cors import CORSMiddleware
 @asynccontextmanager 
 async def lifespan(app:FastAPI):
    try:
@@ -16,7 +17,17 @@ async def lifespan(app:FastAPI):
    finally:
         db.client.close()
 app = FastAPI(lifespan=lifespan);
+origins = [
+    "http://localhost:5173",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 @app.get("/")
 async def root():
     return {"message":"Hello World"}

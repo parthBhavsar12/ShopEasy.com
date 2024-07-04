@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta, timezone
+import os
 from typing import Collection
-from fastapi import Depends, HTTPException,status
+from fastapi import Depends, HTTPException, Response,status
 from pydantic import BaseModel
 from dependencies.dependencies import get_user_collection
 from models.UserModel import User, UserLogin
@@ -22,13 +23,21 @@ def authenticate_user(email: str, password: str, user_collection):
     if not verify_password(password, user['password']):
         return False
     return user
-def create_access_token(data:dict):
+def create_access_token(response:Response,data:dict):
     to_encode = data.copy()
     days = int(settings.ACCESS_TOKEN_EXPIRES_IN)
     expire = datetime.now(timezone.utc) + timedelta(days=days)
     to_encode.update({"exp": expire,"iat": datetime.now(timezone.utc)})
     encoded_jwt = jwt.encode(to_encode,settings.JWT_PRIVATE_KEY,algorithm=settings.JWT_ALGORITHM)
-    return encoded_jwt
+    cookie_options = {
+    "expires": datetime.now(timezone.utc) + timedelta(days=7),  # Adjust expiration as needed
+    "httpOnly": True,  # Prevent client-side JavaScript access
+    "path": "/",  # Accessible from all paths
+     "sameSite": "None" if os.environ.get("ENVIRONMENT") == "production" else "lax", 
+    "secure": True if os.environ.get("ENVIRONMENT") == "production" else False  # Set secure only in production
+    }
+    response.set_cookie("access_token",encoded_jwt,expires=cookie_options["expires"], httponly=cookie_options["httpOnly"], path=cookie_options["path"], secure=cookie_options["secure"],samesite=cookie_options["sameSite"])
+    return encoded_jwt  
 
 def verify_token(token:str, credentials_exception: Exception):
     try:
@@ -37,26 +46,33 @@ def verify_token(token:str, credentials_exception: Exception):
     except JWTError:
         raise credentials_exception
 
-def login_user(user:UserLogin,user_collection:Collection):
-    db_user = authenticate_user(user.email,user.password,user_collection)
-    if not db_user:
-        raise HTTPException(status_code=401, detail="Incorrect email or password")
-    # Generate token
-    token = create_access_token(data={"id": str(db_user["_id"])})
-    return {
-        "status": "success",
-        "token": token,
-        "user": {
-            "email": db_user["email"],
-            "role": db_user["role"],
-            "_id": str(db_user["_id"]),
+def login_user(user:UserLogin,response:Response,user_collection:Collection):
+    try:
+        db_user = authenticate_user(user.email,user.password,user_collection)
+        if not db_user:
+            response.status_code = status.HTTP_401_UNAUTHORIZED
+            raise HTTPException(status_code=401, detail="Incorrect email or password")
+        # Generate token
+        token = create_access_token(response,data={"id": str(db_user["_id"])})
+        return {
+            "status": "success",
+            "token": token,
+            "user": {
+                "email": db_user["email"],
+                "role": db_user["role"],
+                "_id": str(db_user["_id"]),
+            }
         }
-    }
+    except Exception as e:
+        print(e)  # Log the error for debugging
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error",)
 
-def create_user(user:User,user_collection:Collection):
+def create_user(user:User,response:Response,user_collection:Collection):
    try:
         # Check if user already exists
         if get_user(user.email, user_collection):
+            response.status_code = status.HTTP_401_UNAUTHORIZED
             raise HTTPException(status_code=400, detail="Email already registered")
     
         # Hash the password
@@ -72,7 +88,7 @@ def create_user(user:User,user_collection:Collection):
         created_user = user_collection.find_one({"_id": result.inserted_id})
         
         # Generate token
-        token = create_access_token(data={"id": str(created_user["_id"])})
+        token = create_access_token(response,data={"id": str(created_user["_id"])})
 
         # Hash password before saving the user
         # user.password = await hash_password(user.password)
@@ -91,6 +107,22 @@ def create_user(user:User,user_collection:Collection):
     }
    except Exception as e:
         print(e)  # Log the error for debugging
+        response.status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
         return HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Internal server error",)
 
 
+def logout_user(response:Response):
+     try:
+        # Set cookie expiration to past date for invalidation
+        cookie_options = {
+            "expires": datetime.now(timezone.utc) + timedelta(days=-1),  # Expired date
+            "httpOnly": True,
+            "path": "/",
+        }
+        if os.environ.get("ENVIRONMENT") == "production":  # Assuming env variable for production
+            # Set secure flag in production
+            cookie_options.update({"secure": True})
+        response.set_cookie("access_token", "none", expires=cookie_options["expires"], httponly=cookie_options["httpOnly"], path=cookie_options["path"], secure=cookie_options.get("secure", False))
+        return {"success": True}
+     except Exception as e:
+        return {"status": "failed", "message": "Failed to logout user"}
