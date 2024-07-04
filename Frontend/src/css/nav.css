@@ -29,7 +29,8 @@ span#one{
 }
 
 span#two{
-    color: var(--logo-red);
+    /* color: var(--logo-red); */
+    color: var(--dark-red);
 }
 
 span#three{

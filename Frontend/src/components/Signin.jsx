@@ -41,20 +41,23 @@ export default function Signin() {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/login",
         { email, password },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
         { withCredentials: true }
       );
       
       console.log(response);
       if (response.status == 200) {
-        // setMsg('Registered successfully.');
         console.log(response);
         navigate('/shopkeeperhome');
       }
     } catch (error) {
-      
       console.log(error);
       if (error.message == "Request failed with status code 401")
-        setError('Invalid credentials.');
+        setError('Invalid credentials, Try again.');
       else
         setError('Some error occured, Try again.');
 

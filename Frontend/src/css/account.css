@@ -10,3 +10,45 @@
 .account-form div{
     margin: 10px !important;
 }
+
+i.user-icon{
+    font-size: 200px;
+    display: block;
+    text-align: center;
+    color: var(--dark-green);
+}
+
+span.user-email-id{
+    font-size: 1em;
+    color: var(--dark-green);
+    display: block;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+}
+
+.user-data{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 150px 400px;
+    gap: 5px;
+}
+
+input.column-right{
+    grid-column: 2;
+}
+
+.account-form .btn button{
+    width: 560px;
+    text-align: center;
+}
+
+button.edit-account{
+    width: 60px;
+    padding: 2px;
+    margin: 0;
+    display: block;
+    margin: auto;
+    border-radius: 3px;
+    font-size: 0.75em;
+}

@@ -8,6 +8,7 @@ export default function Signup() {
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const pwd = useRef();
   const conPwd = useRef();
@@ -16,7 +17,7 @@ export default function Signup() {
   const span2 = useRef();
   const rdo1 = useRef();
   const rdo2 = useRef();
-  const btnRegister = useRef();
+  // const btnRegister = useRef();
 
   // useEffect(() => {
   //   // console.log("hsjhjs");
@@ -91,14 +92,19 @@ export default function Signup() {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/auth/signup",
         { email, password, role: userType },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
         { withCredentials: true }
       );
 
       if (response.status == 200) {
         setMsg('Registered successfully.');
-        // console.log(200);
       }
     } catch (error) {
+      console.log(error);
 
       if (error.message == "Request failed with status code 401")
         setError('Email id is already registered.');
@@ -201,7 +207,8 @@ export default function Signup() {
             </div>
 
             <div className="btn">
-              <button type="submit" ref={btnRegister}>
+              <button type="submit"> 
+                {/* ref={btnRegister} */}
                 <i className="zmdi zmdi-account-add"></i>Register
               </button>
             </div>

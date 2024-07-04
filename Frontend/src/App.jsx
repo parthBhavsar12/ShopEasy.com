@@ -68,43 +68,43 @@ function App() {
     },
     {
       path: "/customerhome",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="User id" slug4="../account" /><CustomerHome/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><CustomerHome/></>
     },
     {
       path: "/shopkeeperhome",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><ShopkeeperHome/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><ShopkeeperHome/></>
     },
     {
       path: "/makeorder",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="User id" slug4="../account" /><MakeOrder/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><MakeOrder/></>
     },
     {
       path: "/makepayment",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="User id" slug4="../account" /><MakePayment/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><MakePayment/></>
     },
     {
       path: "/findshops",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="User id" slug4="../account" /><FindShops/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><FindShops/></>
     },
     {
       path: "/products",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><AddProducts/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><AddProducts/></>
     },
     {
       path: "/bill",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><UpdateProducts/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><UpdateProducts/></>
     },
     {
       path: "/coupons",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><Coupons/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><Coupons/></>
     },
     {
       path: "/account",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><ShopKeeper/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><ShopKeeper/></>
     },
     {
       path: "/customer",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="User id" slug4="../account" /><Customer/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><Customer/></>
     },
     {
       path: "/logout",
@@ -112,7 +112,7 @@ function App() {
     },
     {
       path: "/contact",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="User id" slug4="../account" /><ContactUs/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><ContactUs/></>
     },
   ])
   return (

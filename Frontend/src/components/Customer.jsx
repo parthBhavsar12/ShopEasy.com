@@ -50,114 +50,118 @@ function Customer() {
 
     return (
         <>
-            <form className='account-form' onSubmit={handleSubmit} method='post'>
-                <div className="divUser">
-                    <label className='signUpUser'>Customer: abc@xyz.pqr</label>
-                </div>
+            <div className="account-user">
+                <i className="zmdi zmdi-account-circle user-icon"></i>
+                <span className="user-email-id">abc@gmail.com</span>
+                <button className="edit-account"><i className="zmdi zmdi-edit"></i>Edit</button>
 
-                <div><label htmlFor="name" className="label-account"><i className="zmdi zmdi-account"></i>Name</label></div>
-                <div>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        placeholder="Lorem Ipsum"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+                <form className='account-form' onSubmit={handleSubmit} method='post'>
+                    <div className="user-data">
+                        <label htmlFor="name" className="label-account"><i className="zmdi zmdi-account"></i>Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Lorem Ipsum"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                        />
+
+                        <label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label>
+
+                        <input
+                            type="number"
+                            name="contact"
+                            id="contact"
+                            placeholder="0000000000"
+                            value={formData.contact}
+                            onChange={handleInputChange}
+                            required
+                        />
 
 
-                <div><label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label></div>
-                <div>
-                    <input
-                        type="number"
-                        name="contact"
-                        id="contact"
-                        placeholder="0000000000"
-                        value={formData.contact}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+                        <label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label>
 
-                <div><label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label></div>
-                <div>
-                    <input
-                        type="text"
-                        name="address1"
-                        id="address1"
-                        placeholder="1, Apar Apartments"
-                        value={formData.address1}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+                        <input
+                            type="text"
+                            name="address1"
+                            id="address1"
+                            placeholder="1, XYZ Complex"
+                            value={formData.address1}
+                            onChange={handleInputChange}
+                            required
+                        />
 
-                <div>
-                    <input
-                        type="text"
-                        name="area"
-                        id="area"
-                        placeholder="Local Area"
-                        value={formData.area}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
 
-                <div>
-                    <input
-                        type="text"
-                        name="dist"
-                        id="dist"
-                        placeholder="District"
-                        value={formData.dist}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
 
-                <div>
-                    <input
-                        type="number"
-                        name="pin"
-                        id="pin"
-                        placeholder="Pin Code"
-                        value={formData.pin}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
+                        <input
+                            type="text"
+                            name="area"
+                            id="area"
+                            placeholder="Local Area"
+                            value={formData.area}
+                            onChange={handleInputChange}
+                            required
+                            className="column-right"
+                        />
 
-                <div>
-                    <input
-                        type="text"
-                        name="state"
-                        id="state"
-                        placeholder="State"
-                        value={formData.state}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
 
-                <div>
-                    <input
-                        type="text"
-                        name="country"
-                        id="country"
-                        placeholder="Country"
-                        value={formData.country}
-                        onChange={handleInputChange}
-                        required
-                    />
-                </div>
 
-                <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
+                        <input
+                            type="text"
+                            name="dist"
+                            id="dist"
+                            placeholder="District"
+                            value={formData.dist}
+                            onChange={handleInputChange}
+                            required
+                            className="column-right"
+                        />
 
-            </form>
+
+
+                        <input
+                            type="number"
+                            name="pin"
+                            id="pin"
+                            placeholder="Pin Code"
+                            value={formData.pin}
+                            onChange={handleInputChange}
+                            required
+                            className="column-right"
+                        />
+
+
+
+                        <input
+                            type="text"
+                            name="state"
+                            id="state"
+                            placeholder="State"
+                            value={formData.state}
+                            onChange={handleInputChange}
+                            required
+                            className="column-right"
+                        />
+
+
+
+                        <input
+                            type="text"
+                            name="country"
+                            id="country"
+                            placeholder="Country"
+                            value={formData.country}
+                            onChange={handleInputChange}
+                            required
+                            className="column-right"
+                        />
+                    </div>
+
+                    <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
+                </form>
+            </div>
             {error && <MessageBox msgTitle="Error" msgText={error} />}
         </>
     )

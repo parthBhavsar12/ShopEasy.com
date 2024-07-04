@@ -1,18 +1,41 @@
 import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Nav(props) {
 
-    // const verNav = useRef();
+    const navigate = useNavigate();
 
-    // const showVerticalNav = () => {
-    //     verNav.current.style.display = 'flex';
-    // }
-
-    // const closeVerticalNav = () => {
-    //     verNav.current.style.display = 'none';
-    //     // verNav.current.children.style.display = 'none';
-    // }
+    const handleLogout = async (e) => {
+        e.preventDefault();
+        // console.log('Form submitted successfully', formData);
+    
+        try {
+          const response = await axios.post(
+            "http://127.0.0.1:8000/api/v1/auth/logout",
+            {},
+            {
+              headers: {
+                "Access-Control-Allow-Origin": "*",
+              },
+            },
+            { withCredentials: true }
+          );
+    
+          console.log(response);
+          if (response.status == 200) {
+            // setMsg('Registered successfully.');
+            console.log(response);
+            navigate("/signin");
+          }
+        } catch (error) {
+          console.log(error);
+          //   if (error.message == "Request failed with status code 401")
+          //     // setError("Invalid credentials.");
+          //   else setError("Some error occured, Try again.");
+        }
+      };
   return (
     <>
         <nav>
@@ -52,7 +75,7 @@ export default function Nav(props) {
                 {props.menuTitle4}    
             </NavLink>
 
-            <span id="logOut">
+            <span id="logOut" onClick={handleLogout}>
                 <i className="zmdi zmdi-power"></i>Log Out
             </span>
         
