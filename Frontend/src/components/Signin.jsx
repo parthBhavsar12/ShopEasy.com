@@ -6,7 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signin() {
-
   const navigate = useNavigate();
 
   const pwd = useRef();
@@ -19,7 +18,7 @@ export default function Signin() {
     email: '',
     password: ''
   });
-  
+
   const [error, setError] = useState('');
 
   const handleInputChange = (e) => {
@@ -48,7 +47,7 @@ export default function Signin() {
         },
         { withCredentials: true }
       );
-      
+
       console.log(response);
       if (response.status == 200) {
         console.log(response);
@@ -64,65 +63,65 @@ export default function Signin() {
     }
   };
 
-return (
-  <>
-    <div className="main">
+  return (
+    <>
+      <div className="main">
 
-      <LeftLogo />
+        <LeftLogo />
 
-      <div className="container">
+        <div className="container">
 
-        <div className="title"><strong>Sign in</strong></div>
+          <div className="title"><strong>Sign in</strong></div>
 
-        <form onSubmit={handleSubmit} method='post'>
-          <div>
-            <label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label>
-          </div>
+          <form onSubmit={handleSubmit} method='post'>
+            <div>
+              <label htmlFor="email"><i className="zmdi zmdi-email"></i>Email</label>
+            </div>
 
-          <div>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              value={formData.email}
-              onChange={handleInputChange}
-              required
-              placeholder="abc@xyz.pqr" />
-          </div>
+            <div>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                placeholder="abc@xyz.pqr" />
+            </div>
 
-          <div>
-            <label htmlFor="password"><i className="zmdi zmdi-lock"></i>Password</label>
-          </div>
+            <div>
+              <label htmlFor="password"><i className="zmdi zmdi-lock"></i>Password</label>
+            </div>
 
-          <div>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              placeholder="Minimum 8 characters"
-              required
-              ref={pwd} />
-          </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="Minimum 8 characters"
+                required
+                ref={pwd} />
+            </div>
 
-          <div>
-            <input type="checkbox" name="show_password" id="show_password" onChange={handleOnChange} ref={checkBox} />
-            <label htmlFor="show_password" id="label_show_password">Show Password</label>
-          </div>
+            <div>
+              <input type="checkbox" name="show_password" id="show_password" onChange={handleOnChange} ref={checkBox} />
+              <label htmlFor="show_password" id="label_show_password">Show Password</label>
+            </div>
 
-          <div className="btn"><button type="submit"><i className="zmdi zmdi-sign-in"></i>Sign in</button></div>
+            <div className="btn"><button type="submit"><i className="zmdi zmdi-sign-in"></i>Sign in</button></div>
 
-        </form>
+          </form>
 
 
-        <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup" />
+          <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup" />
 
-        <GoTo title="" goto="Forgot Password?" slug="../resetpassword" />
+          <GoTo title="" goto="Forgot Password?" slug="../resetpassword" />
+        </div>
+
       </div>
-
-    </div> 
-    {error && <MessageBox msgTitle="Error" msgText={error} />}
-  </>
-)
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
+    </>
+  )
 }

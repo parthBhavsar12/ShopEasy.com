@@ -50,6 +50,10 @@ function App() {
       path: "/signin",
       element: <><Upside/><Signin/></>
     },
+    // {
+    //   path: "/signin/:msg",
+    //   element: <><Upside/><Signin/></>
+    // },
     {
       path: "/about",
       element: <About/>

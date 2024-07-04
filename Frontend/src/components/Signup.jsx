@@ -3,8 +3,11 @@ import LeftLogo from './LeftLogo';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
 import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
+
+  // const navigate = useNavigate();
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
@@ -17,11 +20,6 @@ export default function Signup() {
   const span2 = useRef();
   const rdo1 = useRef();
   const rdo2 = useRef();
-  // const btnRegister = useRef();
-
-  // useEffect(() => {
-  //   // console.log("hsjhjs");
-  // }, [btnRegister]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -65,28 +63,48 @@ export default function Signup() {
     });
   };
 
+  const handlePasswordChange = (event) => {
+    const inpPassword = event.target.value;
+    const regex = /^[a-zA-Z0-9@#]*$/;
+  
+    if (regex.test(inpPassword)) {
+      if (event.target.name == "password"){
+        setFormData({
+          ...formData,
+          password: inpPassword
+        });
+      }
+      else{
+        setFormData({
+          ...formData,
+          conPassword: inpPassword
+        });       
+      }
+    } else {
+      setError("Password must contain only alphabets, numbers, @, or #");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
     const { email, password, conPassword, userType } = formData;
-
+    
     if (password !== conPassword && password.length < 8) {
       setError('Passwords do not match, Password must be at least 8 characters long.');
       return;
     }
-
+    
     if (password !== conPassword) {
       setError('Passwords do not match.');
       return;
     }
-
+    
     if (password.length < 8) {
       setError('Password must be at least 8 characters long.');
       return;
     }
-
-    // console.log('Form submitted successfully', formData);
 
     try {
       const response = await axios.post(
@@ -101,7 +119,9 @@ export default function Signup() {
       );
 
       if (response.status == 200) {
-        setMsg('Registered successfully.');
+        setMsg('Registered successfully, now you can sign in.');
+        // const msg = "register-success";
+        // navigate(`/signin/${msg}`);
       }
     } catch (error) {
       console.log(error);
@@ -174,7 +194,7 @@ export default function Signup() {
                 placeholder="Minimum 8 characters"
                 ref={pwd}
                 value={formData.password}
-                onChange={handleInputChange}
+                onChange={handlePasswordChange}
                 required
               />
             </div>
@@ -190,7 +210,7 @@ export default function Signup() {
                 placeholder="Minimum 8 characters"
                 ref={conPwd}
                 value={formData.conPassword}
-                onChange={handleInputChange}
+                onChange={handlePasswordChange}
                 required
               />
             </div>
