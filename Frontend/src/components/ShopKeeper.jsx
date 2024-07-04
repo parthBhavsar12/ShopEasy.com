@@ -51,114 +51,121 @@ export default function Account() {
 
   return (
     <>
-      <form className='account-form' onSubmit={handleSubmit} method='post'>
-        <div className="divUser">
-          <label className='signUpUser'>Shopkeeper: abc@xyz.pqr</label>
-        </div>
+      <div className="account-user">
+        <i className="zmdi zmdi-account-circle user-icon"></i>
+        <span className="user-email-id">abc@gmail.com</span>
+        <button className="edit-account"><i className="zmdi zmdi-edit"></i>Edit</button>
 
-        <div><label htmlFor="shop_name" className="label-account"><i className="zmdi zmdi-shopping-cart"></i>Shop Name</label></div>
-        <div>
-          <input
-            type="text"
-            name="shop_name"
-            id="shop_name"
-            placeholder="ABC Stores"
-            value={formData.shop_name}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+        <form className='account-form' onSubmit={handleSubmit} method='post'>
+          <div className="user-data">
+            <label htmlFor="shop_name" className="label-account"><i className="zmdi zmdi-shopping-cart"></i>Shop Name</label>
 
-        <div><label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label></div>
-        <div>
-          <input
-            type="number"
-            name="contact"
-            id="contact"
-            placeholder="0000000000"
-            value={formData.contact}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            <input
+              type="text"
+              name="shop_name"
+              id="shop_name"
+              placeholder="ABC Stores"
+              value={formData.shop_name}
+              onChange={handleInputChange}
+              required
+            />
 
-        <div><label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label></div>
-        <div>
-          <input
-            type="text"
-            name="address1"
-            id="address1"
-            placeholder="1, XYZ Complex"
-            value={formData.address1}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            <label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label>
 
-        <div>
-          <input
-            type="text"
-            name="area"
-            id="area"
-            placeholder="Local Area"
-            value={formData.area}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            <input
+              type="number"
+              name="contact"
+              id="contact"
+              placeholder="0000000000"
+              value={formData.contact}
+              onChange={handleInputChange}
+              required
+            />
 
-        <div>
-          <input
-            type="text"
-            name="dist"
-            id="dist"
-            placeholder="District"
-            value={formData.dist}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
 
-        <div>
-          <input
-            type="number"
-            name="pin"
-            id="pin"
-            placeholder="Pin Code"
-            value={formData.pin}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            <label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label>
 
-        <div>
-          <input
-            type="text"
-            name="state"
-            id="state"
-            placeholder="State"
-            value={formData.state}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
+            <input
+              type="text"
+              name="address1"
+              id="address1"
+              placeholder="1, XYZ Complex"
+              value={formData.address1}
+              onChange={handleInputChange}
+              required
+            />
 
-        <div>
-          <input
-            type="text"
-            name="country"
-            id="country"
-            placeholder="Country"
-            value={formData.country}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
 
-        <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
 
-      </form>
-      {error && <MessageBox msgTitle="Error" msgText={error} />}
+            <input
+              type="text"
+              name="area"
+              id="area"
+              placeholder="Local Area"
+              value={formData.area}
+              onChange={handleInputChange}
+              required
+              className="column-right"
+            />
+
+
+
+            <input
+              type="text"
+              name="dist"
+              id="dist"
+              placeholder="District"
+              value={formData.dist}
+              onChange={handleInputChange}
+              required
+              className="column-right"
+            />
+
+
+
+            <input
+              type="number"
+              name="pin"
+              id="pin"
+              placeholder="Pin Code"
+              value={formData.pin}
+              onChange={handleInputChange}
+              required
+              className="column-right"
+            />
+
+
+
+            <input
+              type="text"
+              name="state"
+              id="state"
+              placeholder="State"
+              value={formData.state}
+              onChange={handleInputChange}
+              required
+              className="column-right"
+            />
+
+
+
+            <input
+              type="text"
+              name="country"
+              id="country"
+              placeholder="Country"
+              value={formData.country}
+              onChange={handleInputChange}
+              required
+              className="column-right"
+            />
+          </div>
+
+          <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
+        </form >
+      </div>
+      {error && <MessageBox msgTitle="Error" msgText={error} />
+      }
     </>
   )
 }

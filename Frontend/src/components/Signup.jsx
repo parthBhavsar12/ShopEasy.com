@@ -1,16 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import LeftLogo from './LeftLogo';
 import GoTo from './GoTo';
 import MessageBox from './MessageBox';
+import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    conPassword: '',
-    userType: ''
-  });
+
+  // const navigate = useNavigate();
+
   const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const pwd = useRef();
   const conPwd = useRef();
   const checkBox = useRef();
@@ -18,6 +20,13 @@ export default function Signup() {
   const span2 = useRef();
   const rdo1 = useRef();
   const rdo2 = useRef();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    conPassword: '',
+    userType: ''
+  });
 
   const handleOnChange = () => {
     pwd.current.type = checkBox.current.checked ? "text" : "password";
@@ -54,28 +63,76 @@ export default function Signup() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handlePasswordChange = (event) => {
+    const inpPassword = event.target.value;
+    const regex = /^[a-zA-Z0-9@#]*$/;
+  
+    if (regex.test(inpPassword)) {
+      if (event.target.name == "password"){
+        setFormData({
+          ...formData,
+          password: inpPassword
+        });
+      }
+      else{
+        setFormData({
+          ...formData,
+          conPassword: inpPassword
+        });       
+      }
+    } else {
+      setError("Password must contain only alphabets, numbers, @, or #");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
 
-    const { password, conPassword } = formData;
-
+    const { email, password, conPassword, userType } = formData;
+    
     if (password !== conPassword && password.length < 8) {
       setError('Passwords do not match, Password must be at least 8 characters long.');
       return;
     }
-
+    
     if (password !== conPassword) {
       setError('Passwords do not match.');
       return;
     }
-
+    
     if (password.length < 8) {
       setError('Password must be at least 8 characters long.');
       return;
     }
 
-    console.log('Form submitted successfully', formData);
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/auth/signup",
+        { email, password, role: userType },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+        { withCredentials: true }
+      );
+
+      if (response.status == 200) {
+        setMsg('Registered successfully, now you can sign in.');
+        // const msg = "register-success";
+        // navigate(`/signin/${msg}`);
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (error.message == "Request failed with status code 401")
+        setError('Email id is already registered.');
+      else
+        setError('Some error occured, Try again.');
+
+    }
+
   };
 
   return (
@@ -137,7 +194,7 @@ export default function Signup() {
                 placeholder="Minimum 8 characters"
                 ref={pwd}
                 value={formData.password}
-                onChange={handleInputChange}
+                onChange={handlePasswordChange}
                 required
               />
             </div>
@@ -153,7 +210,7 @@ export default function Signup() {
                 placeholder="Minimum 8 characters"
                 ref={conPwd}
                 value={formData.conPassword}
-                onChange={handleInputChange}
+                onChange={handlePasswordChange}
                 required
               />
             </div>
@@ -170,7 +227,8 @@ export default function Signup() {
             </div>
 
             <div className="btn">
-              <button type="submit">
+              <button type="submit"> 
+                {/* ref={btnRegister} */}
                 <i className="zmdi zmdi-account-add"></i>Register
               </button>
             </div>
@@ -179,6 +237,7 @@ export default function Signup() {
         </div>
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
     </>
   );
 }
