@@ -8,6 +8,7 @@ export default function Coupons() {
   const [formData, setFormData] = useState({
     cpnCode: '',
     cpnQuant: '',
+    cpnDiscount: '0',
     cpnStartDate: '',
     cpnEndDate: ''
   });
@@ -22,9 +23,9 @@ export default function Coupons() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setMsg('');
-    
-    const { cpnCode, cpnQuant, cpnStartDate, cpnEndDate } = formData;
-    const printMsg = `Coupun added successfully. Code: ${cpnCode}, Quantity: ${cpnQuant}, Time Duration: ${cpnStartDate} - ${cpnEndDate}`
+
+    const { cpnCode, cpnQuant, cpnDiscount, cpnStartDate, cpnEndDate } = formData;
+    const printMsg = `Coupun added successfully. Code: ${cpnCode}, Quantity: ${cpnQuant}, Discount (%): ${cpnDiscount}, Time Duration: ${cpnStartDate} - ${cpnEndDate}`
 
     console.log('Form submitted successfully', formData);
     setMsg(printMsg);
@@ -59,6 +60,16 @@ export default function Coupons() {
             required
           />
 
+          <label htmlFor="cpnDiscount">Discount (%):</label>
+          <input
+            type="number"
+            name="cpnDiscount"
+            id="cpnDiscount"
+            min="0"
+            value={formData.cpnDiscount}
+            onChange={handleInputChange}
+          />
+
           <label htmlFor="cpnStartDate">Start Date-Time:</label>
           <input
             type="datetime-local"
@@ -90,6 +101,7 @@ export default function Coupons() {
               <th>#</th>
               <th>Coupon Code</th>
               <th>Quantity</th>
+              <th>Discount (%)</th>
               <th>Start Date-Time</th>
               <th>End Date-Time</th>
             </tr>
@@ -97,6 +109,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -104,6 +117,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -111,6 +125,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -118,6 +133,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -125,6 +141,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -132,6 +149,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -139,6 +157,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -146,6 +165,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -153,6 +173,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -160,6 +181,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -167,6 +189,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -174,6 +197,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -181,6 +205,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -188,6 +213,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -195,6 +221,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -202,6 +229,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -209,6 +237,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -216,6 +245,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -223,6 +253,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -230,6 +261,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -237,6 +269,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -244,6 +277,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -251,6 +285,7 @@ export default function Coupons() {
               <td>#</td>
               <td>Coupon Code</td>
               <td>Quantity</td>
+              <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
             </tr>
@@ -258,7 +293,7 @@ export default function Coupons() {
         </div>
 
       </div>
-      
+
       {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
 
     </>

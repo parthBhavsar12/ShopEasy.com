@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import MessageBox from './MessageBox';
+import '../css/readOnly.css';
 
 export default function Bill() {
 
   const [error, setError] = useState('');
 
   const [formData, setFormData] = useState({
+    billNum: 123,
     custName: '',
+    productCat: 'none',
     productName: 'none',
     productQuant: '',
     productDiscount: '0'
@@ -41,6 +44,16 @@ export default function Bill() {
         <form className="form" onSubmit={handleSubmit} method='post'>
           <span id="productsTitle">Generate Bill</span>
 
+          <label htmlFor="billNum">Bill No.:</label>
+          <input
+            type="number"
+            name="billNum"
+            id="billNum"
+            value={formData.billNum}
+            readOnly
+            className="read-only-ip"
+          />
+
           <label htmlFor="custName">Customer Name:</label>
           <input
             type="text"
@@ -50,6 +63,20 @@ export default function Bill() {
             onChange={handleInputChange}
             required
           />
+
+          <label htmlFor="productCat">Product Category:</label>
+          <select
+            name="productCat"
+            id="productCat"
+            value={formData.productCat}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none" selected>--Select category--</option>
+            <option value="NA">NA</option>
+            <option value="abc">abc</option>
+            <option value="xyz">xyz</option>
+          </select>
 
           <label htmlFor="productName">Product Name:</label>
           <select
@@ -99,135 +126,114 @@ export default function Bill() {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Category</th>
               <th>Quantity</th>
               <th>Price</th>
+              <th>Discount</th>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
+              <td>Discount</td>
             </tr>
             <tr>
               <td>#</td>
               <td>Name</td>
-              <td>Category</td>
               <td>Quantity</td>
               <td>Price</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td>Price</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td>Price</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td>Price</td>
+              <td>Discount</td>
             </tr>
 
             <tr>

@@ -108,7 +108,7 @@ function App() {
     },
     {
       path: "/customer",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><Customer/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><Customer/></>
     },
     {
       path: "/logout",

@@ -24,5 +24,25 @@ class UserLogin(BaseModel):
     email:EmailStr = Field(...)
     password:str = Field(...,min_length=8,max_length=16)
 
+class UserShop(BaseModel):
+    email: EmailStr = Field(...)
+    shop_name: str = Field(...)
+    prod_categories: list = Field(...) # multile categories
+    contact: str = Field(...)
+    address: str = Field(...)
+    local_area: str = Field(...)
+    district: str = Field(...)
+    pin: str = Field(...)
+    state: str = Field(...)
+    country: str = Field(...)
 
-
+class UserCustomer(BaseModel):
+    email: EmailStr = Field(...)
+    customer_name: str = Field(...)
+    contact: str = Field(...)
+    address: str = Field(...)
+    local_area: str = Field(...)
+    district: str = Field(...)
+    pin: str = Field(...)
+    state: str = Field(...)
+    country: str = Field(...)
