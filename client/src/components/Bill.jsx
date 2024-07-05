@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import MessageBox from './MessageBox';
 import '../css/readOnly.css';
+import axios from 'axios';
 
 export default function Bill() {
 
   const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
 
   const [formData, setFormData] = useState({
     billNum: 123,
@@ -22,11 +24,12 @@ export default function Bill() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setMsg('');
 
-    const { productName } = formData;
+    const { billNum, custName, productName, productQuant, productDiscount } = formData;
 
     if (productName === "none") {
       setError('Please select product.');
@@ -34,6 +37,34 @@ export default function Bill() {
     }
 
     console.log('Form submitted successfully', formData);
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/bill/add-to-bill",
+        {
+          bill_num: billNum,
+          cust_name: custName,
+          prod_name: productName,
+          prod_quantity: productQuant,
+          prod_discount: productDiscount
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+        { withCredentials: true }
+      );
+      // console.log(response)
+      // console.log(response.status)
+      if (response.status == 200) {
+        setMsg('Product added to bill successfully.');
+      }
+    } catch (error) {
+      console.log(error);
+      setError('Some error occured, Try again.');
+
+    }
   };
 
   return (
@@ -263,6 +294,7 @@ export default function Bill() {
       </div>
 
       {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
 
     </>
   )

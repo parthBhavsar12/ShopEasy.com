@@ -8,3 +8,12 @@ def get_user_collection():
 
 def get_product_collection():
     return db.get_db()["products"]
+
+def get_bill_collection():
+    return db.get_db()["bills"]
+
+def get_coupon_collection():
+    return db.get_db()["coupons"]
+
+def get_order_collection():
+    return db.get_db()["orders"]

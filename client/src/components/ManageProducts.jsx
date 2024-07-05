@@ -44,6 +44,7 @@ export default function ManageProducts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setMsg('');
     const { productName, productCat, productPrice, productQuant, productImg } = formData;
 
     if (productName === "none" && productCat === "none") {
@@ -66,11 +67,13 @@ export default function ManageProducts() {
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/product/add-product",
-        { prod_name: productName, 
-          prod_category: productCat, 
-          prod_price: productPrice, 
-          prod_quantity: productQuant, 
-          prod_image: productImg },
+        {
+          prod_name: productName,
+          prod_category: productCat,
+          prod_price: productPrice,
+          prod_quantity: productQuant,
+          prod_image: productImg
+        },
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -78,20 +81,14 @@ export default function ManageProducts() {
         },
         { withCredentials: true }
       );
-  
+
       if (response.status == 200) {
         setMsg('Product added successfully.');
-        // const msg = "register-success";
-        // navigate(`/signin/${msg}`);
       }
     } catch (error) {
-      console.log(error);
-  
-      // if (error.message == "Request failed with status code 401")
-      //   setError('Email id is already registered.');
-      // else
-        setError('Some error occured, Try again.');
-  
+      // console.log(error);
+      setError('Some error occured, Try again.');
+
     }
 
   };

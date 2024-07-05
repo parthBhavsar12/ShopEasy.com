@@ -1,5 +1,5 @@
 import datetime
-from pydantic import BeforeValidator, EmailStr,BaseModel, Field
+from pydantic import BeforeValidator, EmailStr, BaseModel, Field
 from typing import Annotated, Optional
 from bson import ObjectId
 
@@ -8,26 +8,31 @@ from bson import ObjectId
 PyObjectId = Annotated[str, BeforeValidator(str)]
 
 
-#this model will useful for 
+# this model will useful for
 # Validate incoming data
 # Generate OpenAPI (Swagger) documentation
 # Serialize/deserialize data
 
+
 class User(BaseModel):
-     email:EmailStr = Field(...)
-     password: str = Field(...,min_length=8,max_length=16)
-     role: str = Field("user", enum=["user", "shopkeeper","admin"])
-     # is_shopkeeper:bool = Field(...,min_length=8,max_length=16)
-     # created: datetime = Field(default_factory=datetime_now_sec)
+    email: EmailStr = Field(...)
+    password: str = Field(..., min_length=8, max_length=16)
+    role: str = Field("user", enum=["user", "shopkeeper", "admin"])
+    # is_shopkeeper:bool = Field(...,min_length=8,max_length=16)
+    # created: datetime = Field(default_factory=datetime_now_sec)
+
 
 class UserLogin(BaseModel):
-    email:EmailStr = Field(...)
-    password:str = Field(...,min_length=8,max_length=16)
-
-class UserShop(BaseModel):
     email: EmailStr = Field(...)
+    password: str = Field(..., min_length=8, max_length=16)
+
+
+class UserShopkeeper(BaseModel):
+    email: EmailStr = Field(...)
+    password: str = Field(..., min_length=8, max_length=16)
+    role: str = "shopkeeper"
     shop_name: str = Field(...)
-    prod_categories: list = Field(...) # multile categories
+    prod_categories: list = Field(...)  # multile categories
     contact: str = Field(...)
     address: str = Field(...)
     local_area: str = Field(...)
@@ -36,8 +41,11 @@ class UserShop(BaseModel):
     state: str = Field(...)
     country: str = Field(...)
 
+
 class UserCustomer(BaseModel):
     email: EmailStr = Field(...)
+    password: str = Field(..., min_length=8, max_length=16)
+    role: str = "customer"
     customer_name: str = Field(...)
     contact: str = Field(...)
     address: str = Field(...)
