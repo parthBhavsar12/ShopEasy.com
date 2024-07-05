@@ -61,7 +61,7 @@ export default function MakeOrder() {
             onChange={handleInputChange}
             required
           >
-            <option value="none" selected>--Select shop--</option>
+            <option value="none">--Select shop--</option>
             <option value="NA">NA</option>
             <option value="abc">abc</option>
             <option value="xyz">xyz</option>
@@ -75,7 +75,7 @@ export default function MakeOrder() {
             onChange={handleInputChange}
             required
           >
-            <option value="none" selected>--Select category--</option>
+            <option value="none">--Select category--</option>
             <option value="NA">NA</option>
             <option value="abc">abc</option>
             <option value="xyz">xyz</option>
@@ -90,7 +90,7 @@ export default function MakeOrder() {
             onChange={handleInputChange}
             required
           >
-            <option value="none" selected>--Select product--</option>
+            <option value="none">--Select product--</option>
             <option value="NA">NA</option>
             <option value="abc">abc</option>
             <option value="xyz">xyz</option>
@@ -128,15 +128,15 @@ export default function MakeOrder() {
             required
           />
 
-          <button type="submit" class="btnProduct">Add to order</button>
+          <button type="submit" className="btnProduct">Add to order</button>
 
         </form>
 
 
         <div className="tableContainer">
-          <span id="productsTitle">Ordered Products</span>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: ABC store</caption>
+          <span id="productsTitle">Orders</span>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: ABC store</caption>
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -199,8 +199,8 @@ export default function MakeOrder() {
               
             </tr>
           </table>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: PQR store</caption>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: PQR store</caption>
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -263,8 +263,8 @@ export default function MakeOrder() {
               
             </tr>
           </table>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: XYZ store</caption>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: XYZ store</caption>
             <tr>
               <th>#</th>
               <th>Name</th>

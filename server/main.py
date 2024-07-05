@@ -1,22 +1,32 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from util.database import get_database
+
 from config import settings;
 import os
 import signal
-from routes.route import router;
+
 from api.routes.auth_routes import auth_router
+from api.routes.product_routes import product_router
 from fastapi.middleware.cors import CORSMiddleware
-@asynccontextmanager 
+from database.db import db
+@asynccontextmanager
 async def lifespan(app:FastAPI):
-   try:
-       db = get_database()
-       yield
-   except ConnectionError as e:
-        print(f"Failed to connect to MongoDB: {e}")
-   finally:
-        db.client.close()
-app = FastAPI(lifespan=lifespan);
+    try:
+        #startup
+        db.get_client()
+        yield
+    finally:
+        #shutdown
+        db.close_connection() 
+# async def lifespan(app:FastAPI):
+#    try:
+#        db = get_database()
+#        yield
+#    except ConnectionError as e:
+#         print(f"Failed to connect to MongoDB: {e}")
+#    finally:
+#         db.client.close()
+app = FastAPI(lifespan=lifespan)
 origins = [
     "http://localhost:5173",
 ]
@@ -31,9 +41,11 @@ app.add_middleware(
 @app.get("/")
 async def root():
     return {"message":"Hello World"}
-
+app.include_router(router=auth_router,prefix="/api/v1/auth")
+app.include_router(router=product_router,prefix="/api/v1/product")
+# app.include_router(router=protected_router, prefix="/api/v1/auth")
 # @app.get("/items/{item_id}")
 # async def read_item(item_id: int):
 #     return {"item_id": item_id}
-app.include_router(router=router,prefix="/todos")
-app.include_router(router=auth_router,prefix="/api/v1/auth")
+# app.include_router(router=router,prefix="/todos")
+

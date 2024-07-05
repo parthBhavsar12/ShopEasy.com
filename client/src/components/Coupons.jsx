@@ -90,13 +90,13 @@ export default function Coupons() {
             required
           />
 
-          <button type="submit" class="btnProduct">Add Coupon</button>
+          <button type="submit" className="btnProduct">Add Coupon</button>
 
         </form>
 
         <div className="tableContainer">
           <span id="productsTitle">Coupons</span>
-          <table class="productsTable">
+          <table className="productsTable">
             <tr>
               <th>#</th>
               <th>Coupon Code</th>
@@ -104,6 +104,7 @@ export default function Coupons() {
               <th>Discount (%)</th>
               <th>Start Date-Time</th>
               <th>End Date-Time</th>
+              <th>Remove</th>
             </tr>
             <tr>
               <td>#</td>
@@ -112,6 +113,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -120,6 +122,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -128,6 +131,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -136,6 +140,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -144,6 +149,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -152,6 +158,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -160,6 +167,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -168,6 +176,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -176,6 +185,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -184,6 +194,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -192,6 +203,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -200,6 +212,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -208,6 +221,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -216,6 +230,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -224,6 +239,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -232,6 +248,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -240,6 +257,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -248,6 +266,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -256,6 +275,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -264,6 +284,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -272,6 +293,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -280,6 +302,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -288,6 +311,7 @@ export default function Coupons() {
               <td>Discount</td>
               <td>Start Date-Time</td>
               <td>End Date-Time</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
           </table>
         </div>

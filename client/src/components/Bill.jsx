@@ -72,7 +72,7 @@ export default function Bill() {
             onChange={handleInputChange}
             required
           >
-            <option value="none" selected>--Select category--</option>
+            <option value="none">--Select category--</option>
             <option value="NA">NA</option>
             <option value="abc">abc</option>
             <option value="xyz">xyz</option>
@@ -114,21 +114,22 @@ export default function Bill() {
           />
 
           {/* <div className="buttonMerger"> */}
-          <button type="submit" class="btnProduct">Add to Bill</button>
-          {/* <button type="reset" class="resetBtnProduct">Reset</button> */}
+          <button type="submit" className="btnProduct">Add to Bill</button>
+          {/* <button type="reset" className="resetBtnProduct">Reset</button> */}
           {/* </div> */}
 
         </form>
 
         <div className="tableContainer">
           <span id="productsTitle">Products added to Bill</span>
-          <table class="productsTable">
+          <table className="productsTable">
             <tr>
               <th>#</th>
               <th>Name</th>
               <th>Quantity</th>
               <th>Price</th>
               <th>Discount</th>
+              <th>Remove</th>
             </tr>
             <tr>
               <td>#</td>
@@ -136,6 +137,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -143,6 +145,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -150,6 +153,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -157,6 +161,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -164,6 +169,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -171,6 +177,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -178,6 +185,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -185,6 +193,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -192,6 +201,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -199,6 +209,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -206,6 +217,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -213,6 +225,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -220,6 +233,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -227,6 +241,7 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
             <tr>
               <td>#</td>
@@ -234,11 +249,13 @@ export default function Bill() {
               <td>Quantity</td>
               <td>Price</td>
               <td>Discount</td>
+              <td><button className="remove-btn">Remove</button></td>
             </tr>
 
             <tr>
-              <td colSpan="4">Total Price Amount:</td>
-              <td>Price</td>
+              <td colSpan="3">Total Price Amount:</td>
+              <td colSpan="2">Price</td>
+              <td><button className="remove-btn remove-all-btn">Clear All</button></td>
             </tr>
           </table>
         </div>

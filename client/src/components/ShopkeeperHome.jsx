@@ -41,8 +41,8 @@ export default function ShopkeeperHome() {
           <input type="button" id="btnCheckStocks" value="Check Stocks" className={underlineRight} onClick={handleViewStocks} />
         </div>
         <div ref={orderTableDiv} className='orderTableDiv'>
-          <table class="productsTable shopkeeperHomeOrderTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
+          <table className="productsTable shopkeeperHomeOrderTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
 
             <tr>
               <th>#</th>
@@ -98,8 +98,8 @@ export default function ShopkeeperHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="productsTable shopkeeperHomeOrderTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
+          <table className="productsTable shopkeeperHomeOrderTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
 
             <tr>
               <th>#</th>
@@ -155,8 +155,8 @@ export default function ShopkeeperHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="productsTable shopkeeperHomeOrderTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
+          <table className="productsTable shopkeeperHomeOrderTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
 
             <tr>
               <th>#</th>
@@ -217,9 +217,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -228,9 +228,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -239,9 +239,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -250,9 +250,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -261,9 +261,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -272,9 +272,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -283,9 +283,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -294,9 +294,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -305,9 +305,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -316,9 +316,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -327,9 +327,9 @@ export default function ShopkeeperHome() {
           <div className="product-card">
             <img src="../../logo/new_product.png" alt="Product" />
             <div className="product-details">
-              <span className="product"><i class="zmdi zmdi-mall"></i>Name: </span>
+              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
               <span>ABC XYZ</span>
-              <span className="product"><i class="zmdi zmdi-ticket-star"></i>Category: </span>
+              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
               <span>pqr</span>
               <span className="product"><i>&#8377;</i>Price:</span>
               <span >Rs. 000</span>
@@ -337,206 +337,205 @@ export default function ShopkeeperHome() {
           </div>
         </div>
         <div ref={stocksTable} className='stocksTable'>
-          <table class="productsTable" >
-            <caption id="stocksTableCaption">(Less to More)<i class="zmdi zmdi-long-arrow-down"></i></caption>
+          <table className="productsTable" >
+            <caption id="stocksTableCaption">(Less to More)<i className="zmdi zmdi-long-arrow-down"></i></caption>
 
             <tr>
               <th>#</th>
               <th>Product Name</th>
               <th>Remaining Stock</th>
-              <th>Minimum Stock</th>
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
             <tr>
               <td>#</td>
               <td>Product Name</td>
               <td>Remaining Stock</td>
-              <td>Minimum Stock</td>
+
             </tr>
           </table>
         </div>

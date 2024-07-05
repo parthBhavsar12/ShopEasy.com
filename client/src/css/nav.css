@@ -49,6 +49,7 @@ nav{
     top: 0;
     left: 0;
     padding: 2vh;
+    justify-content: space-around;
 }
 
 nav > a{
@@ -63,13 +64,13 @@ nav > a.navMenu:hover{
     border-radius: 5px;
 }
 
-input[type="search"]{
+/* input[type="search"]{
     border: 1px solid var(--dark-green);
     padding: 10px;
     border-radius: 5px;
     width: 22vw;
     color: var(--dark-green);
-}
+} */
 
 button#menu{
     width: 3em;

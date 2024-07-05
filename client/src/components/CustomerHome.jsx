@@ -5,8 +5,8 @@ export default function CustomerHome() {
     <>
         <div className="shop-keeper-home">
           <span id="productsTitle" className="order-title">Your Orders</span>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: ABC Store <button className="order-action">Complete Order</button></caption>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: ABC Store <button className="order-action">Complete Order</button></caption>
             
             <tr>
               <th>#</th>
@@ -62,8 +62,8 @@ export default function CustomerHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: PQR Store <button className="order-action">Complete Order</button></caption>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: PQR Store <button className="order-action">Complete Order</button></caption>
             
             <tr>
               <th>#</th>
@@ -119,8 +119,8 @@ export default function CustomerHome() {
               <td>000</td>
             </tr>
           </table>
-          <table class="productsTable">
-            <caption class="shopNameOnOrder"><i class="zmdi zmdi-store"></i>Shop name: XYZ Store <button className="order-action">Complete Order</button></caption>
+          <table className="productsTable">
+            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: XYZ Store <button className="order-action">Complete Order</button></caption>
             
             <tr>
               <th>#</th>

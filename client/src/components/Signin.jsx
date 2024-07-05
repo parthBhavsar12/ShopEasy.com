@@ -48,9 +48,9 @@ export default function Signin() {
         { withCredentials: true }
       );
 
-      console.log(response);
+      // console.log(response);
       if (response.status == 200) {
-        console.log(response);
+        // console.log(response);
         navigate('/shopkeeperhome');
       }
     } catch (error) {

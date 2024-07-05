@@ -10,7 +10,7 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 # cpn - coupon
 
 
-class Product(BaseModel):
+class Order(BaseModel):
     email: EmailStr = Field(...)
     shop_name: str = Field(...)
     prod_cat: str = Field(...)
