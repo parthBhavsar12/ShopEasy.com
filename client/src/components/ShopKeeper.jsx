@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MessageBox from './MessageBox';
+import axios from 'axios';
 import '../css/account.css';
 import '../css/inputTypeNumber.css';
 
 export default function Account() {
 
   const [error, setError] = useState('');
+  const [msg, setMsg] = useState('');
+  const [email, setEmail] = useState('');
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     shop_name: '',
@@ -25,11 +31,36 @@ export default function Account() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const checkUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      if (response.status === 200) {   
+        setEmail(response.data.user.email);
+        if (response.data.user.role == "customer") {
+          navigate('/customer-account');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setMsg('');
 
-    const { contact, pin } = formData;
+    const { shop_name, contact, address1, area, dist, pin, state, country } = formData;
 
     if (contact.length < 8 && pin.length < 6) {
       setError('Please enter appropriate Contact number and Pin code.');
@@ -46,14 +77,46 @@ export default function Account() {
       return;
     }
 
-    console.log('Form submitted successfully', formData);
+    // console.log('Form submitted successfully', formData);
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/v1/user/shopkeeper-data",
+        {
+          email: email,
+          shop_name: shop_name,
+          contact: contact,
+          address: address1,
+          local_area: area,
+          district: dist,
+          pin: pin,
+          state: state,
+          country: country
+        },
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+        { withCredentials: true }
+      );
+      // console.log(response)
+      // console.log(response.status)
+      if (response.status == 200) {
+        setMsg('Data added/updated successfully.');
+      }
+    } catch (error) {
+      console.log(error);
+      setError('Some error occured, Try again.');
+    }
+
   };
 
   return (
     <>
       <div className="account-user">
         <i className="zmdi zmdi-account-circle user-icon"></i>
-        <span className="user-email-id">abc@gmail.com</span>
+        <span className="user-email-id">{email}</span>
         <button className="edit-account"><i className="zmdi zmdi-edit"></i>Edit</button>
 
         <form className='account-form' onSubmit={handleSubmit} method='post'>
@@ -76,6 +139,7 @@ export default function Account() {
               type="number"
               name="contact"
               id="contact"
+              min='0'
               placeholder="0000000000"
               value={formData.contact}
               onChange={handleInputChange}
@@ -127,6 +191,7 @@ export default function Account() {
               type="number"
               name="pin"
               id="pin"
+              min='0'
               placeholder="Pin Code"
               value={formData.pin}
               onChange={handleInputChange}
@@ -164,8 +229,8 @@ export default function Account() {
           <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
         </form >
       </div>
-      {error && <MessageBox msgTitle="Error" msgText={error} />
-      }
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
     </>
   )
 }

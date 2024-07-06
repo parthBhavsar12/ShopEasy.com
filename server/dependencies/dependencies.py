@@ -17,3 +17,9 @@ def get_coupon_collection():
 
 def get_order_collection():
     return db.get_db()["orders"]
+
+def get_shopkeeperdata_collection():
+    return db.get_db()["shopkeeperdata"]
+
+def get_customerdata_collection():
+    return db.get_db()["customerdata"]

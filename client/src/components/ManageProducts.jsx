@@ -1,8 +1,39 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import '../css/insert_category.css';
 
 export default function ManageProducts() {
+
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+
+  const checkUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      if (response.status === 200) {
+        setEmail(response.data.user.email);
+        if (response.data.user.role == "customer") {
+          navigate('/customer-home');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
+
   const addProductsForm = useRef();
   const updateProductsForm = useRef();
 
@@ -26,6 +57,7 @@ export default function ManageProducts() {
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
+  const [insertProductCategory, setInsertProductCategory] = useState('');
   const [formData, setFormData] = useState({
     productName: '',
     productCat: 'none',
@@ -39,6 +71,14 @@ export default function ManageProducts() {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleInsertCategory = (e) => {
+    setInsertProductCategory(e.target.value);
+  };
+
+  const addCategory = () => {
+    console.log(insertProductCategory);
   };
 
   const handleSubmit = async (e) => {
@@ -62,12 +102,13 @@ export default function ManageProducts() {
       return;
     }
 
-    console.log('Form submitted successfully', formData);
+    // console.log('Form submitted successfully', formData);
 
     try {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/product/add-product",
         {
+          user_id: email,
           prod_name: productName,
           prod_category: productCat,
           prod_price: productPrice,
@@ -104,36 +145,48 @@ export default function ManageProducts() {
             <input type="button" id="actionProductsRight" value="Update Products" className="red" onClick={moveToUpdateProducts} />
           </div>
 
+
           <label htmlFor="productName">Product Name:</label>
           <input
             type="text"
             name="productName"
             id="productName"
+            placeholder="Add Name of Product"
             value={formData.productName}
             onChange={handleInputChange}
             required
-            autoFocus
           />
 
           <label htmlFor="productCat">Product Category:</label>
-          <select
-            name="productCat"
-            id="productCat"
-            value={formData.productCat}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select category--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
-          </select>
+          <div className="product-category-div">
+            <select
+              name="productCat"
+              id="productCat"
+              value={formData.productCat}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="none">--Select category--</option>
+              <option value="NA">NA</option>
+              <option value="abc">abc</option>
+              <option value="xyz">xyz</option>
+            </select>
+            <input
+              type="text"
+              name="productCat"
+              id="productCat"
+              placeholder="Add New Category"
+              value={(formData.productCat=="none")?"":formData.productCat}
+              onChange={handleInputChange}
+            />
+          </div>
 
           <label htmlFor="productPrice">Product Price:</label>
           <input
             type="number"
             name="productPrice"
             id="productPrice"
+            placeholder="Add Price of Product"
             min="0"
             value={formData.productPrice}
             onChange={handleInputChange}
@@ -145,6 +198,7 @@ export default function ManageProducts() {
             type="number"
             name="productQuant"
             id="productQuant"
+            placeholder="Add Quantity"
             min="0"
             value={formData.productQuant}
             onChange={handleInputChange}
@@ -205,6 +259,7 @@ export default function ManageProducts() {
             type="number"
             name="productPrice"
             id="productPrice"
+            placeholder="Update Price of Product"
             min="0"
             value={formData.productPrice}
             onChange={handleInputChange}
@@ -216,6 +271,7 @@ export default function ManageProducts() {
             type="number"
             name="productQuant"
             id="productQuant"
+            placeholder="Update Quantity of Product"
             min="0"
             value={formData.productQuant}
             onChange={handleInputChange}

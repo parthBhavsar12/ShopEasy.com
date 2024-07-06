@@ -29,10 +29,7 @@ class UserLogin(BaseModel):
 
 class UserShopkeeper(BaseModel):
     email: EmailStr = Field(...)
-    password: str = Field(..., min_length=8, max_length=16)
-    role: str = "shopkeeper"
     shop_name: str = Field(...)
-    prod_categories: list = Field(...)  # multile categories
     contact: str = Field(...)
     address: str = Field(...)
     local_area: str = Field(...)
@@ -44,8 +41,6 @@ class UserShopkeeper(BaseModel):
 
 class UserCustomer(BaseModel):
     email: EmailStr = Field(...)
-    password: str = Field(..., min_length=8, max_length=16)
-    role: str = "customer"
     customer_name: str = Field(...)
     contact: str = Field(...)
     address: str = Field(...)
@@ -54,3 +49,6 @@ class UserCustomer(BaseModel):
     pin: str = Field(...)
     state: str = Field(...)
     country: str = Field(...)
+
+class UserEmail(BaseModel):
+    email: EmailStr = Field(...)

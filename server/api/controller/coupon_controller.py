@@ -16,7 +16,7 @@ def add_coupon(coupon: Coupon,response:Response,coupon_collection:Collection):
         "status": "success",
         "message": "product added to coupon successfully",
         "coupon": {
-            # "_id": str(coupon_data["_id"]),
+            "user_id": coupon_data["user_id"],
             "cpn_code": coupon_data["cpn_code"],
             "cpn_quantity": coupon_data["cpn_quantity"],
             "cpn_discount": coupon_data["cpn_discount"],

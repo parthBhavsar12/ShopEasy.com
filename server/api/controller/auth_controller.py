@@ -50,17 +50,16 @@ def create_access_token(response: Response, data: dict):
         + timedelta(days=7),  # Adjust expiration as needed
         "httpOnly": True,  # Prevent client-side JavaScript access
         "path": "/",  # Accessible from all paths
-        "sameSite": "None" if os.environ.get("ENVIRONMENT") == "production" else "lax",
-        "secure": (
-            True if os.environ.get("ENVIRONMENT") == "production" else False
-        ),  # Set secure only in production
+        "sameSite": "none" if os.environ.get("ENVIRONMENT") == "production" else "Lax",
+        "secure": False,  # Set secure only in production
+        # "max-age":7 * 24 * 6i0 * 60,
     }
     response.set_cookie(
         "access_token",
         encoded_jwt,
+        path=cookie_options["path"],
         expires=cookie_options["expires"],
         httponly=cookie_options["httpOnly"],
-        path=cookie_options["path"],
         secure=cookie_options["secure"],
         samesite=cookie_options["sameSite"],
     )

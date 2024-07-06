@@ -1,10 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import '../css/account.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Customer() {
 
+    const navigate = useNavigate();
+    
+    const [email, setEmail] = useState('');
+    const [isDisable, setEnable] = useState(false);
+
+    const checkUser = async () => {
+        try {
+            const response = await axios.get(
+                "http://localhost:8000/api/v1/auth/me",
+                {
+                    withCredentials: true,
+                }
+            );
+            // console.log(response);
+            if (response.status === 200) {
+                setEmail(response.data.user.email);
+                if (response.data.user.role == "customer") {
+                    navigate('/customer-account');
+                }
+                else {
+                    navigate('../shopkeeper-account');
+                }
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        checkUser();
+    }, []);
+
+    const handleFormAccess = () => {
+        setEnable(true);
+    }
+
     const [error, setError] = useState('');
+    const [msg, setMsg] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -24,11 +63,12 @@ function Customer() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setMsg('');
 
-        const { contact, pin } = formData;
+        const { name, contact, address1, area, dist, pin, state, country } = formData;
 
         if (contact.length < 8 && pin.length < 6) {
             setError('Please enter appropriate Contact number and Pin code.');
@@ -46,14 +86,46 @@ function Customer() {
         }
 
         console.log('Form submitted successfully', formData);
+
+        try {
+            const response = await axios.post(
+              "http://127.0.0.1:8000/api/v1/user/customer-data",
+              {
+                email: email,
+                customer_name: name,
+                contact: contact,
+                address: address1,
+                local_area: area,
+                district: dist,
+                pin: pin,
+                state: state,
+                country: country
+              },
+              {
+                headers: {
+                  "Access-Control-Allow-Origin": "*",
+                },
+              },
+              { withCredentials: true }
+            );
+            // console.log(response)
+            // console.log(response.status)
+            if (response.status == 200) {
+              setMsg('Data added/updated successfully.');
+            }
+          } catch (error) {
+            console.log(error);
+            setError('Some error occured, Try again.');
+          }
+
     };
 
     return (
         <>
             <div className="account-user">
                 <i className="zmdi zmdi-account-circle user-icon"></i>
-                <span className="user-email-id">abc@gmail.com</span>
-                <button className="edit-account"><i className="zmdi zmdi-edit"></i>Edit</button>
+                <span className="user-email-id">{email}</span>
+                <button className="edit-account" onClick={handleFormAccess}><i className="zmdi zmdi-edit"></i>Edit</button>
 
                 <form className='account-form' onSubmit={handleSubmit} method='post'>
                     <div className="user-data">
@@ -66,6 +138,8 @@ function Customer() {
                             value={formData.name}
                             onChange={handleInputChange}
                             required
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip":""}
                         />
 
                         <label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label>
@@ -74,10 +148,13 @@ function Customer() {
                             type="number"
                             name="contact"
                             id="contact"
+                            min='0'
                             placeholder="0000000000"
                             value={formData.contact}
                             onChange={handleInputChange}
                             required
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip":""}
                         />
 
 
@@ -91,6 +168,8 @@ function Customer() {
                             value={formData.address1}
                             onChange={handleInputChange}
                             required
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip":""}
                         />
 
 
@@ -103,7 +182,8 @@ function Customer() {
                             value={formData.area}
                             onChange={handleInputChange}
                             required
-                            className="column-right"
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip column-right":"column-right"}
                         />
 
 
@@ -116,7 +196,8 @@ function Customer() {
                             value={formData.dist}
                             onChange={handleInputChange}
                             required
-                            className="column-right"
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip column-right":"column-right"}
                         />
 
 
@@ -125,11 +206,13 @@ function Customer() {
                             type="number"
                             name="pin"
                             id="pin"
+                            min='0'
                             placeholder="Pin Code"
                             value={formData.pin}
                             onChange={handleInputChange}
                             required
-                            className="column-right"
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip column-right":"column-right"}
                         />
 
 
@@ -142,7 +225,8 @@ function Customer() {
                             value={formData.state}
                             onChange={handleInputChange}
                             required
-                            className="column-right"
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip column-right":"column-right"}
                         />
 
 
@@ -155,7 +239,8 @@ function Customer() {
                             value={formData.country}
                             onChange={handleInputChange}
                             required
-                            className="column-right"
+                            disabled={isDisable}
+                            className={(isDisable)?"read-only-ip column-right":"column-right"}
                         />
                     </div>
 
@@ -163,6 +248,7 @@ function Customer() {
                 </form>
             </div>
             {error && <MessageBox msgTitle="Error" msgText={error} />}
+            {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
         </>
     )
 }

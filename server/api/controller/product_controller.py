@@ -16,7 +16,7 @@ def add_product(product: Product,response:Response,product_collection:Collection
         "status": "success",
         "message": "product added successfully",
         "product": {
-            # "_id": str(product_data["_id"]),
+            "user_id": product_data["user_id"],
             "prod_name": product_data["prod_name"],
             "prod_category": product_data["prod_category"],
             "prod_price": product_data["prod_price"],

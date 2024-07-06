@@ -71,44 +71,44 @@ function App() {
       element: <><Upside/><ChangePassword/></>
     },
     {
-      path: "/customerhome",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><CustomerHome/></>
+      path: "/customer-home",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><CustomerHome/></>
     },
     {
-      path: "/shopkeeperhome",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><ShopkeeperHome/></>
+      path: "/shopkeeper-home",
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" slug4="../shopkeeper-account" /><ShopkeeperHome/></>
     },
     {
-      path: "/makeorder",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><MakeOrder/></>
+      path: "/make-order",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><MakeOrder/></>
     },
     {
-      path: "/makepayment",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><MakePayment/></>
+      path: "/make-payment",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><MakePayment/></>
     },
     {
-      path: "/findshops",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><FindShops/></>
+      path: "/find-shops",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><FindShops/></>
     },
     {
       path: "/products",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><AddProducts/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" slug4="../shopkeeper-account" /><AddProducts/></>
     },
     {
       path: "/bill",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><UpdateProducts/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" slug4="../shopkeeper-account" /><UpdateProducts/></>
     },
     {
       path: "/coupons",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><Coupons/></>
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" slug4="../shopkeeper-account" /><Coupons/></>
     },
     {
-      path: "/account",
-      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" menuTitle4="Account" slug4="../account" /><ShopKeeper/></>
+      path: "/shopkeeper-account",
+      element: <><Nav iName1="view-list" menuTitle1="Manage Products" slug1="../products" iName2="local-grocery-store" menuTitle2="Bill" slug2="../bill" iName3="receipt" menuTitle3="Coupons" slug3="../coupons"  iName4="account" slug4="../shopkeeper-account" /><ShopKeeper/></>
     },
     {
-      path: "/customer",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops" iName4="account" menuTitle4="Account" slug4="../account" /><Customer/></>
+      path: "/customer-account",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><Customer/></>
     },
     {
       path: "/logout",
@@ -116,7 +116,7 @@ function App() {
     },
     {
       path: "/contact",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../makeorder" iName2="balance" menuTitle2="Payment" slug2="../makepayment" iName3="store" menuTitle3="Shops" slug3="../findshops"  iName4="account" menuTitle4="Account" slug4="../account" /><ContactUs/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><ContactUs/></>
     },
   ])
   return (

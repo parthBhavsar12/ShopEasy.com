@@ -18,3 +18,7 @@
 i, input#show_password {
   margin-right: 1vw;
 }
+
+editor-squiggler{
+  display: none;
+}

@@ -1,5 +1,6 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware import Middleware
 
 from config import settings
 import os
@@ -34,18 +35,30 @@ async def lifespan(app: FastAPI):
 #         print(f"Failed to connect to MongoDB: {e}")
 #    finally:
 #         db.client.close()
-app = FastAPI(lifespan=lifespan)
-origins = [
-    "http://localhost:5173",
-]
+# app = FastAPI(lifespan=lifespan)
+# origins = [
+#     "http://localhost:5173",
+# ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=origins,
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+origins = ['http://localhost:5173', 'http://127.0.0.1:5173']
+middleware = [
+    Middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*']
+    )
+]
+app = FastAPI(lifespan=lifespan,middleware=middleware);
 
 
 @app.get("/")

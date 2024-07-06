@@ -1,8 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import '../css/remove-btn.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function MakeOrder() {
+
+  const navigate = useNavigate();
+
+  const checkUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      if (response.status === 200) {
+        if (response.data.user.role == "shopkeeper") {
+          navigate('/shopkeeper-home');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
@@ -196,7 +223,7 @@ export default function MakeOrder() {
               <td>Coupon Discount</td>
               <td>000</td>
               <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-              
+
             </tr>
           </table>
           <table className="productsTable">
@@ -260,7 +287,7 @@ export default function MakeOrder() {
               <td>Coupon Discount</td>
               <td>000</td>
               <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-              
+
             </tr>
           </table>
           <table className="productsTable">
@@ -324,7 +351,7 @@ export default function MakeOrder() {
               <td>Coupon Discount</td>
               <td>000</td>
               <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-              
+
             </tr>
           </table>
         </div>

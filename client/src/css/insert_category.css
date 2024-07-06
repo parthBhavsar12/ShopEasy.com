@@ -1,0 +1,8 @@
+.product-category-div{
+    width: 100%;
+}
+
+.product-category-div select, .product-category-div input{
+    width: 48% !important;
+    margin: 0 4px;
+}

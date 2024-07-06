@@ -1,37 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 export default function Nav(props) {
 
+  const [ email, setEmail ] = useState('');
+
   const navigate = useNavigate();
 
-  useEffect(
-    () => {handleUser()}
-  , []);
-
-  const handleUser = async (e) => {
+  const checkUser = async () => {
     try {
       const response = await axios.get(
-        "http://127.0.0.1:8000/api/v1/auth/me",
+        "http://localhost:8000/api/v1/auth/me",
         {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        },
-        { withCredentials: true }
+          withCredentials: true,
+        }
       );
+      if (response.status === 200) {
+        setEmail(response.data.user.email);
 
-      if (response.status == 200) {
-        console.log(response);
-        console.log(response.user);
-        console.log(response.user.email);
+        if (response.data.user.role == "customer"){
+          navigate('/customer-home');
+        }
+        // else{
+        //   navigate('../shopkeeper-home');
+        // }
       }
     } catch (error) {
       // console.log(error);
     }
-  }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   const handleLogout = async (e) => {
     e.preventDefault();
@@ -48,9 +51,9 @@ export default function Nav(props) {
         { withCredentials: true }
       );
 
-      console.log(response);
+      // console.log(response);
       if (response.status == 200) {
-        console.log(response);
+        // console.log(response);
         navigate("/signin");
       }
     } catch (error) {
@@ -62,7 +65,7 @@ export default function Nav(props) {
   return (
     <>
       <nav>
-        <NavLink to="/shopkeeperhome" className={(e) => { return e.isActive ? "navLogo activeNavItem" : "navLogo" }}>
+        <NavLink to="/shopkeeper-home" className={(e) => { return e.isActive ? "navLogo activeNavItem" : "navLogo" }}>
           <i className="zmdi zmdi-home"></i>
           <span id="one">Shop</span>
           <span id="two">Easy</span>
@@ -90,12 +93,12 @@ export default function Nav(props) {
             </label> */}
 
         {/* <span id="hello">
-                <i className="zmdi zmdi-account"></i>Hello, user
-            </span> */}
+          <i className="zmdi zmdi-account"></i>{email}
+        </span> */}
 
         <NavLink to={props.slug4} className={(e) => { return e.isActive ? "navMenu activeNavItem" : "navMenu" }}>
           <i className={`zmdi zmdi-${props.iName4}`}></i>
-          {props.menuTitle4}
+          {(email)?email:"Account"}
         </NavLink>
 
         <span id="logOut" onClick={handleLogout}>
@@ -109,7 +112,7 @@ export default function Nav(props) {
       {/* <div className="verticalNav" ref={verNav}>
             <nav>
                 <NavLink className='closeVerticalNav'><i className="zmdi zmdi-close" onClick={closeVerticalNav}></i>Close</NavLink>
-                <NavLink to="/account"><i className="zmdi zmdi-account"></i>Account</NavLink>
+                <NavLink to="/shopkeeper-account"><i className="zmdi zmdi-account"></i>Account</NavLink>
                 <NavLink to="/settings"><i className="zmdi zmdi-settings"></i>Settings</NavLink>
                 <NavLink to="/logout"><i className="zmdi zmdi-power"></i>Log Out</NavLink>
             </nav>

@@ -1,9 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MessageBox from './MessageBox';
 import '../css/readOnly.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Bill() {
+
+  const navigate = useNavigate();
+
+  const checkUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      if (response.status === 200) {
+        if (response.data.user.role == "customer") {
+          navigate('/customer-home');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    checkUser();
+  }, []);
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');

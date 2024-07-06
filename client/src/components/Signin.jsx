@@ -28,6 +28,28 @@ export default function Signin() {
     });
   };
 
+  const checkUser = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/auth/me",
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        if (response.data.user.role == "customer") {
+          navigate('/customer-home');
+        }
+        else {
+          navigate('/shopkeeper-home');
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -38,24 +60,21 @@ export default function Signin() {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/v1/auth/login",
+        "http://localhost:8000/api/v1/auth/login",
         { email, password },
-        {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        },
         { withCredentials: true }
       );
 
       // console.log(response);
       if (response.status == 200) {
+
+        checkUser();
         // console.log(response);
-        navigate('/shopkeeperhome');
+        // navigate('/shopkeeper-home');
       }
     } catch (error) {
       console.log(error);
-      if (error.message == "Request failed with status code 401")
+      if (error.message == "Request failed with status code 401" || error.message == "Request failed with status code 422")
         setError('Invalid credentials, Try again.');
       else
         setError('Some error occured, Try again.');
