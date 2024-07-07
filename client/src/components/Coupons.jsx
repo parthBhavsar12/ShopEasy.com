@@ -30,7 +30,7 @@ export default function Coupons() {
         }
       );
       // console.log(response);
-      if (response.status === 200) {       
+      if (response.status === 200) {
         setEmail(response.data.user.email);
         if (response.data.user.role == "customer") {
           navigate('/customer-home');
@@ -44,6 +44,37 @@ export default function Coupons() {
   useEffect(() => {
     checkUser();
   }, []);
+
+  const [coupons, setCoupons] = useState([]);
+
+  const [isFetching, setIsFetching] = useState(false);
+
+  const fetchCoupons = async () => {
+    setIsFetching(true);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/coupon/fetch-coupons",
+        {
+          params: { user_id: email },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setCoupons(response.data.coupons);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+        setIsFetching(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchCoupons();
+  }, [isFetching]);
+// }, []);
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
@@ -68,14 +99,14 @@ export default function Coupons() {
     setError('');
     setMsg('');
 
-    const { cpnCode, cpnQuant, cpnDiscount, cpnStartDate, cpnEndDate } = formData;
-    // let { cpnStartDate, cpnEndDate } = formData;
+    const { cpnCode, cpnQuant, cpnDiscount } = formData;
+    let { cpnStartDate, cpnEndDate } = formData;
     // const printMsg = `Coupun added successfully. Code: ${cpnCode}, Quantity: ${cpnQuant}, Discount (%): ${cpnDiscount}, Time Duration: ${cpnStartDate} - ${cpnEndDate}`
 
     // console.log('Form submitted successfully', formData);
 
-    // cpnStartDate = cpnStartDate.replace('T', ' ');
-    // cpnEndDate = cpnEndDate.replace('T', ' ');
+    cpnStartDate = cpnStartDate.replace('T', ' ');
+    cpnEndDate = cpnEndDate.replace('T', ' ');
     // setMsg(printMsg);
 
     try {
@@ -86,8 +117,8 @@ export default function Coupons() {
           cpn_code: cpnCode.toUpperCase(),
           cpn_quantity: cpnQuant,
           cpn_discount: cpnDiscount,
-          start_datetime: new Date(cpnStartDate).toISOString(),
-          end_datetime: new Date(cpnEndDate).toISOString()
+          start_datetime: cpnStartDate,
+          end_datetime: cpnEndDate
         },
         {
           headers: {
@@ -100,12 +131,31 @@ export default function Coupons() {
       // console.log(response.status)
       if (response.status == 200) {
         setMsg('Coupon added successfully.');
+        fetchCoupons();
       }
     } catch (error) {
       console.log(error);
       setError('Some error occured, Try again.');
     }
+  };
 
+  const handleRemoveCoupon = async (couponId) => {
+    setMsg('');
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/api/v1/coupon/delete-coupon/${couponId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setMsg('Coupon removed successfully.');
+        setCoupons(coupons.filter(coupon => coupon._id !== couponId));
+      }
+    } catch (error) {
+      // console.log(error);
+      setError('Some error occured, Try again.');
+    }
   };
 
   return (
@@ -177,222 +227,38 @@ export default function Coupons() {
         <div className="tableContainer">
           <span id="productsTitle">Coupons</span>
           <table className="productsTable">
-            <tr>
-              <th>#</th>
-              <th>Coupon Code</th>
-              <th>Quantity</th>
-              <th>Discount (%)</th>
-              <th>Start Date-Time</th>
-              <th>End Date-Time</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Coupon Code</td>
-              <td>Quantity</td>
-              <td>Discount</td>
-              <td>Start Date-Time</td>
-              <td>End Date-Time</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
+            <thead>
+              <tr>
+                <th className="pad-10">#</th>
+                <th>Coupon Code</th>
+                <th>Quantity</th>
+                <th>Discount (%)</th>
+                <th>Start Date-Time</th>
+                <th>End Date-Time</th>
+                <th>Remove</th>
+              </tr>
+
+            </thead>
+            <tbody>
+              {coupons.length > 0 ? (
+                coupons.map((coupon, index) => (
+                  <tr key={coupon._id}>
+                    <td className="pad-10">{index + 1}</td>
+                    <td>{coupon.cpn_code}</td>
+                    <td>{coupon.cpn_quantity}</td>
+                    <td>{coupon.cpn_discount}</td>
+                    <td>{coupon.start_datetime}</td>
+                    <td>{coupon.end_datetime}</td>
+                    <td><button className="remove-btn" onClick={() => handleRemoveCoupon(coupon._id)}>Remove</button></td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7" className="no-row">No coupon found.</td>
+                </tr>
+              )}
+            </tbody>
+
           </table>
         </div>
 

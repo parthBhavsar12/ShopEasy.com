@@ -31,11 +31,12 @@ export default function CustomerHome() {
 
   return (
     <>
-        <div className="shop-keeper-home">
-          <span id="productsTitle" className="order-title">Your Orders</span>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: ABC Store <button className="order-action">Complete Order</button></caption>
-            
+      <div className="shop-keeper-home">
+        <span id="productsTitle" className="order-title">Your Orders</span>
+        <table className="productsTable">
+          <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: ABC Store <button className="order-action">Complete Order</button></caption>
+          <thead>
+
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -44,6 +45,8 @@ export default function CustomerHome() {
               <th>Coupon Discount</th>
               <th>Amount</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>#</td>
               <td>Name</td>
@@ -89,10 +92,12 @@ export default function CustomerHome() {
               <td>Coupon Discount</td>
               <td>000</td>
             </tr>
-          </table>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: PQR Store <button className="order-action">Complete Order</button></caption>
-            
+          </tbody>
+        </table>
+        <table className="productsTable">
+          <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: PQR Store <button className="order-action">Complete Order</button></caption>
+          <thead>
+
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -101,6 +106,8 @@ export default function CustomerHome() {
               <th>Coupon Discount</th>
               <th>Amount</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>#</td>
               <td>Name</td>
@@ -146,10 +153,12 @@ export default function CustomerHome() {
               <td>Coupon Discount</td>
               <td>000</td>
             </tr>
-          </table>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: XYZ Store <button className="order-action">Complete Order</button></caption>
-            
+          </tbody>
+        </table>
+        <table className="productsTable">
+          <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: XYZ Store <button className="order-action">Complete Order</button></caption>
+          <thead>
+
             <tr>
               <th>#</th>
               <th>Name</th>
@@ -158,6 +167,8 @@ export default function CustomerHome() {
               <th>Coupon Discount</th>
               <th>Amount</th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
               <td>#</td>
               <td>Name</td>
@@ -203,8 +214,9 @@ export default function CustomerHome() {
               <td>Coupon Discount</td>
               <td>000</td>
             </tr>
-          </table>
-        </div>
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }

@@ -71,174 +71,186 @@ export default function ShopkeeperHome() {
         <div ref={orderTableDiv} className='orderTableDiv'>
           <table className="productsTable shopkeeperHomeOrderTable">
             <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
+            <thead>
 
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-            </tr>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price per unit</th>
+                <th>Quantity</th>
+                <th>Coupon Discount</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Total Amount to be paid</td>
+                <td>Coupon Discount</td>
+                <td>000</td>
+              </tr>
+            </tbody>
           </table>
           <table className="productsTable shopkeeperHomeOrderTable">
             <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
+            <thead>
 
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-            </tr>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price per unit</th>
+                <th>Quantity</th>
+                <th>Coupon Discount</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Total Amount to be paid</td>
+                <td>Coupon Discount</td>
+                <td>000</td>
+              </tr>
+            </tbody>
           </table>
           <table className="productsTable shopkeeperHomeOrderTable">
             <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
+            <thead>
 
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-            </tr>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price per unit</th>
+                <th>Quantity</th>
+                <th>Coupon Discount</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Coupon Discount</td>
+                <td>Amount</td>
+              </tr>
+              <tr>
+                <td colSpan="4">Total Amount to be paid</td>
+                <td>Coupon Discount</td>
+                <td>000</td>
+              </tr>
+            </tbody>
           </table>
         </div>
         <div ref={productsDiv} className='productsDiv'>
@@ -366,205 +378,208 @@ export default function ShopkeeperHome() {
         </div>
         <div ref={stocksTable} className='stocksTable'>
           <table className="productsTable" >
-            <caption id="stocksTableCaption">(Less to More)<i className="zmdi zmdi-long-arrow-down"></i></caption>
+          <caption id="stocksTableCaption">(Less to More)<i className="zmdi zmdi-long-arrow-down"></i></caption>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Remaining Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            <tr>
-              <th>#</th>
-              <th>Product Name</th>
-              <th>Remaining Stock</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Product Name</td>
+                <td>Remaining Stock</td>
 
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Product Name</td>
-              <td>Remaining Stock</td>
-
-            </tr>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>

@@ -35,6 +35,41 @@ export default function ManageProducts() {
     checkUser();
   }, []);
 
+
+  const [products, setProducts] = useState([]);
+  const [uniqueCategories, setUniqueCategories] = useState([]);
+
+  const [isFetching, setIsFetching] = useState(false);
+
+  const fetchProducts = async () => {
+    setIsFetching(true);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/product/fetch-products",
+        {
+          params: { user_id: email },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setProducts(response.data.products);
+        const categories = response.data.products.map(product => product.prod_category);
+        const uniqueCategoriesSet = new Set(categories);
+        setUniqueCategories(Array.from(uniqueCategoriesSet));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setIsFetching(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [isFetching]);
+
   const addProductsForm = useRef();
   const updateProductsForm = useRef();
 
@@ -99,13 +134,15 @@ export default function ManageProducts() {
     }
 
     if (productCat === "none") {
-      setError('Please select product category.');
+      setError('Please select/add product category.');
       return;
     }
 
     // console.log('Form submitted successfully', formData);
 
     try {
+      
+    setError('');
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/product/add-product",
         {
@@ -125,14 +162,34 @@ export default function ManageProducts() {
       );
 
       if (response.status == 200) {
-        setMsg('Product added successfully.');
+        setMsg('Product added/updated successfully.');
+        fetchProducts();
       }
     } catch (error) {
       // console.log(error);
       setError('Some error occured, Try again.');
 
     }
+  };
 
+  const handleRemoveProduct = async (productId) => {    
+    setError('');
+    setMsg('');
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/api/v1/product/delete-product/${productId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setMsg('Product removed successfully.');
+        setProducts(products.filter(product => product._id !== productId));
+      }
+    } catch (error) {
+      // console.log(error);
+      setError('Some error occured, Try again.');
+    }
   };
 
   return (
@@ -168,16 +225,16 @@ export default function ManageProducts() {
               required
             >
               <option value="none">--Select category--</option>
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
+              {uniqueCategories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
             </select>
             <input
               type="text"
               name="productCat"
               id="productCat"
               placeholder="Add New Category"
-              value={(formData.productCat=="none")?"":formData.productCat}
+              value={(formData.productCat == "none") ? "" : formData.productCat}
               onChange={handleInputChange}
             />
           </div>
@@ -236,9 +293,14 @@ export default function ManageProducts() {
             required
           >
             <option value="none">--Select product--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
+            {
+              products.map((product) => (
+                // <tr key={product._id}>
+                //   <td className="pad-10">{index + 1}</td>
+                <option value={product.prod_name}>{product.prod_name}</option>
+                // </tr>
+              ))
+            }
           </select>
 
           <label htmlFor="productCat">Product Category:</label>
@@ -250,9 +312,9 @@ export default function ManageProducts() {
             required
           >
             <option value="none">--Select category--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
+            {uniqueCategories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
           </select>
 
           <label htmlFor="productPrice">Product Price:</label>
@@ -296,158 +358,34 @@ export default function ManageProducts() {
         <div className="tableContainer">
           <span id="productsTitle">Products</span>
           <table className="productsTable">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Quantity</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Category</td>
-              <td>Quantity</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.length > 0 ? (
+                products.map((product, index) => (
+                  <tr key={product._id}>
+                    <td className="pad-10">{index + 1}</td>
+                    <td>{product.prod_name}</td>
+                    <td>{product.prod_price}</td>
+                    <td>{product.prod_category}</td>
+                    <td>{product.prod_quantity}</td>
+                    <td><button className="remove-btn" onClick={() => handleRemoveProduct(product._id)}>Remove</button></td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" className="no-row">No product found.</td>
+                </tr>
+              )}
+            </tbody>
           </table>
         </div>
 

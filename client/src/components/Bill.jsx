@@ -180,140 +180,144 @@ export default function Bill() {
         <div className="tableContainer">
           <span id="productsTitle">Products added to Bill</span>
           <table className="productsTable">
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Discount</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Quantity</td>
-              <td>Price</td>
-              <td>Discount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Discount</th>
+                <th>Remove</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
+              <tr>
+                <td>#</td>
+                <td>Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td><button className="remove-btn">Remove</button></td>
+              </tr>
 
-            <tr>
-              <td colSpan="3">Total Price Amount:</td>
-              <td colSpan="2">Price</td>
-              <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-            </tr>
+              <tr>
+                <td colSpan="3">Total Price Amount:</td>
+                <td colSpan="2">Price</td>
+                <td><button className="remove-btn remove-all-btn">Clear All</button></td>
+              </tr>
+            </tbody>
           </table>
         </div>
 
