@@ -99,7 +99,7 @@ export default function ManageProducts() {
     productCat: 'none',
     productPrice: '',
     productQuant: '',
-    productImg: ''
+    productImg: 'none'
   });
 
   const handleInputChange = (e) => {
@@ -270,7 +270,6 @@ export default function ManageProducts() {
             id="productImg"
             accept='.jpg,.jpeg,.png'
             onChange={handleInputChange}
-            required
           />
 
           <button type="submit" className="btnProduct">Add Product</button>
@@ -348,7 +347,6 @@ export default function ManageProducts() {
             id="productImg"
             accept='.jpg,.jpeg,.png'
             onChange={handleInputChange}
-            required
           />
 
           <button type="submit" className="btnProduct">Update Product</button>

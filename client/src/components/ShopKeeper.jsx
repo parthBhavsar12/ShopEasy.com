@@ -151,6 +151,7 @@ export default function Account() {
       // console.log(response.status)
       if (response.status == 200) {
         setMsg('Data added/updated successfully.');
+        setDisable(true);
       }
     } catch (error) {
       console.log(error);
