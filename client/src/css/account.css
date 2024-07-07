@@ -12,7 +12,7 @@
 }
 
 i.user-icon{
-    font-size: 148px;
+    font-size: 128px;
     display: block;
     text-align: center;
     color: var(--dark-green);
@@ -51,4 +51,13 @@ button.edit-account{
     margin: auto;
     border-radius: 3px;
     font-size: 0.75em;
+}
+
+.addr-textarea{
+    resize: none;
+}
+
+button.disable-btn{
+    cursor: not-allowed;
+    background-color: var(--logo-green);
 }

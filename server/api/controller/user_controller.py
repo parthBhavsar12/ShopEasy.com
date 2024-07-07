@@ -15,7 +15,16 @@ from config import settings
 
 def shopkeeper_data(user: UserShopkeeper, response: Response, shopkeeperdata_collection: Collection):
     user_data = user.model_dump()
-    result = shopkeeperdata_collection.insert_one(user_data)
+    data = shopkeeperdata_collection.find_one({"email": user_data["email"]})
+
+    if not data:
+        result = shopkeeperdata_collection.insert_one(user_data)
+    else:
+        result = shopkeeperdata_collection.update_one(
+            {"email": user_data["email"]},
+            {"$set": user_data}
+        )
+
     return {
         "status": "success",
         "message": "user data updated/added successfully",
@@ -32,9 +41,19 @@ def shopkeeper_data(user: UserShopkeeper, response: Response, shopkeeperdata_col
         },
     }
 
+
 def customer_data(user: UserCustomer, response: Response, customerdata_collection: Collection):
     user_data = user.model_dump()
-    result = customerdata_collection.insert_one(user_data)
+    data = customerdata_collection.find_one({"email": user_data["email"]})
+
+    if not data:
+        result = customerdata_collection.insert_one(user_data)
+    else:
+        result = customerdata_collection.update_one(
+            {"email": user_data["email"]},
+            {"$set": user_data}
+        )
+            
     return {
         "status": "success",
         "message": "user data updated/added successfully",
@@ -51,14 +70,39 @@ def customer_data(user: UserCustomer, response: Response, customerdata_collectio
         },
     }
 
+
 def get_shopkeeper(email: str, shopkeeperdata_collection):
     return shopkeeperdata_collection.find_one({"email": email})
+
 
 def get_customer(email: str, customerdata_collection):
     return customerdata_collection.find_one({"email": email})
 
-def is_customer_data_available(email: UserEmail, response: Response, customerdata_collection):
-    user = get_customer(email, customerdata_collection)
-    if not user:
-        return False
-    return user
+
+def is_customer_data_available(email: str, customerdata_collection):
+    try:
+        user = get_customer(email, customerdata_collection)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return {
+            "status": "success",
+            "message": "userdata fetched succefully.",
+            "user": UserCustomer(**user),
+        }
+        return
+    except Exception as e:
+        return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}
+    
+def is_shopkeeper_data_available(email: str, shopkeeperdata_collection):
+    try:
+        user = get_shopkeeper(email, shopkeeperdata_collection)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+        return {
+            "status": "success",
+            "message": "userdata fetched succefully.",
+            "user": UserShopkeeper(**user),
+        }
+        return
+    except Exception as e:
+        return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}

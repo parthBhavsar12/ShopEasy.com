@@ -1,5 +1,5 @@
 from typing import Collection
-from fastapi import APIRouter, Depends, Request, Response
+from fastapi import APIRouter, Depends, Query, Request, Response
 
 # from api.middleware.auth_middleware import AuthMiddleware
 from api.middleware.auth_middleware import protect
@@ -12,6 +12,7 @@ from models.UserModel import UserEmail
 from api.controller.user_controller import shopkeeper_data
 from api.controller.user_controller import customer_data
 from api.controller.user_controller import is_customer_data_available
+from api.controller.user_controller import is_shopkeeper_data_available
 
 user_router = APIRouter()
 
@@ -34,11 +35,12 @@ def user(
 ):
     return customer_data(user, response, user_collection)
 
-@user_router.post("/is-customer-data-available")
+@user_router.get("/is-customer-data-available")
 # @protect()
-def user_data_available(
-    email: UserEmail,
-    response: Response,
-    user_collection: Collection = Depends(get_customerdata_collection),
-):
-    return is_customer_data_available(email, response, user_collection)
+def customer_data_available( email: str = Query(...), user_collection: Collection = Depends(get_customerdata_collection)):
+    return is_customer_data_available(email, user_collection)
+
+@user_router.get("/is-shopkeeper-data-available")
+# @protect()
+def shopkeeper_data_available( email: str = Query(...), user_collection: Collection = Depends(get_shopkeeperdata_collection)):
+    return is_shopkeeper_data_available(email, user_collection)

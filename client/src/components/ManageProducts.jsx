@@ -3,6 +3,7 @@ import MessageBox from './MessageBox';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/insert_category.css';
+import capitalize from '../Capitalize';
 
 export default function ManageProducts() {
 
@@ -109,8 +110,8 @@ export default function ManageProducts() {
         "http://127.0.0.1:8000/api/v1/product/add-product",
         {
           user_id: email,
-          prod_name: productName,
-          prod_category: productCat,
+          prod_name: capitalize(productName),
+          prod_category: capitalize(productCat),
           prod_price: productPrice,
           prod_quantity: productQuant,
           prod_image: productImg

@@ -3,13 +3,30 @@ import MessageBox from './MessageBox';
 import '../css/account.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import capitalize from '../Capitalize';
 
 function Customer() {
 
     const navigate = useNavigate();
-    
+
     const [email, setEmail] = useState('');
-    const [isDisable, setEnable] = useState(false);
+    const [isDisable, setDisable] = useState(true);
+    const [formState, setFormState] = useState('Add');
+    const [isFetching, setIsFetching] = useState(false);
+
+    const [error, setError] = useState('');
+    const [msg, setMsg] = useState('');
+
+    const [formData, setFormData] = useState({
+        name: '',
+        contact: '',
+        address1: '',
+        area: '',
+        dist: '',
+        pin: '',
+        state: '',
+        country: ''
+    });
 
     const checkUser = async () => {
         try {
@@ -38,23 +55,46 @@ function Customer() {
         checkUser();
     }, []);
 
-    const handleFormAccess = () => {
-        setEnable(true);
+    const fetchCustomerData = async () => {
+        setIsFetching(true);
+        try {
+            const response = await axios.get(
+                `http://127.0.0.1:8000/api/v1/user/is-customer-data-available`,
+                {
+                    params: { email },
+                    withCredentials: true,
+                }
+            );
+            // console.log(response);
+            if (response.status === 200) {
+                const { customer_name, contact, address, local_area, district, pin, state, country } = response.data.user;
+                setFormData({
+                    name: customer_name,
+                    contact: contact,
+                    address1: address,
+                    area: local_area,
+                    dist: district,
+                    pin: pin,
+                    state: state,
+                    country: country
+                });
+                setFormState('Edit');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsFetching(false);
+        }
     }
 
-    const [error, setError] = useState('');
-    const [msg, setMsg] = useState('');
+    useEffect(() => {
+        fetchCustomerData();
+    }, [isFetching]);
 
-    const [formData, setFormData] = useState({
-        name: '',
-        contact: '',
-        address1: '',
-        area: '',
-        dist: '',
-        pin: '',
-        state: '',
-        country: '',
-    });
+    const handleFormAccess = () => {
+        setDisable(!isDisable);
+    }
 
     const handleInputChange = (e) => {
         setFormData({
@@ -85,38 +125,38 @@ function Customer() {
             return;
         }
 
-        console.log('Form submitted successfully', formData);
+        // console.log('Form submitted successfully', formData);
 
         try {
             const response = await axios.post(
-              "http://127.0.0.1:8000/api/v1/user/customer-data",
-              {
-                email: email,
-                customer_name: name,
-                contact: contact,
-                address: address1,
-                local_area: area,
-                district: dist,
-                pin: pin,
-                state: state,
-                country: country
-              },
-              {
-                headers: {
-                  "Access-Control-Allow-Origin": "*",
+                "http://127.0.0.1:8000/api/v1/user/customer-data",
+                {
+                    email: email,
+                    customer_name: capitalize(name),
+                    contact: contact,
+                    address: capitalize(address1),
+                    local_area: capitalize(area),
+                    district: capitalize(dist),
+                    pin: pin,
+                    state: capitalize(state),
+                    country: capitalize(country)
                 },
-              },
-              { withCredentials: true }
+                {
+                    headers: {
+                        "Access-Control-Allow-Origin": "*",
+                    },
+                },
+                { withCredentials: true }
             );
             // console.log(response)
             // console.log(response.status)
             if (response.status == 200) {
-              setMsg('Data added/updated successfully.');
+                setMsg('Data added/updated successfully.');
             }
-          } catch (error) {
+        } catch (error) {
             console.log(error);
             setError('Some error occured, Try again.');
-          }
+        }
 
     };
 
@@ -125,7 +165,7 @@ function Customer() {
             <div className="account-user">
                 <i className="zmdi zmdi-account-circle user-icon"></i>
                 <span className="user-email-id">{email}</span>
-                <button className="edit-account" onClick={handleFormAccess}><i className="zmdi zmdi-edit"></i>Edit</button>
+                <button className="edit-account" onClick={handleFormAccess}><i className="zmdi zmdi-edit"></i>{formState}</button>
 
                 <form className='account-form' onSubmit={handleSubmit} method='post'>
                     <div className="user-data">
@@ -139,7 +179,7 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip":""}
+                            className={(isDisable) ? "read-only-ip" : ""}
                         />
 
                         <label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label>
@@ -154,13 +194,23 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip":""}
+                            className={(isDisable) ? "read-only-ip" : ""}
                         />
 
 
                         <label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label>
 
-                        <input
+                        <textarea
+                            name="address1"
+                            id="address1"
+                            placeholder="1, XYZ Complex"
+                            value={formData.address1}
+                            onChange={handleInputChange}
+                            required
+                            disabled={isDisable}
+                            className={(isDisable) ? "read-only-ip addr-textarea" : "addr-textarea"}
+                        />
+                        {/* <input
                             type="text"
                             name="address1"
                             id="address1"
@@ -169,8 +219,8 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip":""}
-                        />
+                            className={(isDisable) ? "read-only-ip" : ""}
+                        /> */}
 
 
 
@@ -183,7 +233,7 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip column-right":"column-right"}
+                            className={(isDisable) ? "read-only-ip column-right" : "column-right"}
                         />
 
 
@@ -197,7 +247,7 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip column-right":"column-right"}
+                            className={(isDisable) ? "read-only-ip column-right" : "column-right"}
                         />
 
 
@@ -212,7 +262,7 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip column-right":"column-right"}
+                            className={(isDisable) ? "read-only-ip column-right" : "column-right"}
                         />
 
 
@@ -226,7 +276,7 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip column-right":"column-right"}
+                            className={(isDisable) ? "read-only-ip column-right" : "column-right"}
                         />
 
 
@@ -240,11 +290,15 @@ function Customer() {
                             onChange={handleInputChange}
                             required
                             disabled={isDisable}
-                            className={(isDisable)?"read-only-ip column-right":"column-right"}
+                            className={(isDisable) ? "read-only-ip column-right" : "column-right"}
                         />
                     </div>
 
-                    <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
+                    <div className="btn">
+                        <button type="submit" disabled={isDisable} className={(isDisable) ? "disable-btn" : ""}>
+                            <i className="zmdi zmdi-check-all"></i>Save
+                        </button>
+                    </div>
                 </form>
             </div>
             {error && <MessageBox msgTitle="Error" msgText={error} />}

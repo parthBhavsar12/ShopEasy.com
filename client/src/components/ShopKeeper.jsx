@@ -4,12 +4,16 @@ import MessageBox from './MessageBox';
 import axios from 'axios';
 import '../css/account.css';
 import '../css/inputTypeNumber.css';
+import capitalize from '../Capitalize';
 
 export default function Account() {
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
   const [email, setEmail] = useState('');
+  const [isDisable, setDisable] = useState(true);
+  const [formState, setFormState] = useState('Add');
+  const [isFetching, setIsFetching] = useState(false);
 
   const navigate = useNavigate();
 
@@ -40,7 +44,7 @@ export default function Account() {
         }
       );
       // console.log(response);
-      if (response.status === 200) {   
+      if (response.status === 200) {
         setEmail(response.data.user.email);
         if (response.data.user.role == "customer") {
           navigate('/customer-account');
@@ -54,6 +58,49 @@ export default function Account() {
   useEffect(() => {
     checkUser();
   }, []);
+
+  const fetchShopkeeperData = async () => {
+    setIsFetching(true);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/v1/user/is-shopkeeper-data-available`,
+        // `http://127.0.0.1:8000/api/v1/user/is-customer-data-available?email=${email}`,
+        {
+          params: { email },
+          withCredentials: true,
+        }
+      );
+      // console.log(response);
+      if (response.status === 200) {
+        // console.log(response.data.user.customer_name);
+        const { shop_name, contact, address, local_area, district, pin, state, country } = response.data.user;
+        setFormData({
+          shop_name: shop_name,
+          contact: contact,
+          address1: address,
+          area: local_area,
+          dist: district,
+          pin: pin,
+          state: state,
+          country: country
+        });
+        setFormState('Edit');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setIsFetching(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchShopkeeperData();
+  }, [isFetching]);
+
+  const handleFormAccess = () => {
+    setDisable(!isDisable);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,14 +131,14 @@ export default function Account() {
         "http://127.0.0.1:8000/api/v1/user/shopkeeper-data",
         {
           email: email,
-          shop_name: shop_name,
+          shop_name: capitalize(shop_name),
           contact: contact,
-          address: address1,
-          local_area: area,
-          district: dist,
+          address: capitalize(address1),
+          local_area: capitalize(area),
+          district: capitalize(dist),
           pin: pin,
-          state: state,
-          country: country
+          state: capitalize(state),
+          country: capitalize(country)
         },
         {
           headers: {
@@ -117,7 +164,7 @@ export default function Account() {
       <div className="account-user">
         <i className="zmdi zmdi-account-circle user-icon"></i>
         <span className="user-email-id">{email}</span>
-        <button className="edit-account"><i className="zmdi zmdi-edit"></i>Edit</button>
+        <button className="edit-account" onClick={handleFormAccess}><i className="zmdi zmdi-edit"></i>{formState}</button>
 
         <form className='account-form' onSubmit={handleSubmit} method='post'>
           <div className="user-data">
@@ -131,6 +178,8 @@ export default function Account() {
               value={formData.shop_name}
               onChange={handleInputChange}
               required
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip" : ""}
             />
 
             <label htmlFor="contact" className="label-account"><i className="zmdi zmdi-phone"></i>Contact</label>
@@ -144,12 +193,24 @@ export default function Account() {
               value={formData.contact}
               onChange={handleInputChange}
               required
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip" : ""}
             />
 
 
             <label htmlFor="address1" className="label-account"><i className="zmdi zmdi-pin"></i>Address</label>
 
-            <input
+            <textarea
+              name="address1"
+              id="address1"
+              placeholder="1, XYZ Complex"
+              value={formData.address1}
+              onChange={handleInputChange}
+              required
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip addr-textarea" : "addr-textarea"}
+            />
+            {/* <input
               type="text"
               name="address1"
               id="address1"
@@ -157,7 +218,9 @@ export default function Account() {
               value={formData.address1}
               onChange={handleInputChange}
               required
-            />
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip" : ""}
+            /> */}
 
 
 
@@ -169,7 +232,8 @@ export default function Account() {
               value={formData.area}
               onChange={handleInputChange}
               required
-              className="column-right"
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip column-right" : "column-right"}
             />
 
 
@@ -182,7 +246,8 @@ export default function Account() {
               value={formData.dist}
               onChange={handleInputChange}
               required
-              className="column-right"
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip column-right" : "column-right"}
             />
 
 
@@ -196,7 +261,8 @@ export default function Account() {
               value={formData.pin}
               onChange={handleInputChange}
               required
-              className="column-right"
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip column-right" : "column-right"}
             />
 
 
@@ -209,7 +275,8 @@ export default function Account() {
               value={formData.state}
               onChange={handleInputChange}
               required
-              className="column-right"
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip column-right" : "column-right"}
             />
 
 
@@ -222,11 +289,16 @@ export default function Account() {
               value={formData.country}
               onChange={handleInputChange}
               required
-              className="column-right"
+              disabled={isDisable}
+              className={(isDisable) ? "read-only-ip column-right" : "column-right"}
             />
           </div>
 
-          <div className="btn"><button type="submit"><i className="zmdi zmdi-check-all"></i>Save</button></div>
+          <div className="btn">
+            <button type="submit" disabled={isDisable} className={(isDisable) ? "disable-btn" : ""}>
+              <i className="zmdi zmdi-check-all"></i>Save
+            </button>
+          </div>
         </form >
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
