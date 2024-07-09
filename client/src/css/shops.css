@@ -49,3 +49,7 @@ span.no-cust-data{
     border-radius: 10px;
     padding: 28vh;
 }
+
+.hidden-shops-div{
+    display: none;
+}
