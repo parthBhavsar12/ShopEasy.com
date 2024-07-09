@@ -12,7 +12,7 @@ PyObjectId = Annotated[str, BeforeValidator(str)]
 class Product(BaseModel):
     user_id: EmailStr = Field(...)
     prod_name: str = Field(...)
+    prod_rename: str = Field(...)
     prod_category: str = Field(...)
     prod_price: float = Field(...)
     prod_quantity: int = Field(...)
-    prod_image: str = Field(...)

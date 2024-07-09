@@ -28,6 +28,7 @@ export default function ManageProducts() {
       }
     } catch (error) {
       console.log(error);
+      setError('Something gone wrong.');
     }
   };
 
@@ -40,6 +41,7 @@ export default function ManageProducts() {
   const [uniqueCategories, setUniqueCategories] = useState([]);
 
   const [isFetching, setIsFetching] = useState(false);
+  const [info, setInfo] = useState('');
 
   const fetchProducts = async () => {
     setIsFetching(true);
@@ -53,22 +55,42 @@ export default function ManageProducts() {
         }
       );
       if (response.status === 200) {
-        setProducts(response.data.products);
-        const categories = response.data.products.map(product => product.prod_category);
-        const uniqueCategoriesSet = new Set(categories);
-        setUniqueCategories(Array.from(uniqueCategoriesSet));
+        if (response.data.products.length == 0){
+          // console.log(response.data.products.length);
+          setInfo("Please add your products.")
+        }
+        else{
+          setProducts(response.data.products);
+          const categories = response.data.products.map(product => product.prod_category);
+          const uniqueCategoriesSet = new Set(categories);
+          setUniqueCategories(Array.from(uniqueCategoriesSet));
+          // console.log(response);
+        }
       }
     } catch (error) {
       console.log(error);
+      setError('Something gone wrong.');
     }
     finally {
       setIsFetching(false);
     }
   };
 
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [isFetching]);
+
   useEffect(() => {
-    fetchProducts();
-  }, [isFetching]);
+    if (email) {
+      fetchProducts();
+    }
+  }, [email]);
+
+  // useEffect(() => {
+  //   if (isFetching) {
+  //     fetchProducts();
+  //   }
+  // }, [isFetching]);
 
   const addProductsForm = useRef();
   const updateProductsForm = useRef();
@@ -93,13 +115,13 @@ export default function ManageProducts() {
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
-  const [insertProductCategory, setInsertProductCategory] = useState('');
+  // const [insertProductCategory, setInsertProductCategory] = useState('');
   const [formData, setFormData] = useState({
     productName: '',
+    productReName: 'none',
     productCat: 'none',
     productPrice: '',
-    productQuant: '',
-    productImg: 'none'
+    productQuant: ''
   });
 
   const handleInputChange = (e) => {
@@ -109,19 +131,19 @@ export default function ManageProducts() {
     });
   };
 
-  const handleInsertCategory = (e) => {
-    setInsertProductCategory(e.target.value);
-  };
+  // const handleInsertCategory = (e) => {
+  //   setInsertProductCategory(e.target.value);
+  // };
 
-  const addCategory = () => {
-    console.log(insertProductCategory);
-  };
+  // const addCategory = () => {
+  //   console.log(insertProductCategory);
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setMsg('');
-    const { productName, productCat, productPrice, productQuant, productImg } = formData;
+    const { productName, productReName, productCat, productPrice, productQuant } = formData;
 
     if (productName === "none" && productCat === "none") {
       setError('Please select product and product category.');
@@ -141,17 +163,17 @@ export default function ManageProducts() {
     // console.log('Form submitted successfully', formData);
 
     try {
-      
-    setError('');
+
+      setError('');
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/product/add-product",
         {
           user_id: email,
           prod_name: capitalize(productName),
+          prod_rename: capitalize(productReName),
           prod_category: capitalize(productCat),
           prod_price: productPrice,
-          prod_quantity: productQuant,
-          prod_image: productImg
+          prod_quantity: productQuant
         },
         {
           headers: {
@@ -165,14 +187,22 @@ export default function ManageProducts() {
         setMsg('Product added/updated successfully.');
         fetchProducts();
       }
+      setFormData({
+        ...formData,
+        productReName: 'none',
+        productCat: 'none',
+        productPrice: '',
+        productQuant: ''
+      });
     } catch (error) {
       // console.log(error);
+      // setError('Something gone wrong.');
       setError('Some error occured, Try again.');
 
     }
   };
 
-  const handleRemoveProduct = async (productId) => {    
+  const handleRemoveProduct = async (productId) => {
     setError('');
     setMsg('');
     try {
@@ -188,6 +218,7 @@ export default function ManageProducts() {
       }
     } catch (error) {
       // console.log(error);
+      // setError('Something gone wrong.');
       setError('Some error occured, Try again.');
     }
   };
@@ -263,14 +294,14 @@ export default function ManageProducts() {
             required
           />
 
-          <label htmlFor="productImg">Product Image:</label>
+          {/* <label htmlFor="productImg">Product Image:</label>
           <input
             type="file"
             name="productImg"
             id="productImg"
             accept='.jpg,.jpeg,.png'
             onChange={handleInputChange}
-          />
+          /> */}
 
           <button type="submit" className="btnProduct">Add Product</button>
 
@@ -284,7 +315,38 @@ export default function ManageProducts() {
           </div>
 
           <label htmlFor="productName">Product Name:</label>
-          <select
+          <div className="product-category-div">
+            <select
+              name="productName"
+              id="productName"
+              value={formData.productName}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="none">--Select product--</option>
+              {
+                products.map((product) => (
+                  <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
+                ))
+
+                // products.map((product) => (
+                //   // <tr key={product._id}>
+                //   //   <td className="pad-10">{index + 1}</td>
+                //   <option value={product.prod_name}>{product.prod_name}</option>
+                //   // </tr>
+                // ))
+              }
+            </select>
+            <input
+              type="text"
+              name="productReName"
+              id="productReName"
+              placeholder="Rename Product"
+              value={(formData.productReName == "none") ? "" : formData.productReName}
+              onChange={handleInputChange}
+            />
+          </div>
+          {/* <select
             name="productName"
             id="productName"
             value={formData.productName}
@@ -300,10 +362,32 @@ export default function ManageProducts() {
                 // </tr>
               ))
             }
-          </select>
+          </select> */}
 
           <label htmlFor="productCat">Product Category:</label>
-          <select
+          <div className="product-category-div">
+            <select
+              name="productCat"
+              id="productCat"
+              value={formData.productCat}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="none">--Select category--</option>
+              {uniqueCategories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
+            </select>
+            <input
+              type="text"
+              name="productCat"
+              id="productCat"
+              placeholder="Add New Category"
+              value={(formData.productCat == "none") ? "" : formData.productCat}
+              onChange={handleInputChange}
+            />
+          </div>
+          {/* <select
             name="productCat"
             id="productCat"
             value={formData.productCat}
@@ -314,7 +398,7 @@ export default function ManageProducts() {
             {uniqueCategories.map((category, index) => (
               <option key={index} value={category}>{category}</option>
             ))}
-          </select>
+          </select> */}
 
           <label htmlFor="productPrice">Product Price:</label>
           <input
@@ -340,14 +424,14 @@ export default function ManageProducts() {
             required
           />
 
-          <label htmlFor="productImg">Product Image:</label>
+          {/* <label htmlFor="productImg">Product Image:</label>
           <input
             type="file"
             name="productImg"
             id="productImg"
             accept='.jpg,.jpeg,.png'
             onChange={handleInputChange}
-          />
+          /> */}
 
           <button type="submit" className="btnProduct">Update Product</button>
 
@@ -367,6 +451,32 @@ export default function ManageProducts() {
               </tr>
             </thead>
             <tbody>
+              {
+                isFetching ? (
+                  <tr>
+                    <td colSpan="6" className="no-row loading-data">Loading...</td>
+                  </tr>
+                ) : (
+                  products.length > 0 ? (
+                    products.map((product, index) => (
+                      <tr key={product._id}>
+                        <td className="pad-10">{index + 1}</td>
+                        <td>{product.prod_name}</td>
+                        <td>{product.prod_price}</td>
+                        <td>{product.prod_category}</td>
+                        <td>{product.prod_quantity}</td>
+                        <td><button className="remove-btn" onClick={() => handleRemoveProduct(product._id)}>Remove</button></td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="6" className="no-row">No product found.</td>
+                    </tr>
+                  )
+                )
+              }
+            </tbody>
+            {/* <tbody>
               {products.length > 0 ? (
                 products.map((product, index) => (
                   <tr key={product._id}>
@@ -383,12 +493,13 @@ export default function ManageProducts() {
                   <td colSpan="6" className="no-row">No product found.</td>
                 </tr>
               )}
-            </tbody>
+            </tbody> */}
           </table>
         </div>
 
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {info && <MessageBox msgTitle="No Product" msgText={info} />}
       {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
     </>
   )

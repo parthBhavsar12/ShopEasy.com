@@ -34,3 +34,18 @@ span#shopTitle{
     font-weight: bold;
     color: var(--dark-red);
 }
+
+span.no-cust-data{
+    display: block;
+    margin: auto;
+    color: var(--dark-red);
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.shop-container:has(> span.no-cust-data){
+    background-color: var(--red);
+    margin: 10px;
+    border-radius: 10px;
+    padding: 28vh;
+}

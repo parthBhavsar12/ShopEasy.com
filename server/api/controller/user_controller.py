@@ -91,7 +91,8 @@ def is_customer_data_available(email: str, customerdata_collection):
         }
         return
     except Exception as e:
-        return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}
+        raise HTTPException(status_code=404, detail="Userdata not found")
+        # return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}
     
 def is_shopkeeper_data_available(email: str, shopkeeperdata_collection):
     try:
@@ -105,4 +106,5 @@ def is_shopkeeper_data_available(email: str, shopkeeperdata_collection):
         }
         return
     except Exception as e:
-        return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}
+        raise HTTPException(status_code=404, detail="Userdata not found")
+        # return {"status": "failed", "message": "Failed to fetch userdata", "detail": str(e)}

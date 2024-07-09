@@ -20,10 +20,25 @@ def add_product(product: Product, response: Response, product_collection: Collec
             result = product_collection.insert_one(product_data)
             action = "insert"
         else:
-            result = product_collection.update_one(
-                {"prod_name": product_data["prod_name"]}, {"$set": product_data}
-            )
-            action = "update"
+            if product_data["prod_rename"] == "None":
+                result = product_collection.update_one(
+                    {"prod_name": product_data["prod_name"]}, {"$set": product_data}
+                )
+                action = "update"
+            else:
+                result = product_collection.update_one(
+                    {"prod_name": product_data["prod_name"]},
+                    {
+                        "$set": {
+                            "user_id": product_data["user_id"],
+                            "prod_name": product_data["prod_rename"],
+                            "prod_rename": product_data["prod_rename"],
+                            "prod_category": product_data["prod_category"],
+                            "prod_price": product_data["prod_price"],
+                            "prod_quantity": product_data["prod_quantity"]
+                        }
+                    },
+                )
 
         return {
             "status": "success",

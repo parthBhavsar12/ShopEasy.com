@@ -16,6 +16,7 @@ function Customer() {
 
     const [error, setError] = useState('');
     const [msg, setMsg] = useState('');
+    const [info, setInfo] = useState('');
 
     const [formData, setFormData] = useState({
         name: '',
@@ -47,7 +48,8 @@ function Customer() {
                 }
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            setError('Something gone wrong.');
         }
     };
 
@@ -81,16 +83,25 @@ function Customer() {
                 setFormState('Edit');
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            if (error.response.status == 404) {
+                setInfo('Please insert details.');
+            }
         }
         finally {
             setIsFetching(false);
         }
     }
 
+    // useEffect(() => {
+    //     fetchCustomerData();
+    // }, [isFetching]);
+
     useEffect(() => {
-        fetchCustomerData();
-    }, [isFetching]);
+        if (email) {
+            fetchCustomerData();
+        }
+    }, [email]);
 
     const handleFormAccess = () => {
         setDisable(!isDisable);
@@ -154,7 +165,8 @@ function Customer() {
                 setMsg('Data added/updated successfully.');
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            // setError('Something gone wrong.');
             setError('Some error occured, Try again.');
         }
 
@@ -302,6 +314,7 @@ function Customer() {
                 </form>
             </div>
             {error && <MessageBox msgTitle="Error" msgText={error} />}
+            {info && <MessageBox msgTitle="No Data" msgText={info} />}
             {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
         </>
     )

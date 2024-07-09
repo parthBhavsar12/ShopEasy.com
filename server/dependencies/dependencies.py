@@ -23,3 +23,6 @@ def get_shopkeeperdata_collection():
 
 def get_customerdata_collection():
     return db.get_db()["customerdata"]
+
+def get_reset_password_collection():
+    return db.get_db()["reset_passwords"]

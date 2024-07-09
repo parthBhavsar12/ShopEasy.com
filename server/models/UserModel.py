@@ -1,6 +1,6 @@
 import datetime
 from pydantic import BeforeValidator, EmailStr, BaseModel, Field
-from typing import Annotated, Optional
+from typing import Annotated, List, Optional
 from bson import ObjectId
 
 # Represents an ObjectId field in the database.
@@ -18,9 +18,12 @@ class User(BaseModel):
     email: EmailStr = Field(...)
     password: str = Field(..., min_length=8, max_length=16)
     role: str = Field("user", enum=["user", "shopkeeper", "admin"])
-    # is_shopkeeper:bool = Field(...,min_length=8,max_length=16)
-    # created: datetime = Field(default_factory=datetime_now_sec)
 
+# class UserShop(BaseModel):
+#     email: EmailStr = Field(...)
+#     role: str = Field("user", enum=["user", "shopkeeper", "admin"])
+#     local_area: str = Field(...)
+#     district: str = Field(...)
 
 class UserLogin(BaseModel):
     email: EmailStr = Field(...)
@@ -52,3 +55,13 @@ class UserCustomer(BaseModel):
 
 class UserEmail(BaseModel):
     email: EmailStr = Field(...)
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr = Field(...)
+
+class ResetPasswordRequest(BaseModel):
+    token:str = Field(...)
+    new_password:str =  Field(...,min_length=8,max_length=16)
+    
+class EmailSchema(BaseModel):
+    email: List[EmailStr]

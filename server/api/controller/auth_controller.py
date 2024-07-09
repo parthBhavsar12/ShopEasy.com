@@ -1,12 +1,15 @@
 from datetime import datetime, timedelta, timezone
 import os
+import secrets
 from typing import Collection
 from bson import ObjectId
 from fastapi import Depends, HTTPException, Request, Response, status
+from fastapi.responses import JSONResponse
 from fastapi.security import OAuth2PasswordBearer
+from fastapi_mail import ConnectionConfig, FastMail, MessageSchema, MessageType
 from pydantic import BaseModel
 from dependencies.dependencies import get_user_collection
-from models.UserModel import User, UserLogin
+from models.UserModel import User, UserLogin, ForgotPasswordRequest, ResetPasswordRequest, EmailSchema
 from config import settings
 from jose import jws, jwt, JWTError
 from passlib.context import CryptContext
@@ -250,3 +253,66 @@ def logout_user(response: Response):
 #     # Here you would typically fetch the user from your database
 #     user = {"id": user_id, "username": "example_user"}
 #     return user
+
+async def forgot_password(user_email:ForgotPasswordRequest,user_collection:Collection,resetpasswordCollection:Collection):
+    user = user_collection.find_one({"email":user_email.email})
+    if not user:
+        # Don't reveal if the email exists or not for security reasons
+        return {"message": "If an account with that email exists, a password reset link has been sent."}
+    if user:
+        token = secrets.token_urlsafe(32)
+        expiration = datetime.now(timezone.utc) + timedelta(hours=1)
+        resetpasswordCollection.insert_one({
+            "user_id":user["_id"],
+            "token":token,
+            "expiration":expiration
+        })
+        try:
+         await send_reset_email(user_email.email, token)
+        except Exception as e:
+        # Log the error
+         print(f"Failed to send email: {str(e)}")
+         raise HTTPException(status_code=500, detail="Failed to send reset email")
+        return {"message": "If an account with that email exists, a password reset link has been sent."}
+def reset_password(reset_user:ResetPasswordRequest,user_collection:Collection,resetPasswordCollection:Collection):
+    now = datetime.now(timezone.utc)
+    reset_request = resetPasswordCollection.find_one({"token":reset_user.token,"expiration":{"$gte":now}})
+    if not reset_request :
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+    hashed_password = hash_password(reset_user.new_password)
+    user_collection.update_one({"_id":ObjectId( reset_request["user_id"])},
+        {"$set": {"password": hashed_password}})
+    resetPasswordCollection.delete_one({"_id":reset_request["_id"]})
+    return {"message": "Password has been reset successfully"}
+
+
+async def send_reset_email(email:ForgotPasswordRequest,token:str) -> JSONResponse:
+   
+    conf = ConnectionConfig(
+        MAIL_USERNAME = settings.MAIL_USERNAME,
+        MAIL_PASSWORD = settings.MAIL_PASSWORD,
+        MAIL_FROM = settings.MAIL_FROM,
+        MAIL_PORT = settings.MAIL_PORT,
+        MAIL_SERVER = settings.MAIL_SERVER,
+        MAIL_FROM_NAME=settings.MAIL_FROM_NAME,
+        MAIL_STARTTLS = True,
+        MAIL_SSL_TLS = False,
+        USE_CREDENTIALS = True,
+        VALIDATE_CERTS = True
+)
+    # html = f"<h1>Reset password using following link<h1> <p>http://localhost:8000/reset-password/${token}</p>";
+    html = f"""
+    <h1>Reset Your Password</h1>
+    <p>Click the following link to reset your password:</p>
+    <a href="http://localhost:8000/reset-password?token={token}">Reset Password</a>
+    <p>If you didn't request this, please ignore this email.</p>
+    """
+    message = MessageSchema(
+        subject="Password reset request",
+        recipients=[email],
+        body=html,
+        subtype=MessageType.html)
+    fm = FastMail(conf)
+    # background_tasks.add_task(fm.send_message,message)
+    await fm.send_message(message)
+    return JSONResponse(status_code=200, content={"message": "email has been sent"})

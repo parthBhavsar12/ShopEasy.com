@@ -108,7 +108,7 @@ function App() {
     },
     {
       path: "/customer-account",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><Customer/></>
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" menuTitle4="activeNavItem" slug4="../shopkeeper-account" /><Customer/></>
     },
     {
       path: "/logout",

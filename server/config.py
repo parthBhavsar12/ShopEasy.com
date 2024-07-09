@@ -6,6 +6,13 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRES_IN:str
     JWT_PRIVATE_KEY:str
     JWT_ALGORITHM:str
+    MAIL_USERNAME: str
+    MAIL_PASSWORD:str
+    MAIL_FROM: str
+    MAIL_PORT:int
+    MAIL_SERVER: str
+    MAIL_FROM_NAME: str
+
 settings = Settings()
 #2nd way to load .env file
 # settings = Settings(_env_file='.env', _env_file_encoding='utf-8')

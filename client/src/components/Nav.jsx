@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import MessageBox from './MessageBox';
 import axios from 'axios';
 
 export default function Nav(props) {
 
   const [ email, setEmail ] = useState('');
+
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -58,6 +61,7 @@ export default function Nav(props) {
       }
     } catch (error) {
       console.log(error);
+      setError('Something gone wrong.');
     }
 
 
@@ -95,9 +99,9 @@ export default function Nav(props) {
         {/* <span id="hello">
           <i className="zmdi zmdi-account"></i>{email}
         </span> */}
-
-        <NavLink to={props.slug4} className={(e) => { return e.isActive ? "navMenu activeNavItem" : "navMenu" }}>
-          <i className={`zmdi zmdi-${props.iName4}`}></i>
+{/* ${(props.menuTitle4) ? "activeNavItem": ""} */}
+        <NavLink to={props.slug4} className={(e) => { return (e.isActive || props.menuTitle4) ? "navMenu activeNavItem" : "navMenu" }}>
+          <i className={`zmdi zmdi-${props.iName4}` }></i>
           {(email)?email:"Account"}
         </NavLink>
 
@@ -109,6 +113,7 @@ export default function Nav(props) {
         {/* <img src="../../hamburger-icon.svg" alt="Menu" title="Open Menu" className='nav_menu' onClick={showVerticalNav}/> */}
 
       </nav>
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
       {/* <div className="verticalNav" ref={verNav}>
             <nav>
                 <NavLink className='closeVerticalNav'><i className="zmdi zmdi-close" onClick={closeVerticalNav}></i>Close</NavLink>

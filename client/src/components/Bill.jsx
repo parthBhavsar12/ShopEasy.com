@@ -23,7 +23,8 @@ export default function Bill() {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setError('Something gone wrong.');
     }
   };
 
@@ -87,7 +88,8 @@ export default function Bill() {
         setMsg('Product added to bill successfully.');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      // setError('Something gone wrong.');
       setError('Some error occured, Try again.');
 
     }

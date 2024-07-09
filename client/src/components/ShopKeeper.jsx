@@ -10,6 +10,7 @@ export default function Account() {
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
+  const [info, setInfo] = useState('');
   const [email, setEmail] = useState('');
   const [isDisable, setDisable] = useState(true);
   const [formState, setFormState] = useState('Add');
@@ -51,7 +52,8 @@ export default function Account() {
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setError('Something gone wrong.');
     }
   };
 
@@ -72,7 +74,7 @@ export default function Account() {
       );
       // console.log(response);
       if (response.status === 200) {
-        // console.log(response.data.user.customer_name);
+        // console.log(response.data.status);
         const { shop_name, contact, address, local_area, district, pin, state, country } = response.data.user;
         setFormData({
           shop_name: shop_name,
@@ -87,16 +89,25 @@ export default function Account() {
         setFormState('Edit');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      if (error.response.status == 404){
+        setInfo('Please insert details.');
+      }
     }
     finally {
       setIsFetching(false);
     }
   }
 
+  // useEffect(() => {
+  //   fetchShopkeeperData();
+  // }, [isFetching]);
+
   useEffect(() => {
-    fetchShopkeeperData();
-  }, [isFetching]);
+    if (email) {
+      fetchShopkeeperData();
+    }
+  }, [email]);
 
   const handleFormAccess = () => {
     setDisable(!isDisable);
@@ -154,7 +165,8 @@ export default function Account() {
         setDisable(true);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      // setError('Something gone wrong.');
       setError('Some error occured, Try again.');
     }
 
@@ -303,6 +315,7 @@ export default function Account() {
         </form >
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
+      {info && <MessageBox msgTitle="No Data" msgText={info} />}
       {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
     </>
   )

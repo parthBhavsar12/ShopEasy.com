@@ -3,14 +3,16 @@ from fastapi import APIRouter, Depends, Request, Response
 
 # from api.middleware.auth_middleware import AuthMiddleware
 from api.middleware.auth_middleware import protect
-from dependencies.dependencies import get_user_collection
-from models.UserModel import User, UserLogin
+from dependencies.dependencies import get_user_collection, get_reset_password_collection
+from models.UserModel import User, UserLogin, ForgotPasswordRequest, ResetPasswordRequest
 from api.controller.auth_controller import (
     create_user,
     get_current_user,
     login_user,
     logout_user,
     protect_user,
+    reset_password,
+    forgot_password
 )
 
 auth_router = APIRouter()
@@ -60,3 +62,11 @@ def get_authenticated_user(
 def profile(request: Request):
     user = request.state.user
     return {"message": f"Welcome to your profile, {user}!"}
+
+@auth_router.post("/forgot-password")
+async def forget_password(user_email:ForgotPasswordRequest,user_collection:Collection = Depends(get_user_collection),resetpasswordCollection:Collection = Depends(get_reset_password_collection)):
+    return await forgot_password(user_email,user_collection,resetpasswordCollection)
+
+@auth_router.post("/reset-password")
+def reset_user_password(reset_user:ResetPasswordRequest ,user_collection:Collection = Depends(get_user_collection),resetpasswordCollection:Collection = Depends(get_reset_password_collection)):
+    return reset_password(reset_user,user_collection,resetpasswordCollection)

@@ -1,10 +1,16 @@
 import React, { useRef, useState, useEffect } from 'react';
+import MessageBox from './MessageBox';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function ShopkeeperHome() {
 
   const navigate = useNavigate();
+
+  const [email, setEmail] = useState('');
+
+  const [error, setError] = useState('');
 
   const checkUser = async () => {
     try {
@@ -16,12 +22,14 @@ export default function ShopkeeperHome() {
       );
       // console.log(response);
       if (response.status === 200) {
+        setEmail(response.data.user.email);
         if (response.data.user.role == "customer") {
           navigate('/customer-home');
         }
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      setError('Something gone wrong.');
     }
   };
 
@@ -59,6 +67,41 @@ export default function ShopkeeperHome() {
     setUnderlineMid('no-underline');
     setUnderlineLeft('no-underline');
   }
+
+  const [isFetching, setIsFetching] = useState(false);
+  const [products, setProducts] = useState([]);
+  const [uniqueCategories, setUniqueCategories] = useState([]);
+
+  const fetchProducts = async () => {
+    setIsFetching(true);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/product/fetch-products",
+        {
+          params: { user_id: email },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setProducts(response.data.products);
+        const categories = response.data.products.map(product => product.prod_category);
+        const uniqueCategoriesSet = new Set(categories);
+        setUniqueCategories(Array.from(uniqueCategoriesSet));
+      }
+    } catch (error) {
+      // console.log(error);
+      setError('Something gone wrong.');
+    }
+    finally {
+      setIsFetching(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+  }, [isFetching]);
+
   return (
     <>
       <div className="shop-keeper-home">
@@ -254,131 +297,27 @@ export default function ShopkeeperHome() {
           </table>
         </div>
         <div ref={productsDiv} className='productsDiv'>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
-          <div className="product-card">
-            <img src="../../logo/new_product.png" alt="Product" />
-            <div className="product-details">
-              <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
-              <span>ABC XYZ</span>
-              <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
-              <span>pqr</span>
-              <span className="product"><i>&#8377;</i>Price:</span>
-              <span >Rs. 000</span>
-            </div>
-          </div>
+          {products.length > 0 ? (
+            products.map((product) => (
+              <div className="product-card" key={product._id}>
+                <img src="../../logo/new_product.png" alt="Product" />
+                <div className="product-details">
+                  <span className="product"><i className="zmdi zmdi-mall"></i>Name: </span>
+                  <span>{product.prod_name}</span>
+                  <span className="product"><i className="zmdi zmdi-ticket-star"></i>Category: </span>
+                  <span>{product.prod_category}</span>
+                  <span className="product"><i>&#8377;</i>Price:</span>
+                  <span >Rs. {product.prod_price}</span>
+                </div>
+              </div>
+            ))
+          ) : (
+            <span className="no-product">No product found. Please <Link to="/products" className="a-href">Add your products</Link> if you are here for the first time.</span>
+          )}
         </div>
         <div ref={stocksTable} className='stocksTable'>
           <table className="productsTable" >
-          <caption id="stocksTableCaption">(Less to More)<i className="zmdi zmdi-long-arrow-down"></i></caption>
+            <caption id="stocksTableCaption">(Less to More)<i className="zmdi zmdi-long-arrow-down"></i></caption>
             <thead>
               <tr>
                 <th>#</th>
@@ -583,6 +522,7 @@ export default function ShopkeeperHome() {
           </table>
         </div>
       </div>
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
     </>
   )
 }

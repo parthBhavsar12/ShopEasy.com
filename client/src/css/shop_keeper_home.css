@@ -117,3 +117,28 @@ caption#stocksTableCaption{
 caption#stocksTableCaption i{
     padding: 5px !important;
 }
+
+span.no-product{
+    display: block;
+    margin: 100px auto;
+    color: var(--dark-red);
+    font-weight: bold;
+    font-size: 1.3em;
+}
+
+.productsDiv:has(> span.no-product){
+    background-color: var(--red);
+    margin: 10px;
+    border-radius: 10px;
+    padding: 15vh;
+}
+
+a.a-href{
+    padding: 5px;
+    background-color: var(--dark-green);
+    font-weight: initial;
+}
+
+a.a-href:hover{
+    font-weight: bold;
+}

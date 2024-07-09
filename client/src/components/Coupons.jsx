@@ -38,12 +38,47 @@ export default function Coupons() {
       }
     } catch (error) {
       console.log(error);
+      setError('Something gone wrong.');
     }
   };
 
   useEffect(() => {
     checkUser();
   }, []);
+
+  const [products, setProducts] = useState([]);
+  const [uniqueCategories, setUniqueCategories] = useState([]);
+
+  const fetchProducts = async () => {
+    setIsFetching(true);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/product/fetch-products",
+        {
+          params: { user_id: email },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setProducts(response.data.products);
+        const categories = response.data.products.map(product => product.prod_category);
+        const uniqueCategoriesSet = new Set(categories);
+        setUniqueCategories(Array.from(uniqueCategoriesSet));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setIsFetching(false);
+    }
+  };
+
+  // useEffect(() => {
+  //   if (email) {
+  //     fetchProducts();
+  //   }
+  // }, [email]);
 
   const [coupons, setCoupons] = useState([]);
 
@@ -67,14 +102,20 @@ export default function Coupons() {
       console.log(error);
     }
     finally {
-        setIsFetching(false);
+      setIsFetching(false);
     }
   };
 
   useEffect(() => {
-    fetchCoupons();
-  }, [isFetching]);
-// }, []);
+    if (email) {
+      fetchCoupons();
+      fetchProducts();
+    }
+  }, [email]);
+
+  // useEffect(() => {
+  //   fetchCoupons();
+  // }, [isFetching]);
 
   const [error, setError] = useState('');
   const [msg, setMsg] = useState('');
@@ -84,7 +125,8 @@ export default function Coupons() {
     cpnQuant: '',
     cpnDiscount: '0',
     cpnStartDate: '',
-    cpnEndDate: ''
+    cpnEndDate: '',
+    productName: 'none'
   });
 
   const handleInputChange = (e) => {
@@ -99,7 +141,7 @@ export default function Coupons() {
     setError('');
     setMsg('');
 
-    const { cpnCode, cpnQuant, cpnDiscount } = formData;
+    const { cpnCode, cpnQuant, cpnDiscount, productName } = formData;
     let { cpnStartDate, cpnEndDate } = formData;
     // const printMsg = `Coupun added successfully. Code: ${cpnCode}, Quantity: ${cpnQuant}, Discount (%): ${cpnDiscount}, Time Duration: ${cpnStartDate} - ${cpnEndDate}`
 
@@ -107,7 +149,16 @@ export default function Coupons() {
 
     cpnStartDate = cpnStartDate.replace('T', ' ');
     cpnEndDate = cpnEndDate.replace('T', ' ');
-    // setMsg(printMsg);
+
+    if (productName === "none") {
+      setError('Please select product.');
+      return;
+    }
+
+    if (new Date(cpnEndDate) <= new Date(cpnStartDate)) {
+      setError('End date-time must be after start date-time.');
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -115,6 +166,7 @@ export default function Coupons() {
         {
           user_id: email,
           cpn_code: cpnCode.toUpperCase(),
+          prod_name: productName,
           cpn_quantity: cpnQuant,
           cpn_discount: cpnDiscount,
           start_datetime: cpnStartDate,
@@ -177,6 +229,29 @@ export default function Coupons() {
             required
           />
 
+          <label htmlFor="productName">Coupon for Product:</label>
+          <select
+            name="productName"
+            id="productName"
+            value={formData.productName}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none">--Select product--</option>
+            {
+              products.map((product) => (
+                <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
+              ))
+
+              // products.map((product) => (
+              //   // <tr key={product._id}>
+              //   //   <td className="pad-10">{index + 1}</td>
+              //   <option value={product.prod_name}>{product.prod_name}</option>
+              //   // </tr>
+              // ))
+            }
+          </select>
+
           <label htmlFor="cpnQuant">Coupon Quantity:</label>
           <input
             type="number"
@@ -231,6 +306,7 @@ export default function Coupons() {
               <tr>
                 <th className="pad-10">#</th>
                 <th>Coupon Code</th>
+                <th>Product</th>
                 <th>Quantity</th>
                 <th>Discount (%)</th>
                 <th>Start Date-Time</th>
@@ -240,24 +316,60 @@ export default function Coupons() {
 
             </thead>
             <tbody>
-              {coupons.length > 0 ? (
-                coupons.map((coupon, index) => (
-                  <tr key={coupon._id}>
-                    <td className="pad-10">{index + 1}</td>
-                    <td>{coupon.cpn_code}</td>
-                    <td>{coupon.cpn_quantity}</td>
-                    <td>{coupon.cpn_discount}</td>
-                    <td>{coupon.start_datetime}</td>
-                    <td>{coupon.end_datetime}</td>
-                    <td><button className="remove-btn" onClick={() => handleRemoveCoupon(coupon._id)}>Remove</button></td>
+              {
+                isFetching ? (
+                  <tr>
+                    <td colSpan="8" className="no-row loading-data">Loading...</td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="7" className="no-row">No coupon found.</td>
-                </tr>
-              )}
+                ) : (
+                  coupons.length > 0 ? (
+                    coupons.map((coupon, index) => (
+                      <tr key={coupon._id}>
+                        <td className="pad-10">{index + 1}</td>
+                        <td>{coupon.cpn_code}</td>
+                        <td>{coupon.prod_name}</td>
+                        <td>{coupon.cpn_quantity}</td>
+                        <td>{coupon.cpn_discount}</td>
+                        <td>{coupon.start_datetime}</td>
+                        <td>{coupon.end_datetime}</td>
+                        <td><button className="remove-btn" onClick={() => handleRemoveCoupon(coupon._id)}>Remove</button></td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="8" className="no-row">No coupon found.</td>
+                    </tr>
+                  )
+                )
+              }
             </tbody>
+            {/* <tbody>
+              {
+                isFetching ? (
+                  <tr>
+                    <td colSpan="6" className="no-row loading-data">Loading...</td>
+                  </tr>
+                ) : (
+
+                  coupons.length > 0 ? (
+                    coupons.map((coupon, index) => (
+                      <tr key={coupon._id}>
+                        <td className="pad-10">{index + 1}</td>
+                        <td>{coupon.cpn_code}</td>
+                        <td>{coupon.cpn_quantity}</td>
+                        <td>{coupon.cpn_discount}</td>
+                        <td>{coupon.start_datetime}</td>
+                        <td>{coupon.end_datetime}</td>
+                        <td><button className="remove-btn" onClick={() => handleRemoveCoupon(coupon._id)}>Remove</button></td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="7" className="no-row">No coupon found.</td>
+                    </tr>
+                  )
+            }
+            </tbody> */}
 
           </table>
         </div>

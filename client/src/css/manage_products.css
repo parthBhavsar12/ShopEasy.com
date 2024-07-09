@@ -171,3 +171,8 @@ td.no-row{
     font-weight: bold;
     font-size: 1.3em;
 }
+
+td.loading-data{
+    background-color: var(--green);
+    color: var(--dark-green);
+}
