@@ -322,202 +322,29 @@ export default function ShopkeeperHome() {
               <tr>
                 <th>#</th>
                 <th>Product Name</th>
-                <th>Remaining Stock</th>
+                <th>Remaining Stock (Quantity)</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
+              {products.length > 0 ? (
+                products
+                  .sort((a, b) => a.prod_quantity - b.prod_quantity)
+                  .map((product, index) => (
 
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{product.prod_name}</td>
+                      <td>{product.prod_quantity}</td>
+                    </tr>
 
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Product Name</td>
-                <td>Remaining Stock</td>
-
-              </tr>
+                  ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="no-product-td">
+                    No product found. Please <Link to="/products" className="a-href">Add your products</Link> if you are here for the first time.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

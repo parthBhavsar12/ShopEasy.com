@@ -110,6 +110,11 @@ export default function Shops() {
       // console.log(error);
       if (error.response.status == 404) {
         setIsCustomerDataAvailable(false);
+        setTimeout(
+          () => {
+            navigate('/shopkeeper-account');
+          }, 2500
+        )
       }
     }
     finally {
@@ -140,7 +145,7 @@ export default function Shops() {
 
   return (
     <>
-      <div className={isLocalShopDivHidden ? "hidden-shops-div" : "shop-keeper-home"}>
+      <div className={isLocalShopDivHidden ? "hidden-div" : "shop-keeper-home"}>
         <span id="shopTitle">Shops nearby you</span>
         {isCustomerDataAvailable ? (
           <div className="shopKeeperHomeBtns">
@@ -181,7 +186,7 @@ export default function Shops() {
           )}
         </div>
       </div>
-      <div className={isLocalShopDivHidden ? "shop-keeper-home" : "hidden-shops-div"}>
+      <div className={isLocalShopDivHidden ? "shop-keeper-home" : "hidden-div"}>
         <span id="shopTitle">Shops nearby you</span>
         {isCustomerDataAvailable ? (
           <div className="shopKeeperHomeBtns">

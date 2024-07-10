@@ -142,3 +142,11 @@ a.a-href{
 a.a-href:hover{
     font-weight: bold;
 }
+
+td.no-product-td{
+    color: var(--dark-red);
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 55px !important;
+    background-color: var(--red);
+}
