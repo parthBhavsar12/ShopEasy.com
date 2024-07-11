@@ -44,6 +44,8 @@ export default function ManageProducts() {
   const [info, setInfo] = useState('');
 
   const fetchProducts = async () => {
+    setError('');
+    setMsg('');
     setIsFetching(true);
 
     try {

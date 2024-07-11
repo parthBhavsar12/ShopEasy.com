@@ -12,6 +12,7 @@ from api.routes.bill_routes import bill_router
 from api.routes.coupon_routes import coupon_router
 from api.routes.order_routes import order_router
 from api.routes.user_routes import user_router
+from api.routes.contact_routes import contact_router
 from fastapi.middleware.cors import CORSMiddleware
 from database.db import db
 
@@ -72,3 +73,4 @@ app.include_router(router=bill_router, prefix="/api/v1/bill")
 app.include_router(router=coupon_router, prefix="/api/v1/coupon")
 app.include_router(router=order_router, prefix="/api/v1/order")
 app.include_router(router=user_router, prefix="/api/v1/user")
+app.include_router(router=contact_router, prefix="/api/v1/contact")

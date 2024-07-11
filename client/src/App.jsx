@@ -10,6 +10,7 @@ import ContactUs from './components/ContactUs.jsx';
 import AddProducts from './components/ManageProducts.jsx';
 import About from './components/About.jsx';
 import MakeOrder from './components/MakeOrder.jsx';
+import AddOrder from './components/AddOrder.jsx';
 import MakePayment from './components/MakePayment.jsx';
 import FindShops from './components/Shops.jsx';
 import UpdateProducts from './components/Bill.jsx';
@@ -83,6 +84,10 @@ function App() {
       element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><MakeOrder/></>
     },
     {
+      path: "/add-to-order",
+      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops" iName4="account" slug4="../shopkeeper-account" /><AddOrder/></>
+    },
+    {
       path: "/make-payment",
       element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><MakePayment/></>
     },
@@ -116,8 +121,12 @@ function App() {
     },
     {
       path: "/contact",
-      element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><ContactUs/></>
-    },
+      element: <><Upside/><ContactUs/></>
+    }
+    // {
+    //   path: "/contact",
+    //   element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><ContactUs/></>
+    // },
   ])
   return (
     <>

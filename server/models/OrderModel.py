@@ -11,3 +11,11 @@ class Order(BaseModel):
     cust_name: str = Field(...)
     shop_name: str = Field()
     status: str = Field(...)
+
+class OrderData(BaseModel):
+    order_num: int = Field(...)
+    cust_id: EmailStr = Field(...)
+    prod_name: str = Field(...)
+    prod_price: float = Field(...)
+    prod_quantity: float = Field(...)
+    cpn_code: str = Field(...)

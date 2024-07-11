@@ -1,8 +1,19 @@
 .shopNameOnOrder{
     color: var(--dark-green);
-    margin: 15px 0;
+    margin: 3px 0;
     text-align: left;
     font-weight: bold;
+}
+
+.shopNameOnOrder i{
+    margin: 0 10px;
+    background-color: var(--dark-green);
+    border-radius: 3px;
+    padding: 5px;
+    color: white;
+    height: 28px;
+    width: 28px;
+    text-align: center;
 }
 
 .make-order-div{

@@ -97,3 +97,22 @@ def delete_product(product_id: str, product_collection: Collection):
         raise HTTPException(
             status_code=500, detail=f"Products fetching failed: {str(e)}"
         )
+
+def fetch_and_list_products_by_shopname(shop_name: str, product_collection: Collection, shopkeeper_collection: Collection) -> dict:
+    try:
+        data = shopkeeper_collection.find_one({"shop_name": shop_name})
+        email = data.get('email')
+        products_cursor: Cursor = product_collection.find({"user_id": email})
+        # products_cursor: Cursor = product_collection.find()
+        products: List[dict] = [
+            serialize_product(product) for product in products_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Products fetched successfully.",
+            "products": products,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Products fetching failed: {str(e)}"
+        )

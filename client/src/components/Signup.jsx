@@ -234,6 +234,7 @@ export default function Signup() {
             </div>
           </form>
           <GoTo title="Have an account? " goto="Sign in" slug="../signin" />
+          <GoTo title="" goto="Contact Us" slug="../contact" />
         </div>
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}

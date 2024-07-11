@@ -1,16 +1,16 @@
-textarea#msg{
-    height: 10em !important;
+textarea#message{
+    height: 9em !important;
     width: 100% !important;
     resize: none;
 }
 
-.mainContactUs{
-    /* margin: 0.3em;
-    border-radius: 10px; */
+/* .mainContactUs{
     height: 80vh;
     box-sizing: border-box;
     margin: 25px;
     padding: 25px;
     border: 3px solid var(--dark-green);
     border-radius: 5px;
-}
+} */
+/* margin: 0.3em;
+border-radius: 10px; */

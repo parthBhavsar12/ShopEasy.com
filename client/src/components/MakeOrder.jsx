@@ -56,6 +56,7 @@ export default function MakeOrder() {
   const [custName, setCustName] = useState('');
   // const [shop_name, setShopName] = useState('');
   const [distShops, setDistShops] = useState([]);
+  const [custOrders, setCustOrders] = useState([]);
 
   const postNewOrderData = async (shopName) => {
 
@@ -75,15 +76,55 @@ export default function MakeOrder() {
           withCredentials: true,
         }
       );
-      // console.log(response);
-      // if (response.status === 200) {
-      //   // console.log(response.data.status);
-      //   setDistShops(response.data.shops);
-      //   // console.log("shop fetching done.......", shops);
-      // }
+      console.log(response);
+      if (response.status === 200) {
+        localStorage.setItem("order_num", response.data.order);
+        navigate('/add-to-order');
+      }
     } catch (error) {
       // console.log(error);
     }
+  }
+
+  const fetchCustomerOrders = async () => {
+    setIsFetching(true);
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/v1/order/find-customer-order-data`,
+        {
+          params: { cust_id: email },
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        setCustOrders(response.data.orderdatas);
+        // const uniqueOrderNums = new Set(response.data.orderdatas.map(order => order.order_num));
+        // // Converting Set back to array and sorting
+        // setCustOrders(Array.from(uniqueOrderNums).sort((a, b) => a - b));
+        // console.log(custOrders);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    finally {
+      setIsFetching(false);
+    }
+  }
+
+  // useEffect(() => {
+  //   fetchCustomerOrders();
+  //   }
+  // );
+  useEffect(() => {
+    if (email) {
+      fetchCustomerOrders();
+    }
+  }, [email]);
+
+  const navigateToUpdate = (orderNum)=>{
+    localStorage.setItem("order_num", orderNum);
+    navigate('/add-to-order');
   }
 
   const handleSubmit = (e) => {
@@ -104,7 +145,7 @@ export default function MakeOrder() {
     }
 
     // console.log('Form submitted successfully', formData);
-    ( page == "new" ) ? postNewOrderData(shopName) : postNewOrderData(shopName);
+    (page == "new") ? postNewOrderData(shopName) : navigateToUpdate(orderNum);
     // console.log('Form submitted successfully', formData);
   };
 
@@ -256,12 +297,12 @@ export default function MakeOrder() {
           >
             <option value="none">--Select Order--</option>
             {
-              distShops.length > 0 ? (
-                distShops.map((shop) => (
+              custOrders.length > 0 ? (
+                custOrders.map((order, index) => (
                   isFetching ? (
                     <option value="none" key="loading">Loading...</option>
                   ) : (
-                    <option value={shop.shop_name} key={shop.shop_name}>{shop.shop_name}</option>
+                    <option value={order.order_num} key={index}>{order.order_num} - {order.shop_name} - {order.datetime}</option>
                   )
                 ))
               ) : (
@@ -273,302 +314,8 @@ export default function MakeOrder() {
           <button type="submit" className="btnProduct btn-confirm"><i className="zmdi zmdi-forward"></i>Confirm</button>
         </form>
       </div>
-      {/* <div className="products">
-        <form className="form" onSubmit={handleSubmit} method='post'>
 
-          <span id="productsTitle">Make New Order</span>
-
-          <label htmlFor="shopName">Shop Name:</label>
-          <select
-            name="shopName"
-            id="shopName"
-            value={formData.shopName}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select shop--</option>
-            {
-              distShops.length > 0 ? (
-                distShops.map((shop) => (
-                  isFetching ? (
-                    <option value="none" key="loading">Loading...</option>
-                  ) : (
-                    <option value={shop.shop_name} key={shop.shop_name}>{shop.shop_name}</option>
-                  )
-                ))
-              ) : (
-                ''
-              )
-            }
-
-          </select>
-
-          <label htmlFor="productCat">Product Category:</label>
-          <select
-            name="productCat"
-            id="productCat"
-            value={formData.productCat}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select category--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
-          </select>
-
-
-          <label htmlFor="productName">Product Name:</label>
-          <select
-            name="productName"
-            id="productName"
-            value={formData.productName}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select product--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
-          </select>
-
-          <label htmlFor="productPrice">Product Price:</label>
-          <input
-            type="number"
-            name="productPrice"
-            id="productPrice"
-            min="0"
-            value={formData.productPrice}
-            readOnly
-            className="read-only-ip"
-          />
-
-          <label htmlFor="productQuant">Product Quantity:</label>
-          <input
-            type="number"
-            name="productQuant"
-            id="productQuant"
-            min="0"
-            value={formData.productQuant}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="applyCoupon">Apply Coupon:</label>
-          <input
-            type="text"
-            name="applyCoupon"
-            id="applyCoupon"
-            value={formData.applyCoupon}
-            onChange={handleInputChange}
-            required
-          />
-
-          <button type="submit" className="btnProduct">Add to order</button>
-
-        </form>
-
-
-        <div className="tableContainer">
-          <span id="productsTitle">Orders</span>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: ABC store</caption>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-              <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-
-            </tr>
-          </table>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: PQR store</caption>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-              <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-
-            </tr>
-          </table>
-          <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name: XYZ store</caption>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price per unit</th>
-              <th>Quantity</th>
-              <th>Coupon Discount</th>
-              <th>Amount</th>
-              <th>Remove</th>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td>#</td>
-              <td>Name</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Coupon Discount</td>
-              <td>Amount</td>
-              <td><button className="remove-btn">Remove</button></td>
-            </tr>
-            <tr>
-              <td colSpan="4">Total Amount to be paid</td>
-              <td>Coupon Discount</td>
-              <td>000</td>
-              <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-
-            </tr>
-          </table>
-        </div>
-
-      </div > */}
-
-      {error && <MessageBox msgTitle="Error" msgText={error} />
-      }
+      {error && <MessageBox msgTitle="Error" msgText={error} />}
       {info && <MessageBox msgTitle="No Data" msgText={info} />}
     </>
   )
