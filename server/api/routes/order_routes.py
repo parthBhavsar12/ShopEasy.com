@@ -13,6 +13,7 @@ from api.controller.order_controller import find_and_send_order
 from api.controller.order_controller import add_order_entry
 from api.controller.order_controller import fetch_and_return_order_data
 from api.controller.order_controller import fetch_and_return_customer_order_data
+from api.controller.order_controller import fetch_and_return_all_customer_order_data
 from api.controller.order_controller import delete_orderdata
 
 order_router = APIRouter()
@@ -76,3 +77,10 @@ def fetch_orders_by_a_customer(
 def deleteData(data_id: str, orderdata_collection: Collection = Depends(get_orderdata_collection)):
     return delete_orderdata(data_id, orderdata_collection)
 
+@order_router.get("/find-all-customer-order-data")
+# @protect()
+def fetch_order_data(
+    cust_id: str = Query(...),
+    order_collection: Collection = Depends(get_orderdata_collection)
+):
+    return fetch_and_return_all_customer_order_data(cust_id, order_collection)

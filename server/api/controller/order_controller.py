@@ -162,3 +162,20 @@ def delete_orderdata(data_id: str, orderdata_collection: Collection):
         raise HTTPException(
             status_code=500, detail=f"Data deleting failed: {str(e)}"
         )
+
+def fetch_and_return_all_customer_order_data(cust_id: str, orderdata_collection: Collection):
+    try:
+        orderdatas_cursor: Cursor = orderdata_collection.find({"cust_id": cust_id})
+        # orderdatas_cursor: Cursor = orderdata_collection.find()
+        orderdatas: List[dict] = [
+            serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Orderdata fetched successfully.",
+            "orderdatas": orderdatas,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+        )
