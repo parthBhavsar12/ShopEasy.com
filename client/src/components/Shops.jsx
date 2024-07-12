@@ -211,6 +211,7 @@ export default function Shops() {
                       <span>{shop.address}, {shop.local_area}, {shop.district} - {shop.pin}</span>
                       <span className="shop"><i className="zmdi zmdi-phone"></i>Contact:</span>
                       <span>{shop.contact}</span>
+                      <button className="viewProducts">View Products</button>
                     </>
                   )}
                 </div>

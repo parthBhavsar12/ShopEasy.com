@@ -51,9 +51,46 @@ export default function AddOrder() {
     }
   };
 
+  const fetchProducts = async () => {
+    setError('');
+    setMsg('');
+    setIsFetching(true);
+    console.log(shopName);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/product/fetch-products-by-shopname",
+        {
+          params: { shop_name: shopName },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        if (response.data.products.length == 0) {
+          // console.log(response.data.products.length);
+          setInfo("No products found.")
+        }
+        else {
+          setProducts(response.data.products);
+          const categories = response.data.products.map(product => product.prod_category);
+          const uniqueCategoriesSet = new Set(categories);
+          setUniqueCategories(Array.from(uniqueCategoriesSet));
+          console.log(products);
+          console.log(uniqueCategories);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      // setError('Something gone wrong.');
+    }
+    finally {
+      setIsFetching(false);
+    }
+  };
+
   useEffect(() => {
     checkUser();
-    fetchProducts();
+    // fetchProducts();
   }, []);
 
   const fetchOrderData = async (orderNum) => {
@@ -128,8 +165,8 @@ export default function AddOrder() {
   //     fetchOrderDataInTable();
   //   }
   // }, [formData.orderNum, formData.productName, email]);
-  
-  
+
+
 
   useEffect(() => {
     if (email) {
@@ -137,48 +174,18 @@ export default function AddOrder() {
     }
   }, [email]);
 
-  const fetchProducts = async () => {
-    setError('');
-    setMsg('');
-    setIsFetching(true);
-
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/product/fetch-products-by-shopname",
-        {
-          params: { shop_name: shopName },
-          withCredentials: true,
-        }
-      );
-      if (response.status === 200) {
-        if (response.data.products.length == 0){
-          // console.log(response.data.products.length);
-          setInfo("Please add your products.")
-        }
-        else{
-          setProducts(response.data.products);
-          const categories = response.data.products.map(product => product.prod_category);
-          const uniqueCategoriesSet = new Set(categories);
-          setUniqueCategories(Array.from(uniqueCategoriesSet));
-          console.log(products);
-          console.log(uniqueCategories);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      setError('Something gone wrong.');
+  useEffect(() => {
+    if (shopName) {
+      fetchProducts();
     }
-    finally {
-      setIsFetching(false);
-    }
-  };
+  }, [shopName]);
 
   const addOrderData = async () => {
     setError('');
     setMsg('');
     try {
 
-      const { productName, productPrice, productQuant, applyCoupon} = formData;
+      const { productName, productPrice, productQuant, applyCoupon } = formData;
       console.log(formData);
 
       const response = await axios.post(
@@ -307,41 +314,41 @@ export default function AddOrder() {
 
           <label htmlFor="productCat">Product Category:</label>
           <select
-              name="productCat"
-              id="productCat"
-              value={formData.productCat}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="none">--Select category--</option>
-              {uniqueCategories.map((category, index) => (
-                <option key={index} value={category}>{category}</option>
-              ))}
-            </select>
+            name="productCat"
+            id="productCat"
+            value={formData.productCat}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none">--Select category--</option>
+            {uniqueCategories.map((category, index) => (
+              <option key={index} value={category}>{category}</option>
+            ))}
+          </select>
 
 
           <label htmlFor="productName">Product Name:</label>
           <select
-              name="productName"
-              id="productName"
-              value={formData.productName}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="none">--Select product--</option>
-              {
-                products.map((product) => (
-                  <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
-                ))
+            name="productName"
+            id="productName"
+            value={formData.productName}
+            onChange={handleInputChange}
+            required
+          >
+            <option value="none">--Select product--</option>
+            {
+              products.map((product) => (
+                <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
+              ))
 
-                // products.map((product) => (
-                //   // <tr key={product._id}>
-                //   //   <td className="pad-10">{index + 1}</td>
-                //   <option value={product.prod_name}>{product.prod_name}</option>
-                //   // </tr>
-                // ))
-              }
-            </select>
+              // products.map((product) => (
+              //   // <tr key={product._id}>
+              //   //   <td className="pad-10">{index + 1}</td>
+              //   <option value={product.prod_name}>{product.prod_name}</option>
+              //   // </tr>
+              // ))
+            }
+          </select>
           {/* <select
             name="productName"
             id="productName"
@@ -447,9 +454,9 @@ export default function AddOrder() {
                 )
               }
             </tbody>
-            
+
           </table>
-          
+
         </div>
 
       </div>
