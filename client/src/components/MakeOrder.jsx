@@ -1,30 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import MessageBox from './MessageBox';
-import '../css/remove-btn.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import MessageBox from "./MessageBox";
+import "../css/remove-btn.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import getCurrentDateTime from '../currentDateTime';
 
 export default function MakeOrder() {
-
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isFetching, setIsFetching] = useState(false);
-
+  // const [shopEmail, setShopEmail] = useState("");
+  // const [selectedShop,setSelectedShop] = useState({name:"",email:""});
   const checkUser = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/me",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get("http://localhost:8000/api/v1/auth/me", {
+        withCredentials: true,
+      });
       // console.log(response);
       if (response.status === 200) {
         setEmail(response.data.user.email);
         if (response.data.user.role == "shopkeeper") {
-          navigate('/shopkeeper-home');
+          navigate("/shopkeeper-home");
         }
       }
     } catch (error) {
@@ -36,41 +33,52 @@ export default function MakeOrder() {
     checkUser();
   }, []);
 
-  const [error, setError] = useState('');
-  const [info, setInfo] = useState('');
-  const [page, setPage] = useState('new');
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+  const [page, setPage] = useState("new");
   const [formData, setFormData] = useState({
-    shopName: 'none',
-    orderNum: 'none'
+    shopName: "none",
+    shopEmail: "none",
+    orderNum: "none",
   });
 
   const handleInputChange = (e) => {
+    const shop = distShops.find((shop) => shop.shop_name === e.target.value);
+    console.log(shop.email);
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      shopEmail: shop.email,
+      [e.target.name]: e.target.value,
+    });
+    console.log(Object.entries(formData));
+  };
+  const handleUpdateInputChange = (e) => {
+    const shop = custOrders.find(
+      (shop) => String(shop.order_num) === e.target.value
+    );
+    setFormData({
+      ...formData,
+      shopEmail: shop.email,
+      [e.target.name]: e.target.value,
     });
   };
-
   const [isCustomerDataAvailable, setIsCustomerDataAvailable] = useState();
-  const [dist, setDist] = useState('');
-  const [custName, setCustName] = useState('');
+  const [dist, setDist] = useState("");
+  const [custName, setCustName] = useState("");
   // const [shop_name, setShopName] = useState('');
   const [distShops, setDistShops] = useState([]);
   const [custOrders, setCustOrders] = useState([]);
 
-  const postNewOrderData = async (shopName) => {
-
-    // console.log("Email: ", email);
-    // console.log("cust_name: ", custName);
-    // console.log("shop_name: ", shopName);
+  const postNewOrderData = async (shopName, shopEmail) => {
     try {
       const response = await axios.post(
         `http://127.0.0.1:8000/api/v1/order/new-order`,
         {
-          "cust_id": email,
-          "cust_name": custName,
-          "shop_name": shopName,
-          "status": "not_complete"
+          cust_id: email,
+          cust_name: custName,
+          shop_id: shopEmail,
+          shop_name: shopName,
+          status: "not_complete",
         },
         {
           withCredentials: true,
@@ -79,12 +87,12 @@ export default function MakeOrder() {
       console.log(response);
       if (response.status === 200) {
         localStorage.setItem("order_num", response.data.order);
-        navigate('/add-to-order');
+        navigate("/add-to-order");
       }
     } catch (error) {
       // console.log(error);
     }
-  }
+  };
 
   const fetchCustomerOrders = async () => {
     setIsFetching(true);
@@ -106,11 +114,10 @@ export default function MakeOrder() {
       }
     } catch (error) {
       console.log(error);
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
-  }
+  };
 
   // useEffect(() => {
   //   fetchCustomerOrders();
@@ -122,30 +129,32 @@ export default function MakeOrder() {
     }
   }, [email]);
 
-  const navigateToUpdate = (orderNum)=>{
+  const navigateToUpdate = (orderNum) => {
     localStorage.setItem("order_num", orderNum);
-    navigate('/add-to-order');
-  }
+    navigate("/add-to-order");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
-    const { shopName, orderNum } = formData;
+    const { shopName, shopEmail, orderNum } = formData;
     // console.log("Shop@handleSubmit", shopName);
 
     if (shopName === "none" && page == "new") {
-      setError('Please select shop.');
+      setError("Please select shop.");
       return;
     }
 
     if (orderNum === "none" && page == "update") {
-      setError('Please select order.');
+      setError("Please select order.");
       return;
     }
 
     // console.log('Form submitted successfully', formData);
-    (page == "new") ? postNewOrderData(shopName) : navigateToUpdate(orderNum);
+    page == "new"
+      ? postNewOrderData(shopName, shopEmail)
+      : navigateToUpdate(orderNum);
     // console.log('Form submitted successfully', formData);
   };
 
@@ -156,7 +165,7 @@ export default function MakeOrder() {
       const response = await axios.get(
         `http://127.0.0.1:8000/api/v1/user/get-shopdata-by-district`,
         {
-          params: { "district": dist },
+          params: { district: dist },
           withCredentials: true,
         }
       );
@@ -168,11 +177,10 @@ export default function MakeOrder() {
       }
     } catch (error) {
       // console.log(error);
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
-  }
+  };
 
   const fetchCustomerData = async () => {
     setIsFetching(true);
@@ -189,24 +197,20 @@ export default function MakeOrder() {
         setIsCustomerDataAvailable(true);
         fetchShopDataByDist(response.data.user.district);
         setCustName(response.data.user.customer_name);
-
       }
     } catch (error) {
       // console.log(error);
       if (error.response.status == 404) {
         setIsCustomerDataAvailable(false);
         setInfo("Please insert your address details to make an order.");
-        setTimeout(
-          () => {
-            navigate('/shopkeeper-account');
-          }, 2500
-        )
+        setTimeout(() => {
+          navigate("/shopkeeper-account");
+        }, 2500);
       }
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (email) {
@@ -214,38 +218,53 @@ export default function MakeOrder() {
     }
   }, [email]);
 
-
-  const [underlineLeft, setUnderlineLeft] = useState('underlined');
-  const [underlineRight, setUnderlineRight] = useState('no-underline');
+  const [underlineLeft, setUnderlineLeft] = useState("underlined");
+  const [underlineRight, setUnderlineRight] = useState("no-underline");
   const [isMakeOrderDivHidden, setIsMakeOrderDivHidden] = useState(false);
 
   const handleViewMakeOrder = () => {
-    setUnderlineLeft('underlined');
-    setUnderlineRight('no-underline');
+    setUnderlineLeft("underlined");
+    setUnderlineRight("no-underline");
     setIsMakeOrderDivHidden(false);
-    setPage('new');
-    setError('');
-  }
+    setPage("new");
+    setError("");
+  };
   const handleViewUpdateOrder = () => {
-    setUnderlineLeft('no-underline');
-    setUnderlineRight('underlined');
+    setUnderlineLeft("no-underline");
+    setUnderlineRight("underlined");
     setIsMakeOrderDivHidden(true);
-    setPage('update');
-    setError('');
-  }
+    setPage("update");
+    setError("");
+  };
 
   return (
     <>
-      <div className={isMakeOrderDivHidden ? "hidden-div" : "products make-order-div"}>
+      <div
+        className={
+          isMakeOrderDivHidden ? "hidden-div" : "products make-order-div"
+        }
+      >
         {isCustomerDataAvailable ? (
           <div className="shopKeeperHomeBtns">
-            <input type="button" id="btnYourOrders" value="Make New Order" className={underlineLeft} onClick={handleViewMakeOrder} />
-            <input type="button" id="btnCheckStocks" value="Update Order" className={underlineRight} onClick={handleViewUpdateOrder} />
+            <input
+              type="button"
+              id="btnYourOrders"
+              value="Make New Order"
+              className={underlineLeft}
+              onClick={handleViewMakeOrder}
+            />
+            <input
+              type="button"
+              id="btnCheckStocks"
+              value="Update Order"
+              className={underlineRight}
+              onClick={handleViewUpdateOrder}
+            />
           </div>
-        ) : ('')
-        }
-        <form className="form" onSubmit={handleSubmit} method='post'>
-
+        ) : (
+          ""
+        )}
+        <form className="form" onSubmit={handleSubmit} method="post">
           {/* <span id="productsTitle">Make New Order</span> */}
 
           <label htmlFor="shopName">Shop Name:</label>
@@ -257,34 +276,53 @@ export default function MakeOrder() {
             required
           >
             <option value="none">--Select shop--</option>
-            {
-              distShops.length > 0 ? (
-                distShops.map((shop, index) => (
+            {distShops.length > 0
+              ? distShops.map((shop, index) =>
                   isFetching ? (
-                    <option value="none" key={index}>Loading...</option>
+                    <option value="none" key={index} disabled>
+                      Loading...
+                    </option>
                   ) : (
-                    <option value={shop.shop_name} key={shop.shop_name}>{shop.shop_name}</option>
+                    <>
+                      <option value={shop.shop_name} key={shop.shop_name}>
+                        {shop.shop_name}
+                      </option>
+                    </>
                   )
-                ))
-              ) : (
-                ''
-              )
-            }
-
+                )
+              : ""}
           </select>
-          <button type="submit" className="btnProduct btn-confirm"><i className="zmdi zmdi-forward"></i>Confirm</button>
+          <button type="submit" className="btnProduct btn-confirm">
+            <i className="zmdi zmdi-forward"></i>Confirm
+          </button>
         </form>
       </div>
-      <div className={isMakeOrderDivHidden ? "products make-order-div" : "hidden-div"}>
+      <div
+        className={
+          isMakeOrderDivHidden ? "products make-order-div" : "hidden-div"
+        }
+      >
         {isCustomerDataAvailable ? (
           <div className="shopKeeperHomeBtns">
-            <input type="button" id="btnYourOrders" value="Make New Order" className={underlineLeft} onClick={handleViewMakeOrder} />
-            <input type="button" id="btnCheckStocks" value="Update Order" className={underlineRight} onClick={handleViewUpdateOrder} />
+            <input
+              type="button"
+              id="btnYourOrders"
+              value="Make New Order"
+              className={underlineLeft}
+              onClick={handleViewMakeOrder}
+            />
+            <input
+              type="button"
+              id="btnCheckStocks"
+              value="Update Order"
+              className={underlineRight}
+              onClick={handleViewUpdateOrder}
+            />
           </div>
-        ) : ('')
-        }
-        <form className="form" onSubmit={handleSubmit} method='post'>
-
+        ) : (
+          ""
+        )}
+        <form className="form" onSubmit={handleSubmit} method="post">
           {/* <span id="productsTitle">Make New Order</span> */}
 
           <label htmlFor="orderNum">Order Number:</label>
@@ -292,31 +330,32 @@ export default function MakeOrder() {
             name="orderNum"
             id="orderNum"
             value={formData.orderNum}
-            onChange={handleInputChange}
+            onChange={handleUpdateInputChange}
             required
           >
             <option value="none">--Select Order--</option>
-            {
-              custOrders.length > 0 ? (
-                custOrders.map((order, index) => (
+            {custOrders.length > 0
+              ? custOrders.map((order, index) =>
                   isFetching ? (
-                    <option value="none" key="loading">Loading...</option>
+                    <option value="none" key="loading">
+                      Loading...
+                    </option>
                   ) : (
-                    <option value={order.order_num} key={index}>{order.order_num} - {order.shop_name} - {order.datetime}</option>
+                    <option value={order.order_num} key={index}>
+                      {order.order_num} - {order.shop_name} - {order.datetime}
+                    </option>
                   )
-                ))
-              ) : (
-                ''
-              )
-            }
-
+                )
+              : ""}
           </select>
-          <button type="submit" className="btnProduct btn-confirm"><i className="zmdi zmdi-forward"></i>Confirm</button>
+          <button type="submit" className="btnProduct btn-confirm">
+            <i className="zmdi zmdi-forward"></i>Confirm
+          </button>
         </form>
       </div>
 
       {error && <MessageBox msgTitle="Error" msgText={error} />}
       {info && <MessageBox msgTitle="No Data" msgText={info} />}
     </>
-  )
+  );
 }

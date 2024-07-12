@@ -50,6 +50,7 @@ def make_new_order(order: Order, response: Response, order_collection: Collectio
             {
                 "order_num": counter,
                 "cust_id": order_data["cust_id"],
+                "shop_id":order_data["shop_id"],
                 "cust_name": order_data["cust_name"],
                 "shop_name": order_data["shop_name"],
                 "status": order_data["status"],
@@ -76,11 +77,12 @@ def find_and_send_order(order_num: str, order_collection: Collection):
         print(order_num)
         data = order_collection.find_one({"order_num": int(order_num)})
         print(data)
-        if data:
+        if data:    
             return {
                 "order_num": data["order_num"],
                 "cust_id": data["cust_id"],
                 "cust_name": data["cust_name"],
+                "shop_id":data["shop_id"],
                 "shop_name": data["shop_name"],
                 "status": data["status"],
                 "datetime": data["datetime"],
@@ -98,6 +100,7 @@ def add_order_entry(order_data: OrderData, orderdata_collection: Collection):
         result = orderdata_collection.insert_one({
             "order_num": data["order_num"],
             "cust_id": data["cust_id"],
+            "shop_name": data["shop_name"],
             "prod_name": data["prod_name"],
             "prod_price": data["prod_price"],
             "prod_quantity": data["prod_quantity"],
@@ -166,6 +169,40 @@ def delete_orderdata(data_id: str, orderdata_collection: Collection):
 def fetch_and_return_all_customer_order_data(cust_id: str, orderdata_collection: Collection):
     try:
         orderdatas_cursor: Cursor = orderdata_collection.find({"cust_id": cust_id})
+        # orderdatas_cursor: Cursor = orderdata_collection.find()
+        orderdatas: List[dict] = [
+            serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Orderdata fetched successfully.",
+            "orderdatas": orderdatas,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+        )
+    
+def fetch_and_return_shop_order_data(shop_id: str, orderdata_collection: Collection):
+    try:
+        orderdatas_cursor: Cursor = orderdata_collection.find({"shop_id": shop_id})
+        # orderdatas_cursor: Cursor = orderdata_collection.find()
+        orderdatas: List[dict] = [
+            serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Orderdata fetched successfully.",
+            "orderdatas": orderdatas,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+        )
+    
+def fetch_and_return_shop_order_data_with_order_number(order_num: int, orderdata_collection: Collection):
+    try:
+        orderdatas_cursor: Cursor = orderdata_collection.find({"order_num": order_num})
         # orderdatas_cursor: Cursor = orderdata_collection.find()
         orderdatas: List[dict] = [
             serialize_orderdata(orderdata) for orderdata in orderdatas_cursor

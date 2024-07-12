@@ -154,3 +154,14 @@ td.no-product-td{
 caption.custShopHomeCaption{
     margin-top: 20px !important;
 }
+
+span.no-order-data{
+    display: block;
+    background-color: var(--red);
+    margin: auto;
+    padding: 25px;
+    color: var(--dark-red);
+    font-size: 1em;
+    border-radius: 5px;
+    font-weight: bold;
+}

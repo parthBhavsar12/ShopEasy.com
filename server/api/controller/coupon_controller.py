@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 import os
-from typing import Collection, List
+from typing import Collection, List, Optional
 from bson import ObjectId
 from fastapi import Depends, HTTPException, Request, Response, status
 from fastapi.security import OAuth2PasswordBearer
@@ -19,7 +19,7 @@ def add_coupon(coupon: Coupon, response: Response, coupon_collection: Collection
         "status": "success",
         "message": "product added to coupon successfully",
         "coupon": {
-            "user_id": coupon_data["user_id"],
+            "shop_id": coupon_data["shop_id"],
             "cpn_code": coupon_data["cpn_code"],
             "cpn_quantity": coupon_data["cpn_quantity"],
             "cpn_discount": coupon_data["cpn_discount"],
@@ -68,11 +68,19 @@ def serialize_coupon(coupon):
 #         }
 
 
-def fetch_and_list_coupons(user_id: str, coupon_collection: Collection) -> dict:
+def fetch_and_list_coupons(shop_id: str, coupon_collection: Collection,prod_name:Optional[str] = None) -> dict:
 # def fetch_and_list_coupons(coupon_collection: Collection) -> dict:
     try:
-        coupons_cursor: Cursor = coupon_collection.find({"user_id": user_id})
+        # coupons_cursor: Cursor = coupon_collection.find({"shop_id": shop_id,"prod_name":prod_name})
         # coupons_cursor: Cursor = coupon_collection.find()
+        # Start with a base query
+        query = {"shop_id": shop_id}
+
+        # If prod_name is provided, add it to the query
+        if prod_name:
+            query["prod_name"] = prod_name
+
+        coupons_cursor: Cursor = coupon_collection.find(query)
         coupons: List[dict] = [serialize_coupon(coupon) for coupon in coupons_cursor]
         return {
             "status": "success",

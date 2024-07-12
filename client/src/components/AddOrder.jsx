@@ -1,100 +1,90 @@
-import React, { useState, useEffect } from 'react';
-import MessageBox from './MessageBox';
-import '../css/remove-btn.css';
-import '../css/add_order.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import MessageBox from "./MessageBox";
+import "../css/remove-btn.css";
+import "../css/add_order.css";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function AddOrder() {
-
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
+  const [category, setCategory] = useState("");
+  const [productName, setProductName] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productQuantity, setProductQuantity] = useState(0);
   const [isFetching, setIsFetching] = useState(false);
-  const [error, setError] = useState('');
-  const [info, setInfo] = useState('');
-  const [msg, setMsg] = useState('');
+  const [coupon, setCoupon] = useState("-");
+  const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
+  const [msg, setMsg] = useState("");
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [couponData, setCouponData] = useState([]);
+
   // shopName: 'none',
   const [formData, setFormData] = useState({
     orderNum: localStorage.getItem("order_num"),
-    productCat: 'none',
-    productName: 'none',
-    productPrice: '111',
-    productQuant: '',
-    applyCoupon: '-',
+    // productCat: "none",
+    // productName: "none",
+    // productPrice: "111",
+    productQuant: "",
+    applyCoupon: "-",
   });
 
   const [orderData, setOrderData] = useState([]);
   const [products, setProducts] = useState([]);
   const [orderDataInTable, setOrderDataInTable] = useState([]);
   const [uniqueCategories, setUniqueCategories] = useState([]);
-  const [orderNumber, setOrderNumber] = useState('');
-  const [shopName, setShopName] = useState('');
-
+  const [orderNumber, setOrderNumber] = useState("");
+  const [shopName, setShopName] = useState("");
+  const [shopEmail, setShopEmail] = useState("");
+  const [updateQuantity, setUpdateQuantity] = useState(0);
   const checkUser = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/me",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get("http://localhost:8000/api/v1/auth/me", {
+        withCredentials: true,
+      });
       // console.log(response);
       if (response.status === 200) {
         setEmail(response.data.user.email);
         if (response.data.user.role == "shopkeeper") {
-          navigate('/shopkeeper-home');
+          navigate("/shopkeeper-home");
         }
       }
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  const fetchProducts = async () => {
-    setError('');
-    setMsg('');
-    setIsFetching(true);
-    console.log(shopName);
-
-    try {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/product/fetch-products-by-shopname",
-        {
-          params: { shop_name: shopName },
-          withCredentials: true,
-        }
-      );
-      if (response.status === 200) {
-        if (response.data.products.length == 0) {
-          // console.log(response.data.products.length);
-          setInfo("No products found.")
-        }
-        else {
-          setProducts(response.data.products);
-          const categories = response.data.products.map(product => product.prod_category);
-          const uniqueCategoriesSet = new Set(categories);
-          setUniqueCategories(Array.from(uniqueCategoriesSet));
-          console.log(products);
-          console.log(uniqueCategories);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-      // setError('Something gone wrong.');
-    }
-    finally {
-      setIsFetching(false);
     }
   };
 
   useEffect(() => {
     checkUser();
-    // fetchProducts();
   }, []);
-
+  useEffect(() => {
+    if (shopName) {
+      fetchProducts();
+    }
+  }, [shopName]);
+  const fetchCoupons = async (shop_id, productName) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:8000/api/v1/coupon/fetch-coupons`,
+        {
+          params: { shop_id: shop_id, prod_name: productName },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        setCouponData(response.data.coupons);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // useEffect(() => {
+  //   fetchCoupouns("abcxyz1345@protonmail.com", "iPhone");
+  // }, []);
   const fetchOrderData = async (orderNum) => {
-
     // console.log("Email: ", email);
     // console.log("cust_name: ", custName);
     // console.log("shop_name: ", shopName);
@@ -106,10 +96,10 @@ export default function AddOrder() {
           withCredentials: true,
         }
       );
-      console.log(response);
       if (response.status === 200) {
         setOrderData(response.data);
         setShopName(response.data.shop_name);
+        setShopEmail(response.data.shop_id);
         // setFormData({
         //   ...formData,
         //   shopName: orderData.shop_name
@@ -118,7 +108,7 @@ export default function AddOrder() {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const fetchOrderDataInTable = async () => {
     setIsFetching(true);
@@ -130,10 +120,8 @@ export default function AddOrder() {
           withCredentials: true,
         }
       );
-      console.log(response);
       if (response.status === 200) {
         setOrderDataInTable(response.data.orderdatas);
-        console.log(setOrderDataInTable);
         // setFormData({
         //   ...formData,
         //   shopName: orderData.shop_name
@@ -141,19 +129,16 @@ export default function AddOrder() {
       }
     } catch (error) {
       console.log(error);
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
-  }
+  };
 
-  useEffect(
-    () => {
-      const { orderNum } = formData;
-      fetchOrderData(orderNum);
-      setOrderNumber(orderNum);
-    }, []
-  )
+  useEffect(() => {
+    const { orderNum } = formData;
+    fetchOrderData(orderNum);
+    setOrderNumber(orderNum);
+  }, []);
 
   // useEffect(() => {
   //   if (formData.orderNum && formData.productName) {
@@ -166,89 +151,142 @@ export default function AddOrder() {
   //   }
   // }, [formData.orderNum, formData.productName, email]);
 
-
-
   useEffect(() => {
     if (email) {
       fetchOrderDataInTable();
     }
   }, [email]);
 
-  useEffect(() => {
-    if (shopName) {
-      fetchProducts();
+  const fetchProducts = async () => {
+    setError("");
+    setMsg("");
+    setIsFetching(true);
+
+    try {
+      const response = await axios.get(
+        "http://localhost:8000/api/v1/product/fetch-products-by-shopname",
+        {
+          params: { shop_name: shopName },
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        if (response.data.products.length == 0) {
+          // console.log(response.data.products.length);
+          setInfo("Please add your products.");
+        } else {
+          setProducts(response.data.products);
+          const categories = response.data.products.map(
+            (product) => product.prod_category
+          );
+          const uniqueCategoriesSet = new Set(categories);
+          setUniqueCategories(Array.from(uniqueCategoriesSet));
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Something gone wrong.");
+    } finally {
+      setIsFetching(false);
     }
-  }, [shopName]);
+  };
 
   const addOrderData = async () => {
-    setError('');
-    setMsg('');
+    setError("");
+    setMsg("");
     try {
-
-      const { productName, productPrice, productQuant, applyCoupon } = formData;
+      // const { productQuant } = formData;
       console.log(formData);
+      // console.log(shopName);
 
       const response = await axios.post(
         `http://127.0.0.1:8000/api/v1/order/add-to-order`,
         {
           order_num: orderNumber,
           cust_id: email,
+          shop_name: shopName,
           prod_name: productName,
           prod_price: productPrice,
-          prod_quantity: productQuant,
-          cpn_code: applyCoupon
+          prod_quantity: updateQuantity,
+          cpn_code: coupon,
         },
         {
           withCredentials: true,
         }
       );
-      console.log(response);
+
       if (response.status === 200) {
-        setMsg('Order added/updated successfully.');
+        setMsg("Order added/updated successfully.");
         fetchOrderDataInTable();
       }
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+  const handleCategory = (e) => {
+    setCategory(e.target.value);
+    setFormData({ ...formData, productCat: category });
+    const selectedCategory = e.target.value;
+    const filterCategories = selectedCategory
+      ? products.filter((product) => product.prod_category === selectedCategory)
+      : products;
 
+    setFilteredCategories(filterCategories);
+  };
+  const handleProductName = (e) => {
+    setProductName(e.target.value);
+    // setFormData({ ...formData, productName: productName });
+    const selectedProduct = e.target.value;
+    const filterProductByName = selectedProduct
+      ? filteredCategories.filter(
+          (product) => product.prod_name === selectedProduct
+        )
+      : filteredCategories;
+    setFilteredProducts(filterProductByName);
+    console.log(filterProductByName[0]?.prod_quantity);
+    setProductPrice(filterProductByName[0]?.prod_price);
+    setProductQuantity(filterProductByName[0]?.prod_quantity);
+    fetchCoupons(shopEmail, selectedProduct);
+  };
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      // productName: productName,
+      // productCat: category,
+      [e.target.name]: e.target.value,
     });
   };
-
+  useEffect(() => {
+    console.log("Updated filteredCategories:", filteredCategories);
+  }, [filteredCategories, filteredProducts]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError('');
-    setMsg('');
+    setError("");
+    setMsg("");
 
     const { shopName, productName } = formData;
 
     if (shopName === "none" && productName === "none") {
-      setError('Please select shop and product.');
+      setError("Please select shop and product.");
       return;
     }
 
     if (shopName === "none") {
-      setError('Please select shop.');
+      setError("Please select shop.");
       return;
     }
 
     if (productName === "none") {
-      setError('Please select product.');
+      setError("Please select product.");
       return;
     }
-
-    console.log('Form submitted successfully', formData);
 
     addOrderData();
   };
 
   const handleRemoveData = async (dataId) => {
-    setError('');
-    setMsg('');
+    setError("");
+    setMsg("");
     try {
       const response = await axios.delete(
         `http://localhost:8000/api/v1/order/delete-order-data/${dataId}`,
@@ -257,110 +295,57 @@ export default function AddOrder() {
         }
       );
       if (response.status === 200) {
-        setMsg('Product removed successfully.');
-        setOrderDataInTable(orderDataInTable.filter(data => data._id !== dataId));
+        setMsg("Product removed successfully.");
+        setOrderDataInTable(
+          orderDataInTable.filter((data) => data._id !== dataId)
+        );
       }
     } catch (error) {
       console.log(error);
       // setError('Something gone wrong.');
-      setError('Some error occured, Try again.');
+      setError("Some error occured, Try again.");
     }
   };
-
+  if (isFetching) {
+    return <h1>Fetching Products...</h1>;
+  }
   return (
     <>
       <div className="products">
-
-        <form className="form" onSubmit={handleSubmit} method='post'>
-
+        <form className="form" onSubmit={handleSubmit} method="post">
           <span id="productsTitle">Add/Update Order</span>
-
-          {/* <label htmlFor="orderNum">Order Number:</label>
-          <div className="product-category-div order-shop-div">
-            <input
-              type="number"
-              name="orderNum"
-              id="orderNum"
-              min="0"
-              value={formData.orderNum}
-              readOnly
-              className="read-only-ip"
-            />
-
-            <label htmlFor="shopName">Shop Name:</label>
-            <input
-              type="text"
-              name="shopName"
-              id="shopName"
-              value={formData.shopName}
-              readOnly
-              className="read-only-ip"
-              required
-            /> */}
-
-          {/* <select
-              name="shopName"
-              id="shopName"
-              value={formData.shopName}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="none">--Select shop--</option>
-              <option value="NA">NA</option>
-              <option value="abc">abc</option>
-              <option value="xyz">xyz</option>
-            </select> */}
-          {/* </div> */}
 
           <label htmlFor="productCat">Product Category:</label>
           <select
             name="productCat"
             id="productCat"
-            value={formData.productCat}
-            onChange={handleInputChange}
+            value={category}
+            onChange={handleCategory}
             required
           >
             <option value="none">--Select category--</option>
             {uniqueCategories.map((category, index) => (
-              <option key={index} value={category}>{category}</option>
+              <option key={index} value={category}>
+                {category}
+              </option>
             ))}
           </select>
-
 
           <label htmlFor="productName">Product Name:</label>
           <select
             name="productName"
             id="productName"
-            value={formData.productName}
-            onChange={handleInputChange}
+            value={productName}
+            onChange={handleProductName}
             required
           >
             <option value="none">--Select product--</option>
-            {
-              products.map((product) => (
-                <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
-              ))
-
-              // products.map((product) => (
-              //   // <tr key={product._id}>
-              //   //   <td className="pad-10">{index + 1}</td>
-              //   <option value={product.prod_name}>{product.prod_name}</option>
-              //   // </tr>
-              // ))
-            }
+            {filteredCategories.map((product) => (
+              <option key={product._id} value={product.prod_name}>
+                {product.prod_name}
+              </option>
+            ))}
           </select>
-          {/* <select
-            name="productName"
-            id="productName"
-            value={formData.productName}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select product--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
-          </select> */}
 
           <label htmlFor="productPrice">Product Price:</label>
           <input
@@ -368,13 +353,30 @@ export default function AddOrder() {
             name="productPrice"
             id="productPrice"
             min="0"
-            value={formData.productPrice}
+            value={productPrice ?? ""}
             readOnly
             className="read-only-ip"
           />
 
           <label htmlFor="productQuant">Product Quantity:</label>
-          <input
+          <select
+            name="productQuant"
+            id="productQuant"
+            value={updateQuantity}
+            onChange={(e) => setUpdateQuantity(e.target.value)}
+            required
+          >
+            {/* <option value="none">--Select Quantity--</option> */}
+            {/* <option key={productQuantity} value={productQuantity}>
+              {productQuantity}
+            </option> */}
+            {[...Array(productQuantity)].map((_, index) => (
+              <option key={index + 1} value={index + 1}>
+                {index + 1}
+              </option>
+            ))}
+          </select>
+          {/* <input
             type="number"
             name="productQuant"
             id="productQuant"
@@ -383,19 +385,31 @@ export default function AddOrder() {
             value={formData.productQuant}
             onChange={handleInputChange}
             required
-          />
+          /> */}
 
           <label htmlFor="applyCoupon">Apply Coupon:</label>
           <select
             name="applyCoupon"
             id="applyCoupon"
-            value={formData.applyCoupon}
-            onChange={handleInputChange}
+            value={coupon}
+            onChange={(e) => setCoupon(e.target.value)}
           >
-            <option value="none">--Select coupon--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
+            {couponData.length > 0 ? (
+              couponData.map((coupon, index) => (
+                <>
+                  <option value="none" key={index}>
+                    --Select coupon--
+                  </option>
+
+                  <option value={coupon.cpn_code} key={coupon.cpn_code}>
+                    {coupon.cpn_code}
+                  </option>
+                </>
+              ))
+            ) : (
+              <option value="none">--Select coupon--</option>
+            )}
+            {/* <option value="none">--Select coupon--</option> */}
           </select>
 
           {/* <input
@@ -405,17 +419,28 @@ export default function AddOrder() {
               value={formData.applyCoupon}
               onChange={handleInputChange}
             /> */}
-          <button type="submit" className="btnProduct">Add to order</button>
-
+          <button type="submit" className="btnProduct">
+            Add to order
+          </button>
         </form>
-
 
         <div className="tableContainer">
           <span id="productsTitle">Order</span>
           <table className="productsTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-shopping-cart"></i>Order Number &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {formData.orderNum}</caption>
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-store"></i>Shop name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {orderData.shop_name}</caption>
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-time"></i>Order Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {orderData.datetime}</caption>
+            <caption className="shopNameOnOrder">
+              <i className="zmdi zmdi-shopping-cart"></i>Order Number
+              &nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp; {formData.orderNum}
+            </caption>
+            <caption className="shopNameOnOrder">
+              <i className="zmdi zmdi-store"></i>Shop
+              name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{" "}
+              {orderData.shop_name}
+            </caption>
+            <caption className="shopNameOnOrder">
+              <i className="zmdi zmdi-time"></i>Order
+              Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{" "}
+              {orderData.datetime}
+            </caption>
             <thead>
               <tr>
                 <th>#</th>
@@ -428,42 +453,48 @@ export default function AddOrder() {
               </tr>
             </thead>
             <tbody>
-              {
-                isFetching ? (
-                  <tr>
-                    <td colSpan="7" className="no-row loading-data">Loading...</td>
+              {isFetching ? (
+                <tr>
+                  <td colSpan="7" className="no-row loading-data">
+                    Loading...
+                  </td>
+                </tr>
+              ) : orderDataInTable.length > 0 ? (
+                orderDataInTable.map((data, index) => (
+                  <tr key={data._id}>
+                    <td className="pad-10">{index + 1}</td>
+                    <td>{data.prod_name}</td>
+                    <td>{data.prod_price}</td>
+                    <td>{data.prod_quantity}</td>
+                    <td>{data.cpn_code}</td>
+                    <td>{data.prod_price * data.prod_quantity}</td>
+                    <td>
+                      <button
+                        className="remove-btn"
+                        onClick={() => handleRemoveData(data._id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
                   </tr>
-                ) : (
-                  orderDataInTable.length > 0 ? (
-                    orderDataInTable.map((data, index) => (
-                      <tr key={data._id}>
-                        <td className="pad-10">{index + 1}</td>
-                        <td>{data.prod_name}</td>
-                        <td>{data.prod_price}</td>
-                        <td>{data.prod_quantity}</td>
-                        <td>{data.cpn_code}</td>
-                        <td>{data.prod_price * data.prod_quantity}</td>
-                        <td><button className="remove-btn" onClick={() => handleRemoveData(data._id)}>Remove</button></td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="7" className="no-row">No product added.</td>
-                    </tr>
-                  )
-                )
-              }
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="7" className="no-row">
+                    No product added.
+                  </td>
+                </tr>
+              )}
             </tbody>
-
           </table>
-
         </div>
-
       </div>
 
       {error && <MessageBox msgTitle="Error" msgText={error} />}
       {info && <MessageBox msgTitle="No Product" msgText={info} />}
-      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
+      {msg && (
+        <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />
+      )}
     </>
-  )
+  );
 }

@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import MessageBox from './MessageBox';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import MessageBox from "./MessageBox";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Coupons() {
-
-  const [minDateTime, setMinDateTime] = useState('');
-  const [email, setEmail] = useState('');
+  const [minDateTime, setMinDateTime] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     const now = new Date();
     const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const day = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
     const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
     setMinDateTime(formattedDateTime);
   }, []);
@@ -23,22 +22,19 @@ export default function Coupons() {
 
   const checkUser = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/auth/me",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get("http://localhost:8000/api/v1/auth/me", {
+        withCredentials: true,
+      });
       // console.log(response);
       if (response.status === 200) {
         setEmail(response.data.user.email);
         if (response.data.user.role == "customer") {
-          navigate('/customer-home');
+          navigate("/customer-home");
         }
       }
     } catch (error) {
       console.log(error);
-      setError('Something gone wrong.');
+      setError("Something gone wrong.");
     }
   };
 
@@ -62,14 +58,15 @@ export default function Coupons() {
       );
       if (response.status === 200) {
         setProducts(response.data.products);
-        const categories = response.data.products.map(product => product.prod_category);
+        const categories = response.data.products.map(
+          (product) => product.prod_category
+        );
         const uniqueCategoriesSet = new Set(categories);
         setUniqueCategories(Array.from(uniqueCategoriesSet));
       }
     } catch (error) {
       console.log(error);
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
   };
@@ -91,7 +88,7 @@ export default function Coupons() {
       const response = await axios.get(
         "http://localhost:8000/api/v1/coupon/fetch-coupons",
         {
-          params: { user_id: email },
+          params: { shop_id: email },
           withCredentials: true,
         }
       );
@@ -100,8 +97,7 @@ export default function Coupons() {
       }
     } catch (error) {
       console.log(error);
-    }
-    finally {
+    } finally {
       setIsFetching(false);
     }
   };
@@ -117,29 +113,29 @@ export default function Coupons() {
   //   fetchCoupons();
   // }, [isFetching]);
 
-  const [error, setError] = useState('');
-  const [msg, setMsg] = useState('');
+  const [error, setError] = useState("");
+  const [msg, setMsg] = useState("");
 
   const [formData, setFormData] = useState({
-    cpnCode: '',
-    cpnQuant: '',
-    cpnDiscount: '0',
-    cpnStartDate: '',
-    cpnEndDate: '',
-    productName: 'none'
+    cpnCode: "",
+    cpnQuant: "",
+    cpnDiscount: "0",
+    cpnStartDate: "",
+    cpnEndDate: "",
+    productName: "none",
   });
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setMsg('');
+    setError("");
+    setMsg("");
 
     const { cpnCode, cpnQuant, cpnDiscount, productName } = formData;
     let { cpnStartDate, cpnEndDate } = formData;
@@ -147,16 +143,16 @@ export default function Coupons() {
 
     // console.log('Form submitted successfully', formData);
 
-    cpnStartDate = cpnStartDate.replace('T', ' ');
-    cpnEndDate = cpnEndDate.replace('T', ' ');
+    cpnStartDate = cpnStartDate.replace("T", " ");
+    cpnEndDate = cpnEndDate.replace("T", " ");
 
     if (productName === "none") {
-      setError('Please select product.');
+      setError("Please select product.");
       return;
     }
 
     if (new Date(cpnEndDate) <= new Date(cpnStartDate)) {
-      setError('End date-time must be after start date-time.');
+      setError("End date-time must be after start date-time.");
       return;
     }
 
@@ -164,13 +160,13 @@ export default function Coupons() {
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/coupon/add-coupon",
         {
-          user_id: email,
+          shop_id: email,
           cpn_code: cpnCode.toUpperCase(),
           prod_name: productName,
           cpn_quantity: cpnQuant,
           cpn_discount: cpnDiscount,
           start_datetime: cpnStartDate,
-          end_datetime: cpnEndDate
+          end_datetime: cpnEndDate,
         },
         {
           headers: {
@@ -182,17 +178,17 @@ export default function Coupons() {
       // console.log(response)
       // console.log(response.status)
       if (response.status == 200) {
-        setMsg('Coupon added successfully.');
+        setMsg("Coupon added successfully.");
         fetchCoupons();
       }
     } catch (error) {
       console.log(error);
-      setError('Some error occured, Try again.');
+      setError("Some error occured, Try again.");
     }
   };
 
   const handleRemoveCoupon = async (couponId) => {
-    setMsg('');
+    setMsg("");
     try {
       const response = await axios.delete(
         `http://localhost:8000/api/v1/coupon/delete-coupon/${couponId}`,
@@ -201,21 +197,19 @@ export default function Coupons() {
         }
       );
       if (response.status === 200) {
-        setMsg('Coupon removed successfully.');
-        setCoupons(coupons.filter(coupon => coupon._id !== couponId));
+        setMsg("Coupon removed successfully.");
+        setCoupons(coupons.filter((coupon) => coupon._id !== couponId));
       }
     } catch (error) {
       // console.log(error);
-      setError('Some error occured, Try again.');
+      setError("Some error occured, Try again.");
     }
   };
 
   return (
     <>
-
       <div className="products" id="updateProducts">
-
-        <form className="form" onSubmit={handleSubmit} method='post'>
+        <form className="form" onSubmit={handleSubmit} method="post">
           <span id="productsTitle">Add Coupon</span>
 
           <label htmlFor="cpnCode">Coupon code:</label>
@@ -240,7 +234,9 @@ export default function Coupons() {
             <option value="none">--Select product--</option>
             {
               products.map((product) => (
-                <option key={product._id} value={product.prod_name}>{product.prod_name}</option>
+                <option key={product._id} value={product.prod_name}>
+                  {product.prod_name}
+                </option>
               ))
 
               // products.map((product) => (
@@ -295,8 +291,9 @@ export default function Coupons() {
             required
           />
 
-          <button type="submit" className="btnProduct">Add Coupon</button>
-
+          <button type="submit" className="btnProduct">
+            Add Coupon
+          </button>
         </form>
 
         <div className="tableContainer">
@@ -313,35 +310,41 @@ export default function Coupons() {
                 <th>End Date-Time</th>
                 <th>Remove</th>
               </tr>
-
             </thead>
             <tbody>
-              {
-                isFetching ? (
-                  <tr>
-                    <td colSpan="8" className="no-row loading-data">Loading...</td>
+              {isFetching ? (
+                <tr>
+                  <td colSpan="8" className="no-row loading-data">
+                    Loading...
+                  </td>
+                </tr>
+              ) : coupons.length > 0 ? (
+                coupons.map((coupon, index) => (
+                  <tr key={coupon._id}>
+                    <td className="pad-10">{index + 1}</td>
+                    <td>{coupon.cpn_code}</td>
+                    <td>{coupon.prod_name}</td>
+                    <td>{coupon.cpn_quantity}</td>
+                    <td>{coupon.cpn_discount}</td>
+                    <td>{coupon.start_datetime}</td>
+                    <td>{coupon.end_datetime}</td>
+                    <td>
+                      <button
+                        className="remove-btn"
+                        onClick={() => handleRemoveCoupon(coupon._id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
                   </tr>
-                ) : (
-                  coupons.length > 0 ? (
-                    coupons.map((coupon, index) => (
-                      <tr key={coupon._id}>
-                        <td className="pad-10">{index + 1}</td>
-                        <td>{coupon.cpn_code}</td>
-                        <td>{coupon.prod_name}</td>
-                        <td>{coupon.cpn_quantity}</td>
-                        <td>{coupon.cpn_discount}</td>
-                        <td>{coupon.start_datetime}</td>
-                        <td>{coupon.end_datetime}</td>
-                        <td><button className="remove-btn" onClick={() => handleRemoveCoupon(coupon._id)}>Remove</button></td>
-                      </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="8" className="no-row">No coupon found.</td>
-                    </tr>
-                  )
-                )
-              }
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="8" className="no-row">
+                    No coupon found.
+                  </td>
+                </tr>
+              )}
             </tbody>
             {/* <tbody>
               {
@@ -370,14 +373,13 @@ export default function Coupons() {
                   )
             }
             </tbody> */}
-
           </table>
         </div>
-
       </div>
       {error && <MessageBox msgTitle="Error" msgText={error} />}
-      {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}
-
+      {msg && (
+        <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />
+      )}
     </>
-  )
+  );
 }

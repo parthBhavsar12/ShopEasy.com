@@ -13,8 +13,10 @@ from api.controller.order_controller import find_and_send_order
 from api.controller.order_controller import add_order_entry
 from api.controller.order_controller import fetch_and_return_order_data
 from api.controller.order_controller import fetch_and_return_customer_order_data
-from api.controller.order_controller import fetch_and_return_all_customer_order_data
 from api.controller.order_controller import delete_orderdata
+from api.controller.order_controller import fetch_and_return_all_customer_order_data
+from api.controller.order_controller import fetch_and_return_shop_order_data
+from api.controller.order_controller import fetch_and_return_shop_order_data_with_order_number
 
 order_router = APIRouter()
 
@@ -84,3 +86,27 @@ def fetch_order_data(
     order_collection: Collection = Depends(get_orderdata_collection)
 ):
     return fetch_and_return_all_customer_order_data(cust_id, order_collection)
+
+@order_router.get("/find-shop-order")
+# @protect()
+def fetch_orders_by_a_shop(
+    shop_id: str = Query(...),
+    order_collection: Collection = Depends(get_order_collection)
+):
+    return fetch_and_return_shop_order_data(shop_id, order_collection)
+
+@order_router.get("/find-shop-order-with-order-number")
+# @protect()
+def fetch_orders_by_a_shop_with_order_number(
+    order_num: int = Query(...),
+    orderdata_collection: Collection = Depends(get_orderdata_collection)
+):
+    return fetch_and_return_shop_order_data_with_order_number(order_num, orderdata_collection)
+
+# @order_router.get("/find-shop-order-data")
+# # @protect()
+# def fetch_orders_by_a_shop(
+#     order_num: str = Query(...),
+#     orderdata_collection: Collection = Depends(get_orderdata_collection)
+# ):
+#     return fetch_and_return_shop_order_data(order_num, orderdata_collection)

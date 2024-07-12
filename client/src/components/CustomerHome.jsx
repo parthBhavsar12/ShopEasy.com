@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 export default function CustomerHome() {
   const navigate = useNavigate();
@@ -104,7 +104,9 @@ export default function CustomerHome() {
           <div className="loading-data">Loading...</div>
         ) : (
           Object.keys(groupedOrders).length === 0 ? (
-            <div>No orders found.</div>
+            <span className="no-order-data">
+              No order found. <Link to="/make-order" className="a-href">Make Order</Link>
+            </span>
           ) : (
             Object.keys(groupedOrders).map((orderNum) => {
               const { shop_name, datetime } = orderDetails[orderNum] || {};

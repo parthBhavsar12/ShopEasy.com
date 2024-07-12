@@ -1,4 +1,4 @@
-from typing import Collection
+from typing import Collection, Optional
 from fastapi import APIRouter, Depends, Query, Request, Response
 
 # from api.middleware.auth_middleware import AuthMiddleware
@@ -24,10 +24,10 @@ def coupon(
 
 @coupon_router.get("/fetch-coupons")
 # @protect()
-def fetchCoupon(user_id: str = Query(...), coupon_collection: Collection = Depends(get_coupon_collection)):
+def fetchCoupon(shop_id: str = Query(...), coupon_collection: Collection = Depends(get_coupon_collection),prod_name:Optional[str] = None,):
 # def fetchCoupon(coupon_collection: Collection = Depends(get_coupon_collection)):
     # return fetch_and_list_coupons(coupon_collection)
-    return fetch_and_list_coupons(user_id, coupon_collection)
+    return fetch_and_list_coupons(shop_id, coupon_collection,prod_name)
 
 @coupon_router.delete("/delete-coupon/{coupon_id}")
 # @protect()
