@@ -6,6 +6,7 @@ from api.middleware.auth_middleware import protect
 from dependencies.dependencies import get_order_collection
 from dependencies.dependencies import get_orderdata_collection
 from dependencies.dependencies import get_shopkeeperdata_collection
+from dependencies.dependencies import get_coupon_collection
 from models.OrderModel import Order
 from models.OrderModel import OrderData
 
@@ -49,13 +50,22 @@ def find_order(
 ):
     return find_and_send_order(order_num, order_collection)
 
+# @order_router.post("/add-to-order")
+# # @protect()
+# def add_order(
+#     order_data: OrderData,
+#     order_collection: Collection = Depends(get_orderdata_collection),
+# ):
+#     return add_order_entry(order_data, order_collection)
+
 @order_router.post("/add-to-order")
 # @protect()
 def add_order(
     order_data: OrderData,
     order_collection: Collection = Depends(get_orderdata_collection),
+    coupon_collection: Collection = Depends(get_coupon_collection),
 ):
-    return add_order_entry(order_data, order_collection)
+    return add_order_entry(order_data, order_collection, coupon_collection)
 
 @order_router.get("/find-order-data")
 # @protect()

@@ -96,6 +96,16 @@ export default function CustomerHome() {
     });
   }, [groupedOrders]);
 
+  const calculateTotals = (orderNum) => {
+    const orders = groupedOrders[orderNum];
+    const totalDiscount = orders.reduce((acc, data) => acc + data.discount, 0);
+    const totalPrice = orders.reduce((acc, data) => acc + data.prod_price * data.prod_quantity, 0);
+    const totalAmount = totalPrice - totalDiscount;
+
+    return { totalDiscount, totalPrice, totalAmount };
+  };
+
+
   return (
     <>
       <div className="shop-keeper-home">
@@ -136,6 +146,7 @@ export default function CustomerHome() {
                       <th>Price per unit</th>
                       <th>Quantity</th>
                       <th>Coupon</th>
+                      <th>Discount</th>
                       <th>Amount</th>
                     </tr>
                   </thead>
@@ -148,16 +159,17 @@ export default function CustomerHome() {
                           <td>{data.prod_price}</td>
                           <td>{data.prod_quantity}</td>
                           <td>{data.cpn_code}</td>
+                          <td>{data.discount}</td>
                           <td>{data.prod_price * data.prod_quantity}</td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="6" className="no-row">No products found for this order.</td>
+                        <td colSpan="7" className="no-row">No products found for this order.</td>
                       </tr>
                     )}
                     {/* Calculate Total Amount */}
-                    {groupedOrders[orderNum].length > 0 && (
+                    {/* {groupedOrders[orderNum].length > 0 && (
                       <tr>
                         <td colSpan="4">Total Amount to be paid</td>
                         <td>Coupon Discount</td>
@@ -165,7 +177,29 @@ export default function CustomerHome() {
                           {groupedOrders[orderNum].reduce((total, order) => total + (order.prod_price * order.prod_quantity), 0)}
                         </td>
                       </tr>
-                    )}
+                    )} */}
+                    {groupedOrders[orderNum].length > 0 && (() => {
+                      const { totalDiscount, totalPrice, totalAmount } = calculateTotals(orderNum);
+                      return (
+                        <>
+                          <tr>
+                            <td colSpan="7">
+                              <strong>Total Price:</strong> {totalPrice.toFixed(2)}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="7">
+                              <strong>Total Discount:</strong> {totalDiscount.toFixed(2)}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="7">
+                              <strong>Total Amount to be Paid:</strong> {totalAmount.toFixed(2)}
+                            </td>
+                          </tr>
+                        </>
+                      );
+                    })()}
                   </tbody>
                 </table>
               );

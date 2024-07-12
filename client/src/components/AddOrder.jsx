@@ -28,7 +28,7 @@ export default function AddOrder() {
     // productCat: "none",
     // productName: "none",
     // productPrice: "111",
-    productQuant: "",
+    productQuant: "1",
     applyCoupon: "-",
   });
 
@@ -39,7 +39,7 @@ export default function AddOrder() {
   const [orderNumber, setOrderNumber] = useState("");
   const [shopName, setShopName] = useState("");
   const [shopEmail, setShopEmail] = useState("");
-  const [updateQuantity, setUpdateQuantity] = useState(0);
+  const [updateQuantity, setUpdateQuantity] = useState(1);
   const checkUser = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api/v1/auth/me", {
@@ -239,8 +239,8 @@ export default function AddOrder() {
     const selectedProduct = e.target.value;
     const filterProductByName = selectedProduct
       ? filteredCategories.filter(
-          (product) => product.prod_name === selectedProduct
-        )
+        (product) => product.prod_name === selectedProduct
+      )
       : filteredCategories;
     setFilteredProducts(filterProductByName);
     console.log(filterProductByName[0]?.prod_quantity);
@@ -266,22 +266,26 @@ export default function AddOrder() {
 
     const { shopName, productName } = formData;
 
-    if (shopName === "none" && productName === "none") {
+    if (shopName === "" && productName === "") {
       setError("Please select shop and product.");
       return;
     }
 
-    if (shopName === "none") {
+    if (shopName === "") {
       setError("Please select shop.");
       return;
     }
 
-    if (productName === "none") {
+    if (productName === "") {
       setError("Please select product.");
       return;
     }
 
     addOrderData();
+    setFormData({
+      productQuant: "1",
+      applyCoupon: "-",
+    });
   };
 
   const handleRemoveData = async (dataId) => {
@@ -306,6 +310,17 @@ export default function AddOrder() {
       setError("Some error occured, Try again.");
     }
   };
+
+  const totalDiscount = orderDataInTable.reduce(
+    (acc, data) => acc + data.discount,
+    0
+  );
+  const totalPrice = orderDataInTable.reduce(
+    (acc, data) => acc + data.prod_price * data.prod_quantity,
+    0
+  );
+  const totalAmount = totalPrice - totalDiscount;
+
   if (isFetching) {
     return <h1>Fetching Products...</h1>;
   }
@@ -448,6 +463,7 @@ export default function AddOrder() {
                 <th>Price per unit</th>
                 <th>Quantity</th>
                 <th>Coupon</th>
+                <th>Discount</th>
                 <th>Amount</th>
                 <th>Remove</th>
               </tr>
@@ -467,6 +483,7 @@ export default function AddOrder() {
                     <td>{data.prod_price}</td>
                     <td>{data.prod_quantity}</td>
                     <td>{data.cpn_code}</td>
+                    <td>{data.discount}</td>
                     <td>{data.prod_price * data.prod_quantity}</td>
                     <td>
                       <button
@@ -480,11 +497,26 @@ export default function AddOrder() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="no-row">
+                  <td colSpan="8" className="no-row">
                     No product added.
                   </td>
                 </tr>
               )}
+              <tr>
+                <td colSpan="8">
+                  <strong>Total Price:</strong> {totalPrice.toFixed(2)}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="8">
+                  <strong>Total Discount:</strong> {totalDiscount.toFixed(2)}
+                </td>
+              </tr>
+              <tr>
+                <td colSpan="8">
+                  <strong>Total Amount to be Paid:</strong> {totalAmount.toFixed(2)}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

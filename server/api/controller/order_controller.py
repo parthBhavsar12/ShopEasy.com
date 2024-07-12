@@ -94,9 +94,14 @@ def find_and_send_order(order_num: str, order_collection: Collection):
         raise HTTPException(status_code=500, detail="An internal error occurred")
 
 
-def add_order_entry(order_data: OrderData, orderdata_collection: Collection):
+def add_order_entry(order_data: OrderData, orderdata_collection: Collection, coupon_collection: Collection):
     try:
         data = order_data.model_dump()
+        if data["cpn_code"] == "-":
+            discount = 0
+        else:
+            discount_percentage = coupon_collection.find_one({"cpn_code": data["cpn_code"]})["cpn_discount"]
+            discount = data["prod_price"] * discount_percentage / 100
         result = orderdata_collection.insert_one({
             "order_num": data["order_num"],
             "cust_id": data["cust_id"],
@@ -104,7 +109,8 @@ def add_order_entry(order_data: OrderData, orderdata_collection: Collection):
             "prod_name": data["prod_name"],
             "prod_price": data["prod_price"],
             "prod_quantity": data["prod_quantity"],
-            "cpn_code": data["cpn_code"]
+            "cpn_code": data["cpn_code"],
+            "discount": discount
         })
         # print(data)
         return {

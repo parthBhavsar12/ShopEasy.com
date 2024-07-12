@@ -44,8 +44,8 @@ export default function ManageProducts() {
   const [info, setInfo] = useState('');
 
   const fetchProducts = async () => {
-    setError('');
-    setMsg('');
+    // setError('');
+    // setMsg('');
     setIsFetching(true);
 
     try {
@@ -166,7 +166,8 @@ export default function ManageProducts() {
 
     try {
 
-      setError('');
+      // setError('');
+      // setMsg('');
       const response = await axios.post(
         "http://127.0.0.1:8000/api/v1/product/add-product",
         {
