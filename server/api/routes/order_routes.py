@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, Query, Request, Response
 from api.middleware.auth_middleware import protect
 from dependencies.dependencies import get_order_collection
 from dependencies.dependencies import get_orderdata_collection
+from dependencies.dependencies import get_shopkeeperdata_collection
 from models.OrderModel import Order
 from models.OrderModel import OrderData
 
@@ -16,7 +17,7 @@ from api.controller.order_controller import fetch_and_return_customer_order_data
 from api.controller.order_controller import delete_orderdata
 from api.controller.order_controller import fetch_and_return_all_customer_order_data
 from api.controller.order_controller import fetch_and_return_shop_order_data
-from api.controller.order_controller import fetch_and_return_shop_order_data_with_order_number
+from api.controller.order_controller import fetch_and_return_all_shop_orders
 
 order_router = APIRouter()
 
@@ -95,13 +96,29 @@ def fetch_orders_by_a_shop(
 ):
     return fetch_and_return_shop_order_data(shop_id, order_collection)
 
-@order_router.get("/find-shop-order-with-order-number")
-# @protect()
-def fetch_orders_by_a_shop_with_order_number(
-    order_num: int = Query(...),
-    orderdata_collection: Collection = Depends(get_orderdata_collection)
+# @order_router.get("/find-shop-order-with-order-number")
+# # @protect()
+# def fetch_orders_by_a_shop_with_order_number(
+#     order_num: int = Query(...),
+#     orderdata_collection: Collection = Depends(get_orderdata_collection)
+# ):
+#     return fetch_and_return_shop_order_data_with_order_number(order_num, orderdata_collection)
+
+# # @protect()
+# def fetch_all_orders_by_a_shopname(
+#     shop_id: str = Query(...),
+#     orderdata_collection: Collection = Depends(get_orderdata_collection),
+#     shopkeeperdata_collection: Collection = Depends(get_shopkeeperdata_collection)
+# ):
+#     return fetch_and_return_all_shop_orders(shop_id, orderdata_collection,shopkeeperdata_collection)
+
+@order_router.get("/find-all-shop-orders")
+def fetch_all_orders_by_a_shopname(
+    email: str = Query(...),
+    orderdata_collection: Collection = Depends(get_orderdata_collection),
+    shopkeeperdata_collection: Collection = Depends(get_shopkeeperdata_collection)
 ):
-    return fetch_and_return_shop_order_data_with_order_number(order_num, orderdata_collection)
+    return fetch_and_return_all_shop_orders(email, orderdata_collection, shopkeeperdata_collection)
 
 # @order_router.get("/find-shop-order-data")
 # # @protect()

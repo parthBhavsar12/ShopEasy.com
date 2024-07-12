@@ -12,13 +12,6 @@ export default function ShopkeeperHome() {
   const [orderDetails, setOrderDetails] = useState({});
   const [groupedOrders, setGroupedOrders] = useState({});
 
-  const orderTableDiv = useRef();
-  const productsDiv = useRef();
-  const stocksTable = useRef();
-  const [underlineLeft, setUnderlineLeft] = useState('underlined');
-  const [underlineRight, setUnderlineRight] = useState('no-underline');
-  const [underlineMid, setUnderlineMid] = useState('no-underline');
-
   const checkUser = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api/v1/auth/me", {
@@ -38,33 +31,6 @@ export default function ShopkeeperHome() {
   useEffect(() => {
     checkUser();
   }, []);
-
-  const handleViewOrders = () => {
-    orderTableDiv.current.style.display = 'block';
-    productsDiv.current.style.display = 'none';
-    stocksTable.current.style.display = 'none';
-    setUnderlineLeft('underlined');
-    setUnderlineMid('no-underline');
-    setUnderlineRight('no-underline');
-  };
-
-  const handleViewProducts = () => {
-    stocksTable.current.style.display = 'none';
-    orderTableDiv.current.style.display = 'none';
-    productsDiv.current.style.display = 'flex';
-    setUnderlineRight('no-underline');
-    setUnderlineMid('underlined');
-    setUnderlineLeft('no-underline');
-  };
-
-  const handleViewStocks = () => {
-    stocksTable.current.style.display = 'block';
-    orderTableDiv.current.style.display = 'none';
-    productsDiv.current.style.display = 'none';
-    setUnderlineRight('underlined');
-    setUnderlineMid('no-underline');
-    setUnderlineLeft('no-underline');
-  };
 
   const fetchProducts = async () => {
     setIsFetching(true);
@@ -119,34 +85,6 @@ export default function ShopkeeperHome() {
     }
   }, [email]);
 
-  const fetchOrderData = async (orderNum) => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/api/v1/order/find-shop-order-with-order-number", {
-        params: { order_num: orderNum },
-        withCredentials: true,
-      });
-      if (response.status === 200) {
-        setOrderDetails((prev) => ({
-          ...prev,
-          [orderNum]: {
-            shop_name: response.data.shop_name,
-            datetime: response.data.datetime,
-          },
-        }));
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    Object.keys(groupedOrders).forEach((customerName) => {
-      groupedOrders[customerName].forEach((order) => {
-        fetchOrderData(order.order_num);
-      });
-    });
-  }, [groupedOrders]);
-
   return (
     <>
       <div className="shop-keeper-home">
@@ -159,25 +97,19 @@ export default function ShopkeeperHome() {
           ) : (
             Object.keys(groupedOrders).map((customerName) => (
               <div key={customerName}>
-                <h2>Customer: {customerName}</h2>
                 {groupedOrders[customerName].map((order) => {
-                  const { order_num } = order;
-                  const { shop_name, datetime } = orderDetails[order_num] || {};
+                  const { order_num, datetime, prod_name, prod_price, prod_quantity, cpn_code } = order; // Get necessary data
                   return (
                     <table className="productsTable" key={order_num}>
                       <caption className="shopNameOnOrder custShopHomeCaption">
                         <i className="zmdi zmdi-shopping-cart"></i> Order Number: {order_num}
                       </caption>
-                      {shop_name && (
-                        <caption className="shopNameOnOrder">
-                          <i className="zmdi zmdi-account"></i> Customer Name: {customerName}
-                        </caption>
-                      )}
-                      {datetime && (
-                        <caption className="shopNameOnOrder">
-                          <i className="zmdi zmdi-time"></i> Order Time: {datetime}
-                        </caption>
-                      )}
+                      <caption className="shopNameOnOrder">
+                        <i className="zmdi zmdi-account"></i> Customer Name: {customerName}
+                      </caption>
+                      <caption className="shopNameOnOrder">
+                        <i className="zmdi zmdi-time"></i> Order Time: {datetime}
+                      </caption>
                       <thead>
                         <tr>
                           <th>#</th>
@@ -189,21 +121,19 @@ export default function ShopkeeperHome() {
                         </tr>
                       </thead>
                       <tbody>
-                        {groupedOrders[customerName].map((data, index) => (
-                          <tr key={data._id}>
-                            <td className="pad-10">{index + 1}</td>
-                            <td>{data.prod_name}</td>
-                            <td>{data.prod_price}</td>
-                            <td>{data.prod_quantity}</td>
-                            <td>{data.cpn_code}</td>
-                            <td>{data.prod_price * data.prod_quantity}</td>
-                          </tr>
-                        ))}
+                        <tr>
+                          <td className="pad-10">1</td>
+                          <td>{prod_name}</td>
+                          <td>{prod_price}</td>
+                          <td>{prod_quantity}</td>
+                          <td>{cpn_code}</td>
+                          <td>{prod_price * prod_quantity}</td>
+                        </tr>
                         <tr>
                           <td colSpan="4">Total Amount to be paid</td>
                           <td>Coupon Discount</td>
                           <td>
-                            {groupedOrders[customerName].reduce((total, order) => total + (order.prod_price * order.prod_quantity), 0)}
+                            {prod_price * prod_quantity} {/* Adjust if there's a discount logic */}
                           </td>
                         </tr>
                       </tbody>

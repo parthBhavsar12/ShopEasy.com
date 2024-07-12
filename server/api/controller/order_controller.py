@@ -200,10 +200,31 @@ def fetch_and_return_shop_order_data(shop_id: str, orderdata_collection: Collect
             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
         )
     
-def fetch_and_return_shop_order_data_with_order_number(order_num: int, orderdata_collection: Collection):
+# def fetch_and_return_all_shop_orders(shop_id: str, orderdata_collection: Collection, shopkeeperdata_collection: Collection):
+#     try:
+#         shopkeeper_id = shopkeeperdata_collection.findOne({"shop_id": shop_id})
+
+#         orderdatas_cursor: Cursor = orderdata_collection.find({"shop_name": shopkeeper_id["shop_name"]})
+#         # orderdatas_cursor: Cursor = orderdata_collection.find()
+#         orderdatas: List[dict] = [
+#             serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+#         ]
+#         return {
+#             "status": "success",
+#             "message": "Orderdata fetched successfully.",
+#             "orderdatas": orderdatas,
+#         }
+#     except Exception as e:
+#         raise HTTPException(
+#             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+#         )
+
+def fetch_and_return_all_shop_orders(email: str, orderdata_collection: Collection, shopkeeperdata_collection: Collection):
     try:
-        orderdatas_cursor: Cursor = orderdata_collection.find({"order_num": order_num})
-        # orderdatas_cursor: Cursor = orderdata_collection.find()
+        shopkeeper_id = shopkeeperdata_collection.find_one({"email": email})
+        print(shopkeeper_id["shop_name"])
+
+        orderdatas_cursor: Cursor = orderdata_collection.find({"shop_name": shopkeeper_id["shop_name"]})
         orderdatas: List[dict] = [
             serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
         ]
