@@ -56,10 +56,10 @@ export default function Bill() {
     setError('');
     setMsg('');
 
-    const { billNum, custName, productName, productQuant, productDiscount } = formData;
+    const { orderNum } = formData;
 
-    if (productName === "none") {
-      setError('Please select product.');
+    if (orderNum === "none") {
+      setError('Please select order.');
       return;
     }
 
@@ -98,232 +98,42 @@ export default function Bill() {
   return (
     <>
 
-      <div className="products" id="updateProducts">
-
+      <div className="products make-order-div">
+      <span id="productsTitle">Generate Bill</span>
         <form className="form" onSubmit={handleSubmit} method='post'>
-          <span id="productsTitle">Generate Bill</span>
 
-          <label htmlFor="billNum">Bill No.:</label>
-          <input
-            type="number"
-            name="billNum"
-            id="billNum"
-            value={formData.billNum}
-            readOnly
-            className="read-only-ip"
-          />
+          {/* <span id="productsTitle">Make New Order</span> */}
 
-          <label htmlFor="custName">Customer Name:</label>
-          <input
-            type="text"
-            name="custName"
-            id="custName"
-            value={formData.custName}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="productCat">Product Category:</label>
+          <label htmlFor="shopName">Order Number:</label>
           <select
-            name="productCat"
-            id="productCat"
-            value={formData.productCat}
+            name="shopName"
+            id="shopName"
+            value={formData.shopName}
             onChange={handleInputChange}
             required
           >
-            <option value="none">--Select category--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
+            <option value="none">--Select order--</option>
+            <option value="none">--Select order--</option>
+            <option value="none">--Select order--</option>
+            {/* {
+            distShops.length > 0 ? (
+              distShops.map((shop, index) => (
+                isFetching ? (
+                  <option value="none" key={index}>Loading...</option>
+                ) : (
+                  <option value={shop.shop_name} key={shop.shop_name}>{shop.shop_name}</option>
+                )
+              ))
+            ) : (
+              ''
+            ) */}
+          {/* } */}
+
           </select>
-
-          <label htmlFor="productName">Product Name:</label>
-          <select
-            name="productName"
-            id="productName"
-            value={formData.productName}
-            onChange={handleInputChange}
-            required
-          >
-            <option value="none">--Select product--</option>
-            <option value="NA">NA</option>
-            <option value="abc">abc</option>
-            <option value="xyz">xyz</option>
-          </select>
-
-          <label htmlFor="productQuant">Product Quantity:</label>
-          <input
-            type="number"
-            name="productQuant"
-            id="productQuant"
-            min="0"
-            value={formData.productQuant}
-            onChange={handleInputChange}
-            required
-          />
-
-          <label htmlFor="productDiscount">Discount (%):</label>
-          <input
-            type="number"
-            name="productDiscount"
-            id="productDiscount"
-            min="0"
-            value={formData.productDiscount}
-            onChange={handleInputChange}
-          />
-
-          {/* <div className="buttonMerger"> */}
-          <button type="submit" className="btnProduct">Add to Bill</button>
-          {/* <button type="reset" className="resetBtnProduct">Reset</button> */}
-          {/* </div> */}
-
+          <button type="submit" className="btnProduct btn-confirm"><i className="zmdi zmdi-forward"></i>Confirm</button>
         </form>
-
-        <div className="tableContainer">
-          <span id="productsTitle">Products added to Bill</span>
-          <table className="productsTable">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Discount</th>
-                <th>Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-              <tr>
-                <td>#</td>
-                <td>Name</td>
-                <td>Quantity</td>
-                <td>Price</td>
-                <td>Discount</td>
-                <td><button className="remove-btn">Remove</button></td>
-              </tr>
-
-              <tr>
-                <td colSpan="3">Total Price Amount:</td>
-                <td colSpan="2">Price</td>
-                <td><button className="remove-btn remove-all-btn">Clear All</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
       </div>
+
 
       {error && <MessageBox msgTitle="Error" msgText={error} />}
       {msg && <MessageBox colorClass="msgBoxGreen" msgTitle="Success" msgText={msg} />}

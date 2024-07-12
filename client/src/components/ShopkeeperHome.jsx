@@ -113,7 +113,7 @@ export default function ShopkeeperHome() {
         </div>
         <div ref={orderTableDiv} className='orderTableDiv'>
           <table className="productsTable shopkeeperHomeOrderTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
+            <caption className="shopNameOnOrder custShopHomeCaption custShopHomeCaption"><i className="zmdi zmdi-account"></i>Customer name: ABC XYZ<button className="order-action">Complete Order</button></caption>
             <thead>
 
               <tr>
@@ -174,7 +174,7 @@ export default function ShopkeeperHome() {
             </tbody>
           </table>
           <table className="productsTable shopkeeperHomeOrderTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
+            <caption className="shopNameOnOrder custShopHomeCaption"><i className="zmdi zmdi-account"></i>Customer name: ABC PQR<button className="order-action">Complete Order</button></caption>
             <thead>
 
               <tr>
@@ -235,7 +235,7 @@ export default function ShopkeeperHome() {
             </tbody>
           </table>
           <table className="productsTable shopkeeperHomeOrderTable">
-            <caption className="shopNameOnOrder"><i className="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
+            <caption className="shopNameOnOrder custShopHomeCaption"><i className="zmdi zmdi-account"></i>Customer name: PQR XYZ<button className="order-action">Complete Order</button></caption>
             <thead>
 
               <tr>

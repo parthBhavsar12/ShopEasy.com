@@ -103,61 +103,72 @@ export default function CustomerHome() {
         {isFetching ? (
           <div className="loading-data">Loading...</div>
         ) : (
-          Object.keys(groupedOrders).map((orderNum) => {
-            const firstOrder = groupedOrders[orderNum][0]; // Get the first order to access common data
-            const { shop_name, datetime } = orderDetails[orderNum] || {}; // Fetch shop_name and datetime
+          Object.keys(groupedOrders).length === 0 ? (
+            <div>No orders found.</div>
+          ) : (
+            Object.keys(groupedOrders).map((orderNum) => {
+              const { shop_name, datetime } = orderDetails[orderNum] || {};
 
-            return (
-              <table className="productsTable" key={orderNum}>
-                <caption className="shopNameOnOrder">
-                  <i className="zmdi zmdi-shopping-cart"></i>
-                  Order Number: {orderNum}
-                </caption>
-                {shop_name && (
-                  <caption className="shopNameOnOrder">
-                    <i className="zmdi zmdi-store"></i>
-                    Shop Name: {shop_name}
+              return (
+                <table className="productsTable" key={orderNum}>
+                  <caption className="shopNameOnOrder custShopHomeCaption">
+                    <i className="zmdi zmdi-shopping-cart"></i>
+                    Order Number: {orderNum}
                   </caption>
-                )}
-                {datetime && (
-                  <caption className="shopNameOnOrder">
-                    <i className="zmdi zmdi-time"></i>
-                    Order Time: {datetime}
-                  </caption>
-                )}
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Price per unit</th>
-                    <th>Quantity</th>
-                    <th>Coupon</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {groupedOrders[orderNum].map((data, index) => (
-                    <tr key={data._id}>
-                      <td className="pad-10">{index + 1}</td>
-                      <td>{data.prod_name}</td>
-                      <td>{data.prod_price}</td>
-                      <td>{data.prod_quantity}</td>
-                      <td>{data.cpn_code}</td>
-                      <td>{data.prod_price * data.prod_quantity}</td>
+                  {shop_name && (
+                    <caption className="shopNameOnOrder">
+                      <i className="zmdi zmdi-store"></i>
+                      Shop Name: {shop_name}
+                    </caption>
+                  )}
+                  {datetime && (
+                    <caption className="shopNameOnOrder">
+                      <i className="zmdi zmdi-time"></i>
+                      Order Time: {datetime}
+                    </caption>
+                  )}
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Name</th>
+                      <th>Price per unit</th>
+                      <th>Quantity</th>
+                      <th>Coupon</th>
+                      <th>Amount</th>
                     </tr>
-                  ))}
-                  {/* Calculate Total Amount */}
-                  <tr>
-                    <td colSpan="4">Total Amount to be paid</td>
-                    <td>Coupon Discount</td>
-                    <td>
-                      {groupedOrders[orderNum].reduce((total, order) => total + (order.prod_price * order.prod_quantity), 0)}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })
+                  </thead>
+                  <tbody>
+                    {groupedOrders[orderNum].length > 0 ? (
+                      groupedOrders[orderNum].map((data, index) => (
+                        <tr key={data._id}>
+                          <td className="pad-10">{index + 1}</td>
+                          <td>{data.prod_name}</td>
+                          <td>{data.prod_price}</td>
+                          <td>{data.prod_quantity}</td>
+                          <td>{data.cpn_code}</td>
+                          <td>{data.prod_price * data.prod_quantity}</td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="6" className="no-row">No products found for this order.</td>
+                      </tr>
+                    )}
+                    {/* Calculate Total Amount */}
+                    {groupedOrders[orderNum].length > 0 && (
+                      <tr>
+                        <td colSpan="4">Total Amount to be paid</td>
+                        <td>Coupon Discount</td>
+                        <td>
+                          {groupedOrders[orderNum].reduce((total, order) => total + (order.prod_price * order.prod_quantity), 0)}
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              );
+            })
+          )
         )}
       </div>
     </>
