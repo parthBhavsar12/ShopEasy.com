@@ -15,5 +15,5 @@ class Coupon(BaseModel):
     prod_name: str = Field(...)
     cpn_quantity: float = Field(...)
     cpn_discount: float = Field(...)
-    start_datetime: str = Field(...)
-    end_datetime: str = Field(...)
+    # start_datetime: str = Field(...)
+    # end_datetime: str = Field(...)

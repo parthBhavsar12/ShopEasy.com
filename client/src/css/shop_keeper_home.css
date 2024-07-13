@@ -165,3 +165,7 @@ span.no-order-data{
     border-radius: 5px;
     font-weight: bold;
 }
+
+.isHidden{
+    display: none;
+}

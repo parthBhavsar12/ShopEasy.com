@@ -50,7 +50,7 @@ def make_new_order(order: Order, response: Response, order_collection: Collectio
             {
                 "order_num": counter,
                 "cust_id": order_data["cust_id"],
-                "shop_id":order_data["shop_id"],
+                "shop_id": order_data["shop_id"],
                 "cust_name": order_data["cust_name"],
                 "shop_name": order_data["shop_name"],
                 "status": order_data["status"],
@@ -77,12 +77,12 @@ def find_and_send_order(order_num: str, order_collection: Collection):
         print(order_num)
         data = order_collection.find_one({"order_num": int(order_num)})
         print(data)
-        if data:    
+        if data:
             return {
                 "order_num": data["order_num"],
                 "cust_id": data["cust_id"],
                 "cust_name": data["cust_name"],
-                "shop_id":data["shop_id"],
+                "shop_id": data["shop_id"],
                 "shop_name": data["shop_name"],
                 "status": data["status"],
                 "datetime": data["datetime"],
@@ -94,32 +94,60 @@ def find_and_send_order(order_num: str, order_collection: Collection):
         raise HTTPException(status_code=500, detail="An internal error occurred")
 
 
-def add_order_entry(order_data: OrderData, orderdata_collection: Collection, coupon_collection: Collection):
+def add_order_entry(
+    order_data: OrderData,
+    orderdata_collection: Collection,
+    coupon_collection: Collection,
+    product_collection: Collection,
+):
     try:
         data = order_data.model_dump()
+        print(data["cpn_code"])
         if data["cpn_code"] == "-":
             discount = 0
         else:
-            discount_percentage = coupon_collection.find_one({"cpn_code": data["cpn_code"]})["cpn_discount"]
-            discount = data["prod_price"] * discount_percentage / 100
-        result = orderdata_collection.insert_one({
-            "order_num": data["order_num"],
-            "cust_id": data["cust_id"],
-            "shop_name": data["shop_name"],
-            "prod_name": data["prod_name"],
-            "prod_price": data["prod_price"],
-            "prod_quantity": data["prod_quantity"],
-            "cpn_code": data["cpn_code"],
-            "discount": discount
-        })
+            # print(data["cpn_code"],discount)
+            discount_percentage = coupon_collection.find_one(
+                {"cpn_code": data["cpn_code"]}
+            )["cpn_discount"]
+            discount = (
+                data["prod_price"] * data["prod_quantity"] * discount_percentage / 100
+            )
+            cpn_quantity = coupon_collection.find_one({"cpn_code": data["cpn_code"], "prod_name": data["prod_name"]})["cpn_quantity"]
+            cpn_quantity = int(cpn_quantity) - int(data["prod_quantity"])
+            if cpn_quantity <= 0:
+                discount = 0
+                cpn_code = "-"
+            else:
+                coupon_collection.update_one(
+                    {"cpn_code": data["cpn_code"], "prod_name": data["prod_name"]},
+                    {"$set": {"cpn_quantity": cpn_quantity}},
+                )
+                cpn_code = data["cpn_code"]
+        result = orderdata_collection.insert_one(
+            {
+                "order_num": data["order_num"],
+                "cust_id": data["cust_id"],
+                "shop_name": data["shop_name"],
+                "prod_name": data["prod_name"],
+                "prod_price": data["prod_price"],
+                "prod_quantity": data["prod_quantity"],
+                "cpn_code": cpn_code,
+                "discount": discount,
+            }
+        )
+        prod_quantity = product_collection.find_one({"prod_name": data["prod_name"]})["prod_quantity"]
+        prod_quantity = int(prod_quantity) - int(data["prod_quantity"])
+        product_collection.update_one(
+            {"prod_name": data["prod_name"]},
+            {"$set": {"prod_quantity": prod_quantity}},
+        )
         # print(data)
-        return {
-            "status": "success",
-            "message": "order updated successfully."
-        }
+        return {"status": "success", "message": "order updated successfully."}
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred: (discount) {e}")
         raise HTTPException(status_code=500, detail="An internal error occurred")
+
 
 def serialize_orderdata(orderdata):
     """Serialize MongoDB ObjectId to string if necessary."""
@@ -127,9 +155,14 @@ def serialize_orderdata(orderdata):
         orderdata["_id"] = str(orderdata["_id"])
     return orderdata
 
-def fetch_and_return_order_data(cust_id: str, order_num: str, orderdata_collection: Collection):
+
+def fetch_and_return_order_data(
+    cust_id: str, order_num: str, orderdata_collection: Collection
+):
     try:
-        orderdatas_cursor: Cursor = orderdata_collection.find({"cust_id": cust_id, "order_num": int(order_num)})
+        orderdatas_cursor: Cursor = orderdata_collection.find(
+            {"cust_id": cust_id, "order_num": int(order_num)}
+        )
         # orderdatas_cursor: Cursor = orderdata_collection.find()
         orderdatas: List[dict] = [
             serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
@@ -143,8 +176,11 @@ def fetch_and_return_order_data(cust_id: str, order_num: str, orderdata_collecti
         raise HTTPException(
             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
         )
-    
-def fetch_and_return_customer_order_data(cust_id: str, orderdata_collection: Collection):
+
+
+def fetch_and_return_customer_order_data(
+    cust_id: str, orderdata_collection: Collection
+):
     try:
         orderdatas_cursor: Cursor = orderdata_collection.find({"cust_id": cust_id})
         # orderdatas_cursor: Cursor = orderdata_collection.find()
@@ -160,6 +196,7 @@ def fetch_and_return_customer_order_data(cust_id: str, orderdata_collection: Col
         raise HTTPException(
             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
         )
+
 
 def delete_orderdata(data_id: str, orderdata_collection: Collection):
     try:
@@ -168,11 +205,12 @@ def delete_orderdata(data_id: str, orderdata_collection: Collection):
             raise HTTPException(status_code=404, detail="Data not found")
         return {"status": "success", "message": "Data deleted successfully"}
     except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Data deleting failed: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Data deleting failed: {str(e)}")
 
-def fetch_and_return_all_customer_order_data(cust_id: str, orderdata_collection: Collection):
+
+def fetch_and_return_all_customer_order_data(
+    cust_id: str, orderdata_collection: Collection
+):
     try:
         orderdatas_cursor: Cursor = orderdata_collection.find({"cust_id": cust_id})
         # orderdatas_cursor: Cursor = orderdata_collection.find()
@@ -188,7 +226,8 @@ def fetch_and_return_all_customer_order_data(cust_id: str, orderdata_collection:
         raise HTTPException(
             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
         )
-    
+
+
 def fetch_and_return_shop_order_data(shop_id: str, orderdata_collection: Collection):
     try:
         orderdatas_cursor: Cursor = orderdata_collection.find({"shop_id": shop_id})
@@ -205,7 +244,8 @@ def fetch_and_return_shop_order_data(shop_id: str, orderdata_collection: Collect
         raise HTTPException(
             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
         )
-    
+
+
 # def fetch_and_return_all_shop_orders(shop_id: str, orderdata_collection: Collection, shopkeeperdata_collection: Collection):
 #     try:
 #         shopkeeper_id = shopkeeperdata_collection.findOne({"shop_id": shop_id})
@@ -225,12 +265,57 @@ def fetch_and_return_shop_order_data(shop_id: str, orderdata_collection: Collect
 #             status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
 #         )
 
-def fetch_and_return_all_shop_orders(email: str, orderdata_collection: Collection, shopkeeperdata_collection: Collection):
+
+def fetch_and_return_all_shop_orders(
+    email: str, orderdata_collection: Collection, shopkeeperdata_collection: Collection
+):
     try:
         shopkeeper_id = shopkeeperdata_collection.find_one({"email": email})
         print(shopkeeper_id["shop_name"])
 
-        orderdatas_cursor: Cursor = orderdata_collection.find({"shop_name": shopkeeper_id["shop_name"]})
+        orderdatas_cursor: Cursor = orderdata_collection.find(
+            {"shop_name": shopkeeper_id["shop_name"]}
+        )
+        orderdatas: List[dict] = [
+            serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Orderdata fetched successfully.",
+            "orderdatas": orderdatas,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+        )
+
+
+def return_shop_order_data(shop_id: str, orderdata_collection: Collection):
+    try:
+        orderdatas_cursor: Cursor = orderdata_collection.find({"shop_id": shop_id})
+        # orderdatas_cursor: Cursor = orderdata_collection.find()
+        orderdatas: List[dict] = [
+            serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
+        ]
+        return {
+            "status": "success",
+            "message": "Orderdata fetched successfully.",
+            "orderdatas": orderdatas,
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500, detail=f"Orderdata fetching failed: {str(e)}"
+        )
+
+
+def fetch_and_return_order_number_data(
+    order_num: str, orderdata_collection: Collection
+):
+    try:
+        orderdatas_cursor: Cursor = orderdata_collection.find(
+            {"order_num": int(order_num)}
+        )
+        # orderdatas_cursor: Cursor = orderdata_collection.find()
         orderdatas: List[dict] = [
             serialize_orderdata(orderdata) for orderdata in orderdatas_cursor
         ]

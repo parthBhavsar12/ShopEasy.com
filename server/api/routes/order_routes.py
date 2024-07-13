@@ -7,6 +7,7 @@ from dependencies.dependencies import get_order_collection
 from dependencies.dependencies import get_orderdata_collection
 from dependencies.dependencies import get_shopkeeperdata_collection
 from dependencies.dependencies import get_coupon_collection
+from dependencies.dependencies import get_product_collection
 from models.OrderModel import Order
 from models.OrderModel import OrderData
 
@@ -19,6 +20,8 @@ from api.controller.order_controller import delete_orderdata
 from api.controller.order_controller import fetch_and_return_all_customer_order_data
 from api.controller.order_controller import fetch_and_return_shop_order_data
 from api.controller.order_controller import fetch_and_return_all_shop_orders
+from api.controller.order_controller import return_shop_order_data
+from api.controller.order_controller import fetch_and_return_order_number_data
 
 order_router = APIRouter()
 
@@ -64,8 +67,9 @@ def add_order(
     order_data: OrderData,
     order_collection: Collection = Depends(get_orderdata_collection),
     coupon_collection: Collection = Depends(get_coupon_collection),
+    product_collection: Collection = Depends(get_product_collection),
 ):
-    return add_order_entry(order_data, order_collection, coupon_collection)
+    return add_order_entry(order_data, order_collection, coupon_collection, product_collection)
 
 @order_router.get("/find-order-data")
 # @protect()
@@ -137,3 +141,19 @@ def fetch_all_orders_by_a_shopname(
 #     orderdata_collection: Collection = Depends(get_orderdata_collection)
 # ):
 #     return fetch_and_return_shop_order_data(order_num, orderdata_collection)
+
+@order_router.get("/find-shop-order-data")
+# # @protect()
+def orders_by_a_shop(
+    shop_id: str = Query(...),
+    order_collection: Collection = Depends(get_order_collection)
+):
+    return return_shop_order_data(shop_id, order_collection)
+
+@order_router.get("/find-order-number-data")
+# @protect()
+def fetch_order_data(
+    order_num: str = Query(...),
+    order_collection: Collection = Depends(get_orderdata_collection)
+):
+    return fetch_and_return_order_number_data(order_num, order_collection)

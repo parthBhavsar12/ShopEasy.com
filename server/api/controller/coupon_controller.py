@@ -23,8 +23,8 @@ def add_coupon(coupon: Coupon, response: Response, coupon_collection: Collection
             "cpn_code": coupon_data["cpn_code"],
             "cpn_quantity": coupon_data["cpn_quantity"],
             "cpn_discount": coupon_data["cpn_discount"],
-            "start_datetime": coupon_data["start_datetime"],
-            "end_datetime": coupon_data["end_datetime"],
+            # "start_datetime": coupon_data["start_datetime"],
+            # "end_datetime": coupon_data["end_datetime"],
         },
     }
 

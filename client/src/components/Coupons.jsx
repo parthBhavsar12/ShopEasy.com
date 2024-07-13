@@ -120,8 +120,8 @@ export default function Coupons() {
     cpnCode: "",
     cpnQuant: "",
     cpnDiscount: "0",
-    cpnStartDate: "",
-    cpnEndDate: "",
+    // cpnStartDate: "",
+    // cpnEndDate: "",
     productName: "none",
   });
 
@@ -138,23 +138,23 @@ export default function Coupons() {
     setMsg("");
 
     const { cpnCode, cpnQuant, cpnDiscount, productName } = formData;
-    let { cpnStartDate, cpnEndDate } = formData;
+    // let { cpnStartDate, cpnEndDate } = formData;
     // const printMsg = `Coupun added successfully. Code: ${cpnCode}, Quantity: ${cpnQuant}, Discount (%): ${cpnDiscount}, Time Duration: ${cpnStartDate} - ${cpnEndDate}`
 
     // console.log('Form submitted successfully', formData);
 
-    cpnStartDate = cpnStartDate.replace("T", " ");
-    cpnEndDate = cpnEndDate.replace("T", " ");
+    // cpnStartDate = cpnStartDate.replace("T", " ");
+    // cpnEndDate = cpnEndDate.replace("T", " ");
 
     if (productName === "none") {
       setError("Please select product.");
       return;
     }
 
-    if (new Date(cpnEndDate) <= new Date(cpnStartDate)) {
-      setError("End date-time must be after start date-time.");
-      return;
-    }
+    // if (new Date(cpnEndDate) <= new Date(cpnStartDate)) {
+    //   setError("End date-time must be after start date-time.");
+    //   return;
+    // }
 
     try {
       const response = await axios.post(
@@ -165,8 +165,8 @@ export default function Coupons() {
           prod_name: productName,
           cpn_quantity: cpnQuant,
           cpn_discount: cpnDiscount,
-          start_datetime: cpnStartDate,
-          end_datetime: cpnEndDate,
+          // start_datetime: cpnStartDate,
+          // end_datetime: cpnEndDate,
         },
         {
           headers: {
@@ -270,7 +270,7 @@ export default function Coupons() {
             onChange={handleInputChange}
           />
 
-          <label htmlFor="cpnStartDate">Start Date-Time:</label>
+          {/* <label htmlFor="cpnStartDate">Start Date-Time:</label>
           <input
             type="datetime-local"
             name="cpnStartDate"
@@ -289,7 +289,7 @@ export default function Coupons() {
             value={formData.cpnEndDate}
             onChange={handleInputChange}
             required
-          />
+          /> */}
 
           <button type="submit" className="btnProduct">
             Add Coupon
@@ -306,8 +306,8 @@ export default function Coupons() {
                 <th>Product</th>
                 <th>Quantity</th>
                 <th>Discount (%)</th>
-                <th>Start Date-Time</th>
-                <th>End Date-Time</th>
+                {/* <th>Start Date-Time</th>
+                <th>End Date-Time</th> */}
                 <th>Remove</th>
               </tr>
             </thead>
@@ -326,8 +326,8 @@ export default function Coupons() {
                     <td>{coupon.prod_name}</td>
                     <td>{coupon.cpn_quantity}</td>
                     <td>{coupon.cpn_discount}</td>
-                    <td>{coupon.start_datetime}</td>
-                    <td>{coupon.end_datetime}</td>
+                    {/* <td>{coupon.start_datetime}</td>
+                    <td>{coupon.end_datetime}</td> */}
                     <td>
                       <button
                         className="remove-btn"

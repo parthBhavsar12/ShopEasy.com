@@ -283,9 +283,13 @@ export default function AddOrder() {
 
     addOrderData();
     setFormData({
+      orderNum: localStorage.getItem("order_num"),
       productQuant: "1",
       applyCoupon: "-",
     });
+    setCategory("");
+    setProductName("");
+    setProductPrice("");
   };
 
   const handleRemoveData = async (dataId) => {
@@ -367,6 +371,7 @@ export default function AddOrder() {
             type="number"
             name="productPrice"
             id="productPrice"
+            placeholder="Price will be shown here"
             min="0"
             value={productPrice ?? ""}
             readOnly
@@ -409,12 +414,15 @@ export default function AddOrder() {
             value={coupon}
             onChange={(e) => setCoupon(e.target.value)}
           >
+            <option value="-" selected>
+                    --Select coupon--
+                  </option>
             {couponData.length > 0 ? (
               couponData.map((coupon, index) => (
                 <>
-                  <option value="none" key={index}>
+                  {/* <option value="-" key={index} selected>
                     --Select coupon--
-                  </option>
+                  </option> */}
 
                   <option value={coupon.cpn_code} key={coupon.cpn_code}>
                     {coupon.cpn_code}
