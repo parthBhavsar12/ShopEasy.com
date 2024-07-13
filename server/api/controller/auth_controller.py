@@ -304,7 +304,7 @@ async def send_reset_email(email:ForgotPasswordRequest,token:str) -> JSONRespons
     html = f"""
     <h1>Reset Your Password</h1>
     <p>Click the following link to reset your password:</p>
-    <a href="http://localhost:8000/reset-password?token={token}">Reset Password</a>
+    <a href="http://localhost:5173/reset-password?token={token}">Reset Password</a>
     <p>If you didn't request this, please ignore this email.</p>
     """
     message = MessageSchema(

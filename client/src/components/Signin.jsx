@@ -136,7 +136,7 @@ export default function Signin() {
 
           <GoTo title="New to ShopEasy.com? " goto="Sign up" slug="../signup" />
 
-          <GoTo title="" goto="Forgot Password?" slug="../resetpassword" />
+          <GoTo title="" goto="Forgot Password?" slug="../forgot-password" />
           <GoTo title="" goto="Contact Us" slug="../contact" />
         </div>
 

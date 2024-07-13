@@ -2,6 +2,7 @@ import Upside from './components/Upside.jsx';
 import Signup from './components/Signup.jsx';
 import Signin from './components/Signin.jsx';
 import ResetPassword1 from './components/ResetPassword1.jsx';
+import ForgotPassword from './components/ForgotPassword.jsx';
 import Otp from './components/ResetPassword2.jsx';
 import ChangePassword from './components/ResetPassword3.jsx';
 import Nav from './components/Nav.jsx';
@@ -122,7 +123,25 @@ function App() {
     {
       path: "/contact",
       element: <><Upside/><ContactUs/></>
-    }
+    },
+    {
+      path: "/reset-password",
+      element: (
+        <>
+          <Upside />
+          <ResetPassword1 />
+        </>
+      ),
+    },
+    {
+      path: "/forgot-password",
+      element: (
+        <>
+          <Upside />
+          <ForgotPassword />
+        </>
+      ),
+    },
     // {
     //   path: "/contact",
     //   element: <><Nav iName1="edit" menuTitle1="Order" slug1="../make-order" iName2="balance" menuTitle2="Payment" slug2="../make-payment" iName3="store" menuTitle3="Shops" slug3="../find-shops"  iName4="account" slug4="../shopkeeper-account" /><ContactUs/></>
